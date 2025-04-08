@@ -5,8 +5,8 @@ function Home() {
   const unirseMesa = () => {
     console.log("Unirse a mesa clicked");
 
-    // prueba husky
     console.log("prueba");
+    // prueba husky
   };
 
   return (
