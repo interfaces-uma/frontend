@@ -1,7 +1,7 @@
-import homePhoto from "../assets/homePhoto.png";
-import Button from "../components/Button";
+import homePhoto from "@assets/homePhoto.png";
+import Button from "@components/Button";
 
-function App() {
+function Home() {
   const unirseMesa = () => {
     console.log("Unirse a mesa clicked");
   };
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

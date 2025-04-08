@@ -2,7 +2,11 @@ function Button({
   children,
   onClick,
   circular,
-}: { children?: React.ReactNode; onClick: () => void; circular?: boolean }) {
+}: {
+  children?: React.ReactNode;
+  onClick: () => void;
+  circular?: boolean;
+}) {
   let buttonStyle = "";
   let buttonCircle = "";
   if (children === "CREAR MESA") {
