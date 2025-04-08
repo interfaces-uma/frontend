@@ -6,11 +6,11 @@ function Button({
   let buttonStyle = "";
   let buttonCircle = "";
   if (children === "CREAR MESA") {
-    buttonStyle = "bg-blue-500 hover:bg-blue-700";
+    buttonStyle = "bg-fondoAzul hover:bg-blue-700";
   } else if (children === "UNIRSE A MESA") {
-    buttonStyle = "bg-red-500 hover:bg-red-700";
+    buttonStyle = "bg-fondoRojo hover:brightness-110";
   } else {
-    buttonStyle = "bg-yellow-100 hover:bg-yellow-200";
+    buttonStyle = "bg-cartas hover:bg-yellow-100";
   }
 
   if (circular) {

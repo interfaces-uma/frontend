@@ -1,5 +1,5 @@
-import homePhoto from "./assets/homePhoto.png";
-import Button from "./Button";
+import homePhoto from "../assets/homePhoto.png";
+import Button from "../components/Button";
 
 function App() {
   const unirseMesa = () => {
