@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+  --color-fondo: #3b1d2a;
+}
