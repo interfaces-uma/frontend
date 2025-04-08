@@ -4,9 +4,6 @@ import Button from "@components/Button";
 function Home() {
   const unirseMesa = () => {
     console.log("Unirse a mesa clicked");
-
-    console.log("prueba");
-    // prueba husky
   };
 
   return (
