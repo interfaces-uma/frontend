@@ -12,9 +12,12 @@ function Button({
   let buttonStyle = "";
   let buttonCircle = "";
   if (children === "CREAR MESA") {
-    buttonStyle = "w-60 h-20 bg-fondoAzul hover:brightness-85 text-fondo";
+    buttonStyle = "w-75 h-25 bg-fondoAzul hover:brightness-85 text-fondo";
   } else if (children === "UNIRSE A MESA") {
-    buttonStyle = "w-60 h-20 bg-fondoRojo hover:brightness-85 text-fondo";
+    buttonStyle = "w-75 h-25 bg-fondoRojo hover:brightness-85 text-fondo";
+  } else if (children === "CREAR") {
+    buttonStyle =
+      "w-50 h-15 bg-chat hover:brightness-85 text-fondo justify-center";
   } else {
     buttonStyle = "bg-cartas hover:bg-yellow-100";
   }
@@ -24,9 +27,9 @@ function Button({
   }
 
   if (circular) {
-    buttonCircle = "px-2 py-2 rounded-full";
+    buttonCircle = "px-3 py-3 rounded-full";
   } else {
-    buttonCircle = "px-10 py-5 rounded";
+    buttonCircle = "w-36 h-12 rounded-xl";
   }
 
   if (inversed) {

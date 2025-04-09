@@ -7,8 +7,10 @@ import IconVolume from "./Icons/IconVolume";
 
 function Settings({
   onClose,
+  roomCode,
 }: {
   onClose: () => void;
+  roomCode?: string;
 }) {
   const [volume, setVolume] = useState(50);
   const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,13 +35,14 @@ function Settings({
     document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
   }, [fontIndex]);
 
-  /*
-   *   Queda poner los iconos de los colores del fondo
-   *   Que el volumen realmente funcione
-   *   Terminar de añadir las cosas de los ajustes
-   *   A lo mejor se pueda crear una componente que sea elemento de ajustes para reultilizarla
-   */
+  const [checked, setChecked] = useState(false);
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
+  /*
+   *   Que el volumen realmente funcione
+   */
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
@@ -48,10 +51,14 @@ function Settings({
             <BackIcon />
           </Button>
         </div>
-
         <div className="w-full flex justify-between items-center gap-2 mt-10">
           <label htmlFor="volume">
-            <IconVolume volume={volume} onClick={muteVolume} fill="fondo" />
+            <IconVolume
+              className="text-fondo"
+              volume={volume}
+              onClick={muteVolume}
+              fill="currentColor"
+            />
           </label>
           <input
             id="volume"
@@ -64,7 +71,7 @@ function Settings({
           />
         </div>
         <div className="w-full flex justify-between items-center gap-2 mt-10">
-          <IconFontSize fill="fondo" />
+          <IconFontSize className="text-fondo" fill="currentColor" />
           <input
             id="volume"
             type="range"
@@ -76,18 +83,40 @@ function Settings({
             className="w-2/3 accent-fondo"
           />
         </div>
-
         <div className="w-full flex justify-between items-center gap-2 mt-10">
-          <IconLanguage fill="fondo" />
+          <IconLanguage className="text-fondo" fill="currentColor" />
           {/* para el cambio de idioma se hace con i18next*/}
 
-          <select className="w-2/3 accent-fondo bg-center " defaultValue="es">
+          <select
+            className="w-2/3 accent-fondo bg-center text-fondo"
+            defaultValue="es"
+          >
             <option value="es">Español</option>
             <option value="en">English</option>
             <option value="fr">Français</option>
             <option value="de">Deutch</option>
           </select>
         </div>
+        <div className="w-full flex items-center gap-2 mt-10 text-fondo">
+          <div>Ayuda de sonido</div>
+          <input
+            type="checkbox"
+            checked={checked}
+            onClick={handleChange}
+            className="accent-fondo text- w-4 h-4 ml-4"
+          />
+        </div>
+        {roomCode && (
+          <button
+            type="button"
+            className="w-full flex items-center gap-2 mt-10 text-fondo font-bold hover:underline cursor-pointer bg-transparent border-none p-0"
+            onClick={() => {
+              navigator.clipboard.writeText(roomCode.toString());
+            }}
+          >
+            Código de sala: {roomCode}
+          </button>
+        )}
       </div>
     </div>
   );
