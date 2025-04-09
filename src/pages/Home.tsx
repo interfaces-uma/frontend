@@ -10,9 +10,6 @@ function Home() {
   //const navigate = useNavigate(); //para navegar entre rutas
 
   // Función para unirse a una mesa
-  const unirseMesa = () => {
-    console.log("Unirse a mesa clicked");
-  };
 
   // Función para abrir o cerrar la configuración
   const [showSettings, setShowSettings] = useState(false);
@@ -22,9 +19,15 @@ function Home() {
   };
 
   const [showName, setShowName] = useState(false);
+  const [showNameCode, setShowNameCode] = useState(false);
 
   const openName = () => {
     setShowName(!showName);
+  };
+
+  const openNameCode = () => {
+    setShowName(!showName);
+    setShowNameCode(!showNameCode);
   };
 
   return (
@@ -36,14 +39,15 @@ function Home() {
         <Button onClick={openSettings} circular>
           <SettingsIcon stroke="fondo" />
         </Button>
-        <Button onClick={unirseMesa}>UNIRSE A MESA</Button>
+        <Button onClick={openNameCode}>UNIRSE A MESA</Button>
       </div>
 
       <div className="absolute top-3 right-3">
-        <Button onClick={unirseMesa}>TUTORIAL</Button>
+        <Button onClick={openNameCode}>TUTORIAL</Button>
       </div>
       {showSettings && <Settings onClose={openSettings} />}
       {showName && <Name onClose={openName} />}
+      {showName && showNameCode && <Name onClose={openNameCode} unirse />}
     </div>
   );
 }

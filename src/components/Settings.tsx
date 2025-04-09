@@ -40,6 +40,15 @@ function Settings({
     setChecked(!checked);
   };
 
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText((roomCode ?? "").toString());
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   /*
    *   Que el volumen realmente funcione
    */
@@ -107,15 +116,20 @@ function Settings({
           />
         </div>
         {roomCode && (
-          <button
-            type="button"
-            className="w-full flex items-center gap-2 mt-10 text-fondo font-bold hover:underline cursor-pointer bg-transparent border-none p-0"
-            onClick={() => {
-              navigator.clipboard.writeText(roomCode.toString());
-            }}
-          >
-            Código de sala: {roomCode}
-          </button>
+          <div className="w-full flex items-center gap-2 mt-10 text-fondo">
+            <button
+              type="button"
+              className="w-full flex items-center gap-2 mt-10 text-fondo font-bold hover:underline cursor-pointer bg-transparent border-none p-0"
+              onClick={handleCopy}
+            >
+              Código de sala: {roomCode}
+            </button>
+            {copied && (
+              <div className="w-full flex items-start mt-10 text-fondo opacity-50 cursor-pointer bg-transparent border-none p-0">
+                Código copiado!
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

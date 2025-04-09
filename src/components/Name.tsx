@@ -5,8 +5,10 @@ import { useNavigate } from "react-router";
 
 function Name({
   onClose,
+  unirse,
 }: {
   onClose: () => void;
+  unirse?: boolean;
 }) {
   const navigate = useNavigate();
 
@@ -30,10 +32,21 @@ function Name({
           Nombre
           <input
             id="textarea"
-            className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none"
+            className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
             placeholder="Escribe tu nombre"
           />
         </label>
+        {/*  A lo mejor luego hace falta que sean comoponentes distintas */}
+        {unirse && (
+          <label className="text-fondo text-2xl font-bold mb-4 mt-4">
+            Codigo de sala
+            <input
+              id="textarea"
+              className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
+              placeholder="Introduzca el código de la sala"
+            />
+          </label>
+        )}
         <div className="flex flex-col items-center justify-center h-full">
           <Button onClick={crearMesa} inversed>
             CREAR

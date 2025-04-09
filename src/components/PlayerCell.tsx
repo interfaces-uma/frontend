@@ -9,7 +9,7 @@ function PlayerCell({
   if (children === "Unirse...") {
     buttonStyle = "w-50 h-10 bg-chat hover:brightness-85 text-fondo";
   } else {
-    buttonStyle = "w-50 h-10 bg-chat hover:brightness-85 text-fondo";
+    buttonStyle = "w-50 h-10 bg-cartas hover:brightness-85 text-fondo";
   }
 
   return (
