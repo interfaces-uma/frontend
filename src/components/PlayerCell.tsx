@@ -13,7 +13,11 @@ function PlayerCell({
   }
 
   return (
-    <button type="button" onClick={onClick} className={buttonStyle}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${buttonStyle} cursor-pointer`}
+    >
       {children}
     </button>
   );

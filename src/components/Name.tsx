@@ -1,6 +1,5 @@
 //import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import useLocalStorage from "../useLocalStorage";
 import Button from "./Button";
 import BackIcon from "./Icons/IconBack";
 
@@ -10,9 +9,13 @@ function Name({
   onClose: () => void;
 }) {
   const navigate = useNavigate();
-  const [name, setName] = useLocalStorage("name", "");
-  const crearMesa = () => {
-    navigate("/lobby", { state: { name } });
+
+  const crearMesa = async () => {
+    const valor: string = (
+      document.getElementById("textarea") as HTMLTextAreaElement
+    ).value;
+    await localStorage.setItem("name", valor);
+    navigate("/lobby", { state: { valor } });
   };
 
   return (
@@ -25,21 +28,21 @@ function Name({
         </div>
         <label className="text-fondo text-2xl font-bold mb-4 mt-4">
           Nombre
-          <textarea
+          <input
+            id="textarea"
             className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none"
             placeholder="Escribe tu nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)} // Se actualiza el nombre en el state
           />
         </label>
         <div className="flex flex-col items-center justify-center h-full">
           <Button onClick={crearMesa} inversed>
             CREAR
+            {/* cierre del boton */}
           </Button>
         </div>
+        {/* cierre del div */}
       </div>
     </div>
   );
 }
-
 export default Name;

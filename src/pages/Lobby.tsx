@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 function Lobby({
-  name,
   codigo,
 }: {
-  name: string;
   codigo?: number;
 }) {
+  const name = localStorage.getItem("name") || "Unirse...";
+
   //Ajustes
   const [showSettings, setShowSettings] = useState(false);
 

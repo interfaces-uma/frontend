@@ -39,7 +39,7 @@ function Button({
     <button
       type="button"
       onClick={onClick}
-      className={`${buttonCircle} ${buttonStyle} transition duration-300 ease-in-out`}
+      className={`${buttonCircle} ${buttonStyle} transition duration-300 ease-in-out cursor-pointer`}
     >
       {children}
     </button>
