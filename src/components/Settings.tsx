@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import BackIcon from "./Icons/IconBack";
 import IconFontSize from "./Icons/IconFontSize";
+import IconLanguage from "./Icons/IconLanguage";
 import IconVolume from "./Icons/IconVolume";
 
 function Settings({
@@ -50,7 +51,7 @@ function Settings({
 
         <div className="w-full flex justify-between items-center gap-2 mt-10">
           <label htmlFor="volume">
-            <IconVolume volume={volume} onClick={muteVolume} />
+            <IconVolume volume={volume} onClick={muteVolume} fill="fondo" />
           </label>
           <input
             id="volume"
@@ -63,9 +64,7 @@ function Settings({
           />
         </div>
         <div className="w-full flex justify-between items-center gap-2 mt-10">
-          <label htmlFor="font-size">
-            <IconFontSize />
-          </label>
+          <IconFontSize fill="fondo" />
           <input
             id="volume"
             type="range"
@@ -76,6 +75,18 @@ function Settings({
             onChange={(e) => setFontSize(Number(e.target.value))}
             className="w-2/3 accent-fondo"
           />
+        </div>
+
+        <div className="w-full flex justify-between items-center gap-2 mt-10">
+          <IconLanguage fill="fondo" />
+          {/* para el cambio de idioma se hace con i18next*/}
+
+          <select className="w-2/3 accent-fondo bg-center " defaultValue="es">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutch</option>
+          </select>
         </div>
       </div>
     </div>

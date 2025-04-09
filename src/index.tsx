@@ -1,4 +1,5 @@
 import Home from "@pages/Home";
+import Lobby from "@pages/Lobby";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
@@ -8,6 +9,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/lobby",
+    element: <Lobby />,
   },
 ]);
 
