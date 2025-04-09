@@ -1,21 +1,53 @@
+import Button from "@components/Button";
 import BackIcon from "@components/Icons/IconBack";
-import Player_Cell from "@components/Player_Cell";
+import SettingsIcon from "@components/Icons/IconSettings";
+import PlayerCell from "@components/PlayerCell";
+import Settings from "@components/Settings";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-function Lobby() {
-  // Estado para el código de la sala
-  const [roomCode, setRoomCode] = useState("");
-  const navigate = useNavigate(); //para navegar entre rutas
+function Lobby({
+  name,
+  codigo,
+}: {
+  name: string;
+  codigo?: number;
+}) {
+  //Ajustes
+  const [showSettings, setShowSettings] = useState(false);
 
-  // Función para generar un código de sala aleatorio
+  const openSettings = () => {
+    setShowSettings(!showSettings);
+  };
+
+  const [blueTeam, setBlueTeam] = useState<Array<string>>([
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+  ]);
+  const [redTeam, setRedTeam] = useState<Array<string>>([
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+    "Unirse...",
+  ]);
+  const [roomCode, setRoomCode] = useState("");
+  const navigate = useNavigate();
+
   const generateRoomCode = () => {
     let code = "";
-    for (let i = 0; i < 4; i++) {
-      // Generar un dígito aleatorio entre 0 y 9
-      code += Math.floor(Math.random() * 10);
+    if (codigo) {
+      return codigo.toString();
+      // biome-ignore lint/style/noUselessElse: <explanation>
+    } else {
+      for (let i = 0; i < 4; i++) {
+        code += Math.floor(Math.random() * 10);
+      }
+      return code;
     }
-    return code;
   };
 
   // Función para ir al home
@@ -23,22 +55,38 @@ function Lobby() {
     navigate("/"); // Navega a la página de inicio
   };
 
+  const handleJoinClick = (team: "blue" | "red", index: number) => {
+    if (team === "blue") {
+      const updatedBlueTeam = [...blueTeam];
+      updatedBlueTeam[index] = name;
+      setBlueTeam(updatedBlueTeam);
+    } else {
+      const updatedRedTeam = [...redTeam];
+      updatedRedTeam[index] = name;
+      setRedTeam(updatedRedTeam);
+    }
+  };
+
   // Usar useEffect para generar el código de la sala cuando el componente se monte
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setRoomCode(generateRoomCode());
-  }, []);
+  }, [codigo]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center font-sans">
       {/* Flecha de navegación hacia atrás */}
+
       <div className="absolute top-4 left-4">
-        <div className="self-start">
-          {/* biome-ignore lint/a11y/useButtonType: <explanation> */}
-          <button className="bg-neutral-800 rounded-full p-2" onClick={goHome}>
-            <BackIcon />
-          </button>
-        </div>
+        <Button onClick={goHome} inversed circular>
+          <BackIcon stroke="fondo" />
+        </Button>
+      </div>
+
+      <div className="absolute top-4 right-4">
+        <Button onClick={openSettings} circular inversed>
+          <SettingsIcon fill="currentColor" className="cartas" />
+        </Button>
       </div>
 
       {/* Código de sala */}
@@ -52,23 +100,30 @@ function Lobby() {
         {/* Equipo Azul */}
         <div className="flex-1 bg-fuerteAzul p-8 flex flex-col items-center gap-4">
           <h2 className="text-xl font-sans text-chat">EQUIPO AZUL</h2>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>Unirse...</Player_Cell>
-          <Player_Cell>Unirse...</Player_Cell>
+          {blueTeam.map((player, index) => (
+            <PlayerCell
+              key={index}
+              onClick={() => handleJoinClick("blue", index)}
+            >
+              {player}
+            </PlayerCell>
+          ))}
         </div>
 
         {/* Equipo Rojo */}
         <div className="flex-1 bg-fuerteRojo p-8 flex flex-col items-center gap-4">
           <h2 className="text-xl font-sans text-chat">EQUIPO ROJO</h2>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>CRM</Player_Cell>
-          <Player_Cell>Unirse...</Player_Cell>
-          <Player_Cell>Unirse...</Player_Cell>
+          {redTeam.map((player, index) => (
+            <PlayerCell
+              key={index}
+              onClick={() => handleJoinClick("red", index)}
+            >
+              {player}
+            </PlayerCell>
+          ))}
         </div>
       </div>
+      {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />}
     </div>
   );
 }

@@ -1,7 +1,9 @@
-function Player_Cell({
+function PlayerCell({
   children,
+  onClick,
 }: {
   children?: React.ReactNode;
+  onClick?: () => void;
 }) {
   let buttonStyle = "";
   if (children === "Unirse...") {
@@ -11,10 +13,10 @@ function Player_Cell({
   }
 
   return (
-    <button type="button" className={buttonStyle}>
+    <button type="button" onClick={onClick} className={buttonStyle}>
       {children}
     </button>
   );
 }
 
-export default Player_Cell;
+export default PlayerCell;
