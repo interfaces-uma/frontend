@@ -1,4 +1,4 @@
-import type { minimap } from "@tipos/minimap";
+import type { minimap } from "@/types/minimap";
 const Minimapa = ({ values }: { values: minimap }) => {
   // const minimapa: minimap = {
   //   minimap: [

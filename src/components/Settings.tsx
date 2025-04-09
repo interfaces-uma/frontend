@@ -1,9 +1,9 @@
+import Button from "@/components/Button";
+import BackIcon from "@/components/Icons/IconBack";
+import IconFontSize from "@/components/Icons/IconFontSize";
+import IconLanguage from "@/components/Icons/IconLanguage";
+import IconVolume from "@/components/Icons/IconVolume";
 import { useEffect, useState } from "react";
-import Button from "./Button";
-import BackIcon from "./Icons/IconBack";
-import IconFontSize from "./Icons/IconFontSize";
-import IconLanguage from "./Icons/IconLanguage";
-import IconVolume from "./Icons/IconVolume";
 
 function Settings({
   onClose,

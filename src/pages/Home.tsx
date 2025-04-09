@@ -1,8 +1,8 @@
-import homePhoto from "@assets/homePhoto.png";
-import Button from "@components/Button";
-import SettingsIcon from "@components/Icons/IconSettings";
-import Name from "@components/Name";
-import Settings from "@components/Settings";
+import homePhoto from "@/assets/homePhoto.png";
+import Button from "@/components/Button";
+import SettingsIcon from "@/components/Icons/IconSettings";
+import Name from "@/components/Name";
+import Settings from "@/components/Settings";
 import { useState } from "react";
 //import { useNavigate } from "react-router";
 

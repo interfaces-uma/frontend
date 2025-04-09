@@ -2,10 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@tipos/*": ["./src/tipos/*"]
+      "@/*": ["./src/*"]
     },
     "lib": ["DOM", "ES2020"],
     "jsx": "react-jsx",

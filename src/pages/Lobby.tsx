@@ -1,8 +1,8 @@
-import Button from "@components/Button";
-import BackIcon from "@components/Icons/IconBack";
-import SettingsIcon from "@components/Icons/IconSettings";
-import PlayerCell from "@components/PlayerCell";
-import Settings from "@components/Settings";
+import Button from "@/components/Button";
+import BackIcon from "@/components/Icons/IconBack";
+import SettingsIcon from "@/components/Icons/IconSettings";
+import PlayerCell from "@/components/PlayerCell";
+import Settings from "@/components/Settings";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 

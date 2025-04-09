@@ -1,7 +1,7 @@
+import Button from "@/components/Button";
+import BackIcon from "@/components/Icons/IconBack";
 //import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import Button from "./Button";
-import BackIcon from "./Icons/IconBack";
 
 function Name({
   onClose,

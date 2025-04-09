@@ -1,9 +1,9 @@
-import Home from "@pages/Home";
-import Lobby from "@pages/Lobby";
+import Home from "@/pages/Home";
+import Lobby from "@/pages/Lobby";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
-import "./style.css";
+import "@/style.css";
 
 const router = createBrowserRouter([
   {
