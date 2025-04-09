@@ -9,3 +9,19 @@
   --color-fuerteRojo: #b3261e;
   --color-fuerteAzul: #5eafbf;
 }
+
+.minimapa__cell__red {
+  background-color: var(--color-fuerteRojo);
+}
+
+.minimapa__cell__blue {
+  background-color: var(--color-fuerteAzul);
+}
+
+.minimapa__cell__empty {
+  background-color: var(--color-cartas);
+}
+
+.minimapa__cell__black {
+  background-color: #000000;
+}
