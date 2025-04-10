@@ -16,7 +16,15 @@ function Name({
 
   const crearMesa = async () => {
     await localStorage.setItem("name", name);
-    navigate("/lobby", { state: { valor: name } });
+    if (unirse && code.length === 4) {
+      await localStorage.setItem("code", code);
+    }
+    navigate("/lobby", {
+      state: {
+        unirse,
+        codigo: unirse ? Number(code) : undefined,
+      },
+    });
   };
 
   return (
@@ -48,8 +56,8 @@ function Name({
               pattern="[0-9]*"
               maxLength={4}
               value={code}
-              onInput={(e) => {
-                const cleaned = e.currentTarget.value.replace(/[^0-9]/g, "");
+              onChange={(e) => {
+                const cleaned = e.target.value.replace(/[^0-9]/g, "");
                 setCode(cleaned);
               }}
               className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"

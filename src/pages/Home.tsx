@@ -53,13 +53,13 @@ function Home() {
         <Button onClick={openPopup}>TUTORIAL</Button>
       </div>
       {showSettings && <Settings onClose={openSettings} />}
-      {showName && <Name onClose={openName} />}
-      {showName && showNameCode && <Name onClose={openNameCode} unirse />}
+      {showName && !showNameCode && <Name onClose={openName} />}
+      {showNameCode && <Name onClose={openNameCode} unirse />}
 
       <Popup
         isOpen={isPopupOpen}
         onClose={openPopup}
-        message="El equipo Azul ha elegido la carta negra 😓 ¡Gana la partida el equipo rojo! 🔴 🎉"
+        message="TUTORIAL EN CONSTRUCCIÓN 🏗️🚧🚧👷👷👷"
       />
     </div>
   );
