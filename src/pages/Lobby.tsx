@@ -56,21 +56,18 @@ function Lobby({
   };
 
   const handleJoinClick = (team: "blue" | "red", index: number) => {
+    const updatedBlueTeam = [...blueTeam];
+    const updatedRedTeam = [...redTeam];
     if (team === "blue") {
-      const updatedBlueTeam = [...blueTeam];
-      const updatedRedTeam = [...redTeam];
-
       if (blueTeam[index] === name) {
         // Si ya esta tu nombre lo quitas
 
         updatedBlueTeam[index] = "Unirse...";
       } else if (blueTeam[index] === "Unirse...") {
-        for (let i = 0; i < updatedBlueTeam.length; i++) {
+        for (let i = 0; i < 5; i++) {
           if (blueTeam[i] === name) {
             updatedBlueTeam[i] = "Unirse...";
           }
-        }
-        for (let i = 0; i < updatedRedTeam.length; i++) {
           if (redTeam[i] === name) {
             updatedRedTeam[i] = "Unirse...";
           }
@@ -78,31 +75,29 @@ function Lobby({
 
         updatedBlueTeam[index] = name;
       }
-
+      setRedTeam(updatedRedTeam);
       setBlueTeam(updatedBlueTeam);
     } else {
-      const updatedRedTeam = [...redTeam];
-      const updatedBlueTeam = [...blueTeam];
-
       if (redTeam[index] === name) {
         // Si ya esta tu nombre lo quitas
 
         updatedRedTeam[index] = "Unirse...";
       } else if (redTeam[index] === "Unirse...") {
-        for (let i = 0; i < updatedRedTeam.length; i++) {
+        for (let i = 0; i < 5; i++) {
           if (redTeam[i] === name) {
             updatedRedTeam[i] = "Unirse...";
           }
         }
-        for (let i = 0; i < updatedBlueTeam.length; i++) {
-          if (blueTeam[i] === name) {
-            updatedBlueTeam[i] = "Unirse...";
+        for (let j = 0; j < updatedBlueTeam.length; j++) {
+          if (blueTeam[j] === name) {
+            updatedBlueTeam[j] = "Unirse...";
           }
         }
         updatedRedTeam[index] = name;
       }
 
       setRedTeam(updatedRedTeam);
+      setBlueTeam(updatedBlueTeam);
     }
   };
 
