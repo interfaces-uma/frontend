@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
-//import { SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 function Name({
@@ -11,13 +11,12 @@ function Name({
   unirse?: boolean;
 }) {
   const navigate = useNavigate();
+  const [code, setCode] = useState("");
+  const [name, setName] = useState("");
 
   const crearMesa = async () => {
-    const valor: string = (
-      document.getElementById("textarea") as HTMLTextAreaElement
-    ).value;
-    await localStorage.setItem("name", valor);
-    navigate("/lobby", { state: { valor } });
+    await localStorage.setItem("name", name);
+    navigate("/lobby", { state: { valor: name } });
   };
 
   return (
@@ -28,34 +27,49 @@ function Name({
             <BackIcon />
           </Button>
         </div>
+
         <label className="text-fondo text-2xl font-bold mb-4 mt-4">
           Nombre
           <input
-            id="textarea"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
             placeholder="Escribe tu nombre"
           />
         </label>
-        {/*  A lo mejor luego hace falta que sean comoponentes distintas */}
+
         {unirse && (
           <label className="text-fondo text-2xl font-bold mb-4 mt-4">
-            Codigo de sala
+            Código de sala
             <input
-              id="textarea"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              maxLength={4}
+              value={code}
+              onInput={(e) => {
+                const cleaned = e.currentTarget.value.replace(/[^0-9]/g, "");
+                setCode(cleaned);
+              }}
               className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
               placeholder="Introduzca el código de la sala"
             />
           </label>
         )}
+
         <div className="flex flex-col items-center justify-center h-full">
-          <Button onClick={crearMesa} inversed>
+          <Button
+            onClick={crearMesa}
+            inversed
+            disabled={unirse && code.length !== 4}
+          >
             CREAR
-            {/* cierre del boton */}
           </Button>
         </div>
-        {/* cierre del div */}
       </div>
     </div>
   );
 }
+
 export default Name;

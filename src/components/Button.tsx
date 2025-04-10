@@ -3,11 +3,13 @@ function Button({
   onClick,
   circular,
   inversed,
+  disabled,
 }: {
   children?: React.ReactNode;
   onClick: () => void;
   circular?: boolean;
   inversed?: boolean;
+  disabled?: boolean;
 }) {
   let buttonStyle = "";
   let buttonCircle = "";
@@ -31,14 +33,15 @@ function Button({
   } else {
     buttonCircle = "w-36 h-12 rounded-xl";
   }
-
-  if (inversed) {
+  if (disabled) {
+    buttonStyle = "bg-white text-gray-400 cursor-not-allowed";
   }
 
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       className={`${buttonCircle} ${buttonStyle} transition duration-300 ease-in-out cursor-pointer`}
     >
       {children}
