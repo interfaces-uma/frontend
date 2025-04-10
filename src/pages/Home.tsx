@@ -2,8 +2,10 @@ import homePhoto from "@/assets/homePhoto.png";
 import Button from "@/components/Button";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import Name from "@/components/Name";
+import Popup from "@/components/Popup";
 import Settings from "@/components/Settings";
 import { useState } from "react";
+
 //import { useNavigate } from "react-router";
 
 function Home() {
@@ -30,6 +32,11 @@ function Home() {
     setShowNameCode(!showNameCode);
   };
 
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const openPopup = () => {
+    setPopupOpen(!isPopupOpen);
+  };
+
   return (
     <div className="bg-fondo min-h-screen flex flex-col items-center justify-center">
       <img src={homePhoto} alt="not found" className="w-120 h-120" />
@@ -43,11 +50,17 @@ function Home() {
       </div>
 
       <div className="absolute top-3 right-3">
-        <Button onClick={openNameCode}>TUTORIAL</Button>
+        <Button onClick={openPopup}>TUTORIAL</Button>
       </div>
       {showSettings && <Settings onClose={openSettings} />}
       {showName && <Name onClose={openName} />}
       {showName && showNameCode && <Name onClose={openNameCode} unirse />}
+
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={openPopup}
+        message="El equipo Azul ha elegido la carta negra 😓 ¡Gana la partida el equipo rojo! 🔴 🎉"
+      />
     </div>
   );
 }

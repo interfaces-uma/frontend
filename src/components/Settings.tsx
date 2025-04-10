@@ -112,7 +112,7 @@ function Settings({
             type="checkbox"
             checked={checked}
             onClick={handleChange}
-            className="accent-fondo text- w-4 h-4 ml-4"
+            className="accent-fondo text- w-6 h-6 ml-4"
           />
         </div>
         {roomCode && (
