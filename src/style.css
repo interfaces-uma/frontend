@@ -10,6 +10,16 @@
   --color-fuerteAzul: #5eafbf;
 }
 
+body {
+  height: 100dvh;
+  width: 100dvw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
 .minimapa__cell__red {
   background-color: var(--color-fuerteRojo);
 }
