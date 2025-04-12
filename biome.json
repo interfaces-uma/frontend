@@ -28,6 +28,9 @@
       "recommended": true,
       "suspicious": {
         "noArrayIndexKey": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
       }
     }
   }
