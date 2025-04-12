@@ -37,7 +37,6 @@ function Lobby() {
     return code;
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setRoomCode(generateRoomCode());
   }, [codigo]);
