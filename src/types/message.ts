@@ -1,5 +1,5 @@
 export type Message = {
-  color: string;
+  team: string;
   user: string;
   message: string;
 };

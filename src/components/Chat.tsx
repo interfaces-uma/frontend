@@ -1,5 +1,7 @@
 import type { Message } from "@/types/message";
 import { useEffect, useRef, useState } from "react";
+import io from "socket.io-client";
+const socket = io("http://localhost:3001");
 
 function showMessages(
   data: Message[],
@@ -18,7 +20,7 @@ function showMessages(
         >
           <strong
             className={
-              data.color === "red"
+              data.team === "red"
                 ? "text-fuerteRojo ml-2"
                 : "text-fuerteAzul ml-2"
             }
@@ -33,16 +35,18 @@ function showMessages(
 }
 
 function Chat() {
-  const color = localStorage.getItem("color");
+  const team = localStorage.getItem("team");
+  const user = localStorage.getItem("name");
   const [newMessage, setNewMessage] = useState<Message>({
-    color: color ? color : "NULL",
-    user: "user",
+    team: team || "NULL",
+    user: user || "",
     message: "",
   });
 
   const handleNewMessage = (text: string) => {
     setNewMessage({
-      ...newMessage,
+      team: team || "NULL",
+      user: user || "",
       message: text,
     });
   };
@@ -51,9 +55,16 @@ function Chat() {
 
   const handleSendMessage = () => {
     if (newMessage.message === "") return;
+    socket.emit("send_message", newMessage);
     setMessages([...messages, newMessage]);
     setNewMessage({ ...newMessage, message: "" });
   };
+
+  useEffect(() => {
+    socket.on("receive_message", (data: Message) => {
+      setMessages([...messages, data]);
+    });
+  });
 
   const messagesEndRef = useRef<HTMLUListElement | null>(null);
 
@@ -67,7 +78,7 @@ function Chat() {
     <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg">
       <div
         className={
-          color === "red"
+          team === "red"
             ? "bg-fuerteRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
             : "bg-fuerteAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
         }
@@ -78,7 +89,7 @@ function Chat() {
       {showMessages(messages, messagesEndRef)}
       <div
         className={
-          color === "red"
+          team === "red"
             ? "bg-fuerteRojo flex w-full rounded-bl rounded-br text-white"
             : "bg-fuerteAzul flex w-full rounded-bl rounded-br text-black"
         }
@@ -98,7 +109,7 @@ function Chat() {
           type="button"
           onClick={handleSendMessage}
           className={
-            color === "red"
+            team === "red"
               ? " bg-fuerteRojo px-4 py-2 whitespace-nowrap rounded-br hover:brightness-90"
               : " bg-fuerteAzul px-4 py-2 whitespace-nowrap rounded-br hover:brightness-90"
           }

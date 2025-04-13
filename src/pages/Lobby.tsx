@@ -49,22 +49,26 @@ function Lobby() {
     if (team === "blue") {
       if (blueTeam[index] === name) {
         updatedBlue[index] = "Unirse...";
+        localStorage.setItem("team", "");
       } else if (blueTeam[index] === "Unirse...") {
         for (let i = 0; i < 5; i++) {
           if (blueTeam[i] === name) updatedBlue[i] = "Unirse...";
           if (redTeam[i] === name) updatedRed[i] = "Unirse...";
         }
         updatedBlue[index] = name;
+        localStorage.setItem("team", "blue");
       }
     } else {
       if (redTeam[index] === name) {
         updatedRed[index] = "Unirse...";
+        localStorage.setItem("team", "");
       } else if (redTeam[index] === "Unirse...") {
         for (let i = 0; i < 5; i++) {
           if (redTeam[i] === name) updatedRed[i] = "Unirse...";
           if (blueTeam[i] === name) updatedBlue[i] = "Unirse...";
         }
         updatedRed[index] = name;
+        localStorage.setItem("team", "red");
       }
     }
 
