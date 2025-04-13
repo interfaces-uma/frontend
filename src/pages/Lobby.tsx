@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Button from "@/components/Button";
+import Chat from "@/components/Chat";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import PlayerCell from "@/components/PlayerCell";
@@ -78,13 +79,14 @@ function Lobby() {
           <BackIcon stroke="fondo" />
         </Button>
       </div>
+
       <div className="absolute top-4 right-4">
         <Button onClick={openSettings} circular inversed>
           <SettingsIcon fill="currentColor" className="cartas" />
         </Button>
       </div>
 
-      <div className="bg-neutral-800 text-white py-2 px-4 rounded-t-lg text-center mb-2">
+      <div className="bg-fondo text-cartas py-2 px-4 rounded-t-lg text-center mb-2">
         <div className="text-xs">CÓDIGO DE SALA</div>
         <div className="text-xl font-bold tracking-widest">{roomCode}</div>
       </div>
@@ -111,6 +113,9 @@ function Lobby() {
               {player}
             </PlayerCell>
           ))}
+        </div>
+        <div className="flex-1 top-0 right-0 ">
+          <Chat />
         </div>
       </div>
 

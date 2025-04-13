@@ -1,5 +1,6 @@
 import Home from "@/pages/Home";
 import Lobby from "@/pages/Lobby";
+import Test from "@/pages/Test";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
