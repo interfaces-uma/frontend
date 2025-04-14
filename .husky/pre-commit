@@ -1,5 +1,1 @@
-git diff --cached --name-only > .staged
-npm run format
-npm run check
-cat .staged | xargs git add
-rm .staged
+npx lint-staged
