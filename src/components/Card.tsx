@@ -28,14 +28,13 @@ export default function Card({
     <div
       onClick={() => handleCardClick(card.word)}
       onKeyDown={() => handleCardClick(card.word)}
+      className={className}
     >
-      <div className={className}>
-        {card.isFlipped ? (
-          <span className={colors[card.color]}>{card.word}</span>
-        ) : (
-          <span>{card.word}</span>
-        )}
-      </div>
+      {card.isFlipped ? (
+        <span className={colors[card.color]}>{card.word}</span>
+      ) : (
+        <span>{card.word}</span>
+      )}
     </div>
   );
 }
