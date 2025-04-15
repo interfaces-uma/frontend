@@ -1,10 +1,9 @@
 import Home from "@/pages/Home";
 import Lobby from "@/pages/Lobby";
-import Test from "@/pages/Test";
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import "@/style.css";
+import GamePage from "./pages/GamePage";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +14,12 @@ const router = createBrowserRouter([
     path: "/lobby",
     element: <Lobby />,
   },
+  {
+    path: "/game",
+    element: <GamePage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <RouterProvider router={router} />,
 );
