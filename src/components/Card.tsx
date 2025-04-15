@@ -10,9 +10,8 @@ export default function Card({
     black: "bg-black",
     empty: "bg-yellow-500",
   };
-
   let className =
-    "card rounded-lg p-4 m-2 text-white text-center cursor-pointer";
+    "card bg-[#F0D9B9] aspect-[3/2] rounded-lg flex items-center justify-center drop-shadow-md cursor-pointer";
 
   if (card.isSelected) {
     className += " outline outline-4 outline-blue-300";
@@ -20,21 +19,27 @@ export default function Card({
 
   if (card.isFlipped) {
     className += ` ${colors[card.color]}`;
-  } else {
-    className += " bg-gray-400";
   }
 
   return (
     <div
+      className={className}
       onClick={() => handleCardClick(card.word)}
       onKeyDown={() => handleCardClick(card.word)}
-      className={className}
     >
-      {card.isFlipped ? (
-        <span className={colors[card.color]}>{card.word}</span>
-      ) : (
-        <span>{card.word}</span>
-      )}
+      <div className="card-inner aspect-[3/2] border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
+        {card.isFlipped ? (
+          <span
+            className={`${colors[card.color]} uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]`}
+          >
+            {card.word}
+          </span>
+        ) : (
+          <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]">
+            {card.word}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

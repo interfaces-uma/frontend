@@ -2,16 +2,10 @@ import Board from "@/components/Board";
 import type { Card } from "@/types/game";
 import { useEffect } from "react";
 import { useBoardManager } from "./hooks/useBoardManager";
+import Minimapa from "@/components/Minimapa";
 export default function Game() {
   const { board, handleCardClick, addCards } = useBoardManager();
 
-  // export type Card = {
-  //   word: string;
-  //   color: "red" | "blue" | "black" | "empty";
-  //   isSelected: boolean;
-  //   isFlipped: boolean;
-  //   // handleClickCard?: (word: string) => void;
-  // };
   const cards: Card[] = [
     { word: "apple", color: "red", isSelected: false, isFlipped: false },
     { word: "banana", color: "blue", isSelected: false, isFlipped: false },
@@ -52,6 +46,10 @@ export default function Game() {
   useEffect(() => {
     addCards(cards);
   }, []);
-
-  return <Board board={board} handleCardClick={handleCardClick} />;
+  return (
+    <>
+      <Board board={board} handleCardClick={handleCardClick} />
+      <Minimapa cards={cards} />
+    </>
+  );
 }

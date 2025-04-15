@@ -17,6 +17,7 @@ export type User = {
 
 export type GameState = {
   code: string;
+  user: User;
   players: User[]; // para jugadores aun no asignados a equipos en el lobby
   teams: {
     blue: {

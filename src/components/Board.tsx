@@ -4,9 +4,10 @@ export default function Board({
   board,
   handleCardClick,
 }: { board: BoardType; handleCardClick: (word: string) => void }) {
+  // <div className="card-grid grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-3">
   return (
     <div className="board">
-      <div className="card-grid grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 ">
+      <div className="card-grid grid grid-cols-5 gap-3">
         {board.cards.map((card) => {
           return (
             <Card
