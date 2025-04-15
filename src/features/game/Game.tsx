@@ -47,9 +47,10 @@ export default function Game() {
     addCards(cards);
   }, []);
   return (
-    <>
-      <Board board={board} handleCardClick={handleCardClick} />
-      <Minimapa cards={cards} />
-    </>
+    <div className="flex w-max h-[100%]">
+      <div className="board-section w-[70%]">
+        <Board board={board} handleCardClick={handleCardClick} />
+      </div>
+    </div>
   );
 }
