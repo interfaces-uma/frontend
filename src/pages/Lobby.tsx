@@ -6,6 +6,7 @@ import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import PlayerCell from "@/components/PlayerCell";
 import Settings from "@/components/Settings";
+import Timer from "@/components/Timer";
 import { useLocation, useNavigate } from "react-router"; // 👈 importa useLocation
 
 function Lobby() {
@@ -82,6 +83,7 @@ function Lobby() {
         <Button onClick={goHome} inversed circular>
           <BackIcon stroke="fondo" />
         </Button>
+        <Timer duration={60000} />
       </div>
 
       <div className="absolute top-4 right-4">

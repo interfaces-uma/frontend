@@ -1,8 +1,8 @@
 import Board from "@/components/Board";
+import Minimapa from "@/components/Minimapa";
 import type { Card } from "@/types/game";
 import { useEffect } from "react";
 import { useBoardManager } from "./hooks/useBoardManager";
-import Minimapa from "@/components/Minimapa";
 export default function Game() {
   const { board, handleCardClick, addCards } = useBoardManager();
 
