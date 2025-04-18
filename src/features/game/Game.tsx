@@ -1,5 +1,4 @@
 import Board from "@/components/Board";
-import Minimapa from "@/components/Minimapa";
 import type { Card } from "@/types/game";
 import { useEffect } from "react";
 import { useBoardManager } from "./hooks/useBoardManager";
