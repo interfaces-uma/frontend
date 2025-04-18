@@ -2,7 +2,7 @@ import type { Message } from "./message";
 
 export type CardColor = "red" | "blue" | "black" | "empty";
 export type Role = "leader" | "agent" | "spectator";
-export type Team = "red" | "blue";
+export type TeamColor = "red" | "blue" | null;
 export type GameMode = "online" | "tutorial";
 
 export type Card = {
@@ -20,7 +20,7 @@ export type Board = {
 export type User = {
   id: string;
   name: string;
-  color: string;
+  color: TeamColor;
   role: Role | null;
 };
 
@@ -40,31 +40,32 @@ export type GameState = {
   };
   cards: Card[];
   turn: {
-    team: Team;
+    team: TeamColor;
     role: Role;
   };
   clue: {
     word: string;
     count: number;
   } | null;
+  messages: Message[];
 };
 
 /**
  * Acciones que se pueden realizar en el juego
  */
 export type DispatchActions =
-  | { type: "UPDATE_STATE"; state: GameState }
-  | { type: "START_GAME"; players: User[] }
-  | { type: "SET_TEAM"; user: User; team: Team }
-  | { type: "SET_ROLE"; user: User; role: Role }
+  | { type: "SET_USER"; user: User }
+  | { type: "SET_TEAM"; user: User; team: TeamColor; role: Role }
+  | { type: "SET_STATE"; state: GameState }
   | { type: "SET_CLUE"; word: string; count: number }
   | { type: "REVEAL_CARD"; cardText: Card["word"] }
-  | { type: "SEND_MESSAGE"; message: Message }
+  | { type: "SELECT_CARD"; cardText: Card["word"] }
   | { type: "NEXT_TURN" }
-  | { type: "END_GAME" };
+  | { type: "END_GAME" }
+  | { type: "SEND_MESSAGE"; message: Message };
 
 export type GameActions = {
   setClue: (word: string, count: number) => void;
   selectCard: (word: string) => void;
-  selectTeam: (user: User, team: Team) => void;
+  selectTeam: (user: User, team: TeamColor, role: Role) => void;
 };
