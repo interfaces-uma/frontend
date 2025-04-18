@@ -2,7 +2,8 @@ import type {
   DispatchActions,
   GameActions,
   GameMode,
-  Team,
+  Role,
+  TeamColor,
   User,
 } from "@/types/game";
 import type React from "react";
@@ -27,9 +28,9 @@ export const createGameActions = (
       dispatch({ type: "REVEAL_CARD", cardText: word });
       emitIfOnline("REVEAL_CARD", { word });
     },
-    selectTeam: (user: User, team: Team) => {
-      dispatch({ type: "SET_TEAM", user, team });
-      emitIfOnline("SET_TEAM", { user, team });
+    selectTeam: (user: User, team: TeamColor, role: Role) => {
+      dispatch({ type: "SET_TEAM", user, team, role });
+      emitIfOnline("SET_TEAM", { user, team, role });
     },
   };
 };
