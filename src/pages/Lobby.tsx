@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Button from "@/components/Button";
-import Chat from "@/components/Chat";
+import Chat from "@/features/chat/components/Chat";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import PlayerCell from "@/components/PlayerCell";

@@ -1,14 +1,10 @@
-import { useOnlineManager } from "./useOnlineManager";
-import { socket } from "@/features/game/service/socket";
+import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types/message";
 import { useEffect, useRef } from "react";
+import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
 
 export function useChat() {
   const { state } = useOnlineManager();
-
-  // dispatch({ type: "SEND_MESSAGE", message: { message: "BUENASH", user } });
-
-  // sendMessage -> Socket.emit("sendMessage", message)
 
   const handleSendMessage = (message: string) => {
     const msg: Message = {

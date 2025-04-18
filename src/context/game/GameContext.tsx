@@ -1,8 +1,15 @@
 import type { DispatchActions, GameState } from "@/types/game";
 import type React from "react";
-import { createContext, type ReactNode, useContext, useReducer } from "react";
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { gameReducer } from "./gameReducer";
 import { initialGameState } from "./initialState";
+import { socket } from "@/features/online/service/socket";
 
 type GameContextType = {
   state: GameState;
@@ -13,6 +20,19 @@ const GameStateContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
+
+  useEffect(() => {
+    socket.on("updateState", (newState) => {
+      console.log(newState);
+      dispatch({ type: "SET_STATE", state: newState });
+    });
+
+    return () => {
+      socket.off("updateState", (newState) => {
+        dispatch({ type: "SET_STATE", state: newState });
+      });
+    };
+  }, []);
 
   return (
     <GameStateContext.Provider value={{ state, dispatch }}>
@@ -26,8 +46,5 @@ export const useGameState = () => {
   if (context === undefined) {
     throw new Error("useGameState must be used within a GameProvider");
   }
-  return {
-    state: context.state,
-    dispatch: context.dispatch,
-  };
+  return context;
 };

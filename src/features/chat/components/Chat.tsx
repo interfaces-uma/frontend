@@ -1,7 +1,7 @@
 import type { Message } from "@/types/message";
 import { useState } from "react";
-import { useChat } from "@/features/game/hooks/useChat";
-import { useOnlineManager } from "@/features/game/hooks/useOnlineManager";
+import { useChat } from "@/features/chat/hooks/useChat";
+import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
 
 function showMessages(
   data: Message[],

@@ -1,4 +1,4 @@
-import Game from "@/features/game/Game";
+import Game from "@/features/online/Game";
 
 export default function GamePage() {
   return <Game />;
