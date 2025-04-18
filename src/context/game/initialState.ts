@@ -5,7 +5,7 @@ export const initialGameState: GameState = {
   user: {
     id: "",
     name: "",
-    color: "",
+    color: null,
     role: null,
   },
   players: [],
@@ -14,7 +14,7 @@ export const initialGameState: GameState = {
       leader: {
         id: "",
         name: "",
-        color: "",
+        color: "blue",
         role: "leader",
       },
       agents: [],
@@ -23,7 +23,7 @@ export const initialGameState: GameState = {
       leader: {
         id: "",
         name: "",
-        color: "",
+        color: "red",
         role: "leader",
       },
       agents: [],
@@ -35,4 +35,5 @@ export const initialGameState: GameState = {
     role: "leader",
   },
   clue: null,
+  messages: [],
 };
