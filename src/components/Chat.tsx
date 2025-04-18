@@ -1,7 +1,7 @@
 import type { Message } from "@/types/message";
-import { useEffect, useRef, useState } from "react";
-import io from "socket.io-client";
-const socket = io("http://localhost:3001");
+import { useState } from "react";
+import { useChat } from "@/features/game/hooks/useChat";
+import { useOnlineManager } from "@/features/game/hooks/useOnlineManager";
 
 function showMessages(
   data: Message[],
@@ -35,44 +35,16 @@ function showMessages(
 }
 
 function Chat() {
-  const team = localStorage.getItem("team");
-  const user = localStorage.getItem("name");
-  const [newMessage, setNewMessage] = useState<Message>({
-    team: team || "NULL",
-    user: user || "",
-    message: "",
-  });
+  const { state } = useOnlineManager();
+  const { handleSendMessage } = useChat();
 
-  const handleNewMessage = (text: string) => {
-    setNewMessage({
-      team: team || "NULL",
-      user: user || "",
-      message: text,
-    });
-  };
+  const [input, setInput] = useState<string>("");
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const team = state.user.color;
 
-  const handleSendMessage = () => {
-    if (newMessage.message === "") return;
-    socket.emit("send_message", newMessage);
-    setMessages([...messages, newMessage]);
-    setNewMessage({ ...newMessage, message: "" });
-  };
+  const messages = state.messages;
 
-  useEffect(() => {
-    socket.on("receive_message", (data: Message) => {
-      setMessages([...messages, data]);
-    });
-  });
-
-  const messagesEndRef = useRef<HTMLUListElement | null>(null);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-    }
-  }, [messages]); // Cuando los datos cambien (es decir, cuando se agregue un nuevo mensaje)
+  const { messagesEndRef } = useChat();
 
   return (
     <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg">
@@ -96,18 +68,24 @@ function Chat() {
       >
         <input
           placeholder="Escribe un mensaje..."
-          value={newMessage.message}
-          onChange={(event) => handleNewMessage(event.target.value)}
+          onChange={(event) => setInput(event.target.value)}
+          value={input}
           onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              handleSendMessage();
+            if (event.key === "Enter" && input !== "") {
+              handleSendMessage(input);
+              setInput("");
             }
           }}
           className="flex-grow p-2 focus:outline-none"
         />
         <button
           type="button"
-          onClick={handleSendMessage}
+          onClick={() => {
+            if (input !== "") {
+              handleSendMessage(input);
+              setInput("");
+            }
+          }}
           className={
             team === "red"
               ? " bg-fuerteRojo px-4 py-2 whitespace-nowrap rounded-br hover:brightness-90"

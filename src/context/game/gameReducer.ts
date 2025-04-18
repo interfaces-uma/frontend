@@ -70,7 +70,7 @@ export function gameReducer(
       };
     }
     case "SET_STATE":
-      return action.state;
+      return { ...action.state, user: state.user };
 
     case "SET_CLUE":
       return { ...state, clue: { word: action.word, count: action.count } };

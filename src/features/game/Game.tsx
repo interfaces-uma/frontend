@@ -45,6 +45,7 @@ export default function Game() {
   useEffect(() => {
     addCards(cards);
   }, []);
+
   return (
     <div className="flex w-max h-[100%]">
       <div className="board-section w-[70%]">
