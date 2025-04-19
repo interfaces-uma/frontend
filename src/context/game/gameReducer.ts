@@ -17,47 +17,37 @@ export function gameReducer(
       const updatedRedTeam = { ...state.teams.red };
       const updatedBlueTeam = { ...state.teams.blue };
 
-      if (state.teams.red.leader.id === user.id) {
-        updatedRedTeam.leader = {
-          id: "",
-          name: "",
-          color: "red",
-          role: "leader",
-        };
+      if (state.teams.red.leader?.id === user.id) {
+        updatedRedTeam.leader = null;
       } else {
         updatedRedTeam.agents = state.teams.red.agents.filter(
           (p) => p.id !== user.id,
         );
       }
 
-      if (state.teams.blue.leader.id === user.id) {
-        updatedBlueTeam.leader = {
-          id: "",
-          name: "",
-          color: "blue",
-          role: "leader",
-        };
+      if (state.teams.blue.leader?.id === user.id) {
+        updatedBlueTeam.leader = null;
       } else {
         updatedBlueTeam.agents = state.teams.blue.agents.filter(
           (p) => p.id !== user.id,
         );
       }
 
+      const updatedUser = { ...user, role, color: team };
+
       if (team === "red") {
         if (role === "leader") {
-          updatedRedTeam.leader = user;
+          updatedRedTeam.leader = updatedUser;
         } else {
-          updatedRedTeam.agents.push(user);
+          updatedRedTeam.agents.push(updatedUser);
         }
       } else if (team === "blue") {
         if (role === "leader") {
-          updatedBlueTeam.leader = user;
+          updatedBlueTeam.leader = updatedUser;
         } else {
-          updatedBlueTeam.agents.push(user);
+          updatedBlueTeam.agents.push(updatedUser);
         }
       }
-
-      const updatedUser = { ...user, role, color: team };
 
       return {
         ...state,
@@ -119,6 +109,7 @@ export function gameReducer(
         },
       };
     }
+
     case "END_GAME":
       return state;
 

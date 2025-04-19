@@ -1,5 +1,5 @@
 import Home from "@/pages/Home";
-import Lobby from "@/pages/Lobby";
+import Lobby from "@/pages/LobbyPage";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { GameProvider } from "@/context/game/GameContext";

@@ -1,6 +1,7 @@
 import type { GameState } from "@/types/game";
 
 export const initialGameState: GameState = {
+  mode: "online",
   code: "",
   user: {
     id: "",
@@ -11,21 +12,11 @@ export const initialGameState: GameState = {
   players: [],
   teams: {
     blue: {
-      leader: {
-        id: "",
-        name: "",
-        color: "blue",
-        role: "leader",
-      },
+      leader: null,
       agents: [],
     },
     red: {
-      leader: {
-        id: "",
-        name: "",
-        color: "red",
-        role: "leader",
-      },
+      leader: null,
       agents: [],
     },
   },

@@ -5,6 +5,17 @@ export type Role = "leader" | "agent" | "spectator";
 export type TeamColor = "red" | "blue" | null;
 export type GameMode = "online" | "tutorial";
 
+export type Teams = {
+  blue: {
+    leader: User | null;
+    agents: User[];
+  };
+  red: {
+    leader: User | null;
+    agents: User[];
+  };
+};
+
 export type Card = {
   word: string;
   color: CardColor;
@@ -25,19 +36,11 @@ export type User = {
 };
 
 export type GameState = {
+  mode: GameMode;
   code: string;
   user: User;
   players: User[];
-  teams: {
-    blue: {
-      leader: User;
-      agents: User[];
-    };
-    red: {
-      leader: User;
-      agents: User[];
-    };
-  };
+  teams: Teams;
   cards: Card[];
   turn: {
     team: TeamColor;
