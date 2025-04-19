@@ -1,5 +1,5 @@
 import { socket } from "@/features/online/service/socket";
-import type { Message } from "@/types/message";
+import type { Message } from "@/types";
 import { useEffect, useRef } from "react";
 import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
 

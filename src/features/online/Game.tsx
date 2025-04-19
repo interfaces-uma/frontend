@@ -1,5 +1,5 @@
 import Board from "@/components/Board";
-import type { Card } from "@/types/game";
+import type { Card } from "@/types";
 import { useEffect } from "react";
 import { useBoardManager } from "./hooks/useBoardManager";
 export default function Game() {

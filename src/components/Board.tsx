@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import type { Board as BoardType } from "@/types/game";
+import type { Board as BoardType } from "@/types";
 export default function Board({
   board,
   handleCardClick,

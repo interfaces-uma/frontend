@@ -1,4 +1,4 @@
-import type { DispatchActions, GameState } from "@/types/game";
+import type { DispatchActions, GameState } from "@/types";
 import type React from "react";
 import {
   createContext,

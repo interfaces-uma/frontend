@@ -8,7 +8,7 @@ import Settings from "@/components/Settings";
 import Timer from "@/components/Timer";
 import Chat from "@/features/chat/components/Chat";
 import { useNavigate } from "react-router";
-import { useLobbyManager } from "./hooks/useOnlineLobbyManager";
+import { useLobbyManager } from "./hooks/useLobbyManager";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;

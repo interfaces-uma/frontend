@@ -1,9 +1,14 @@
-import type { Message } from "./message";
-
 export type CardColor = "red" | "blue" | "black" | "empty";
 export type Role = "leader" | "agent" | "spectator";
 export type TeamColor = "red" | "blue" | null;
 export type GameMode = "online" | "tutorial";
+
+type minimapCell = {
+  color: "red" | "blue" | "black" | "empty";
+};
+export type minimap = {
+  minimap: minimapCell[][];
+};
 
 export type Teams = {
   blue: {
@@ -14,6 +19,12 @@ export type Teams = {
     leader: User | null;
     agents: User[];
   };
+};
+
+export type Message = {
+  team: string;
+  user: string;
+  message: string;
 };
 
 export type Card = {
@@ -66,9 +77,3 @@ export type DispatchActions =
   | { type: "NEXT_TURN" }
   | { type: "END_GAME" }
   | { type: "SEND_MESSAGE"; message: Message };
-
-export type GameActions = {
-  setClue: (word: string, count: number) => void;
-  selectCard: (word: string) => void;
-  selectTeam: (user: User, team: TeamColor, role: Role) => void;
-};

@@ -1,4 +1,4 @@
-import type { GameState, DispatchActions } from "@/types/game";
+import type { GameState, DispatchActions } from "@/types";
 
 export function gameReducer(
   state: GameState,

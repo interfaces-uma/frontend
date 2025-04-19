@@ -1,4 +1,4 @@
-import type { GameState } from "@/types/game";
+import type { GameState } from "@/types";
 
 export const initialGameState: GameState = {
   mode: "online",

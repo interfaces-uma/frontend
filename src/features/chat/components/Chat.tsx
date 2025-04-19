@@ -1,4 +1,4 @@
-import type { Message } from "@/types/message";
+import type { Message } from "@/types";
 import { useState } from "react";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";

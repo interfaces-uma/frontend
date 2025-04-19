@@ -1,4 +1,4 @@
-import type { Card as CardType } from "@/types/game";
+import type { Card as CardType } from "@/types";
 
 export default function Card({
   card,

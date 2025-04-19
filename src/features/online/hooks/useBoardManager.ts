@@ -1,4 +1,4 @@
-import type { Board, Card } from "@/types/game";
+import type { Board, Card } from "@/types";
 import { useState } from "react";
 
 export function useBoardManager() {

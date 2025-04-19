@@ -1,4 +1,4 @@
-import type { Role, TeamColor, Teams } from "@/types/game";
+import type { Role, TeamColor, Teams } from "@/types";
 
 export interface LobbyManager {
   getRoomCode(): string;

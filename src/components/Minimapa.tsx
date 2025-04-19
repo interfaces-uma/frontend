@@ -1,4 +1,4 @@
-import type { Card } from "@/types/game";
+import type { Card } from "@/types";
 const Minimapa = ({ cards }: { cards: Card[] }) => {
   return (
     <div className="minimapa w-[20vw]">
