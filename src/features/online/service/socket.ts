@@ -1,11 +1,22 @@
-import type { Message, GameState, Role, TeamColor, User } from "@/types";
+import type {
+  Message,
+  GameState,
+  Role,
+  TeamColor,
+  User,
+  Clue,
+  Card,
+} from "@/types";
 import { type Socket, io } from "socket.io-client";
 
 interface ClientToServerEvents {
   joinRoom: (code: string) => void;
   leaveRoom: () => void;
-  joinTeam: (user: User, color: TeamColor, role: Role) => void;
+  joinTeam: (data: { user: User; color: TeamColor; role: Role }) => void;
   sendMessage: (message: Message) => void;
+  startGame: () => void;
+  sendClue: (clue: Clue) => void;
+  guessCard: (card: Card) => void;
 }
 
 interface ServerToClientEvents {

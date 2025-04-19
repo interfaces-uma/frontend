@@ -23,17 +23,15 @@ export const useLobbyManager = (): LobbyManager => {
     const user = state.user;
 
     if (gameMode === "tutorial") {
-      socket.emit("join", { user, color, role });
+      socket.emit("joinTeam", { user, color, role });
     } else {
       dispatch({ type: "SET_TEAM", role, team: color, user: state.user });
     }
   };
 
   const startGame = () => {
-    const user = state.user;
-
     if (gameMode === "online") {
-      socket.emit("startGame", { user });
+      socket.emit("startGame");
     } else {
       // redirect to game TODO
     }

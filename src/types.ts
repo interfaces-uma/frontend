@@ -3,6 +3,11 @@ export type Role = "leader" | "agent" | "spectator";
 export type TeamColor = "red" | "blue" | null;
 export type GameMode = "online" | "tutorial";
 
+export type Clue = {
+  word: string;
+  count: number;
+} | null;
+
 type minimapCell = {
   color: "red" | "blue" | "black" | "empty";
 };
@@ -57,10 +62,7 @@ export type GameState = {
     team: TeamColor;
     role: Role;
   };
-  clue: {
-    word: string;
-    count: number;
-  } | null;
+  clue: Clue;
   messages: Message[];
 };
 
