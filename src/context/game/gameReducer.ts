@@ -60,7 +60,12 @@ export function gameReducer(
       };
     }
     case "SET_STATE":
-      return { ...action.state, user: state.user };
+      return {
+        ...action.state,
+        user: state.user,
+        mode: state.mode,
+        code: state.code,
+      };
 
     case "SET_CLUE":
       return { ...state, clue: { word: action.word, count: action.count } };
