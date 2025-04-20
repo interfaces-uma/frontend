@@ -10,7 +10,15 @@ import type {
 import { type Socket, io } from "socket.io-client";
 
 interface ClientToServerEvents {
-  joinRoom: (code: string) => void;
+  joinRoom: (
+    code: string,
+    user: User,
+    callback: (response: { success: boolean; message?: string }) => void,
+  ) => void;
+  createRoom: (
+    user: User,
+    callback: (response: { success: boolean; message?: string }) => void,
+  ) => void;
   leaveRoom: () => void;
   joinTeam: (data: { user: User; color: TeamColor; role: Role }) => void;
   sendMessage: (message: Message) => void;
@@ -24,7 +32,7 @@ interface ServerToClientEvents {
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  "http://localhost:3001",
+  "http://localhost:3001/",
 );
 
 export { socket };

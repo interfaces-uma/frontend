@@ -1,7 +1,9 @@
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
+import { useGameState } from "@/context/game/GameContext";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { socket } from "@/features/online/service/socket";
 
 function Name({
   onClose,
@@ -11,20 +13,44 @@ function Name({
   unirse?: boolean;
 }) {
   const navigate = useNavigate();
+  const { state, dispatch } = useGameState();
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
 
-  const crearMesa = async () => {
+  const handleMesa = async () => {
     await localStorage.setItem("name", name);
-    if (unirse && code.length === 4) {
-      await localStorage.setItem("code", code);
-    }
-    navigate("/lobby", {
-      state: {
-        unirse,
-        codigo: unirse ? Number(code) : undefined,
-      },
+    dispatch({
+      type: "SET_USER",
+      user: { name, id: name, color: null, role: null },
     });
+
+    if (!unirse) {
+      socket.emit("createRoom", state.user, (response) => {
+        if (!response.success) {
+          alert(response.message);
+        } else {
+          navigate("/lobby", {
+            state: {
+              unirse,
+              codigo: unirse ? Number(code) : undefined,
+            },
+          });
+        }
+      });
+    } else {
+      socket.emit("joinRoom", code, state.user, (response) => {
+        if (!response.success) {
+          alert(response.message);
+        } else {
+          navigate("/lobby", {
+            state: {
+              unirse,
+              codigo: unirse ? Number(code) : undefined,
+            },
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -68,11 +94,11 @@ function Name({
 
         <div className="flex flex-col items-center justify-center h-full">
           <Button
-            onClick={crearMesa}
+            onClick={handleMesa}
             inversed
             disabled={unirse && code.length !== 4}
           >
-            CREAR
+            {unirse ? "UNIRSE" : "CREAR"}
           </Button>
         </div>
       </div>
