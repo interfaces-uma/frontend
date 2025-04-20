@@ -38,7 +38,7 @@ function Name({
         }
       });
     } else {
-      socket.emit("joinRoom", code, state.user, (response) => {
+      socket.emit("joinRoom", state.user, code, (response) => {
         if (!response.success) {
           alert(response.message);
         } else {

@@ -11,8 +11,8 @@ import { type Socket, io } from "socket.io-client";
 
 interface ClientToServerEvents {
   joinRoom: (
-    code: string,
     user: User,
+    code: string,
     callback: (response: { success: boolean; message?: string }) => void,
   ) => void;
   createRoom: (
@@ -21,7 +21,7 @@ interface ClientToServerEvents {
   ) => void;
   leaveRoom: () => void;
   joinTeam: (data: { user: User; color: TeamColor; role: Role }) => void;
-  sendMessage: (message: Message) => void;
+  sendMessage: (message: Message, roomCode: string) => void;
   startGame: () => void;
   sendClue: (clue: Clue) => void;
   guessCard: (card: Card) => void;

@@ -13,7 +13,8 @@ export function useChat() {
       team: state.user.color || "red",
     };
 
-    socket.emit("sendMessage", msg);
+    socket.emit("sendMessage", msg, state.code);
+    console.log(state);
   };
 
   const messagesEndRef = useRef<HTMLUListElement | null>(null);
