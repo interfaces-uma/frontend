@@ -10,10 +10,15 @@ import Chat from "@/features/chat/components/Chat";
 import { useNavigate } from "react-router";
 import { useLobbyManager } from "./hooks/useLobbyManager";
 
+import { useGameState } from "@/context/game/GameContext";
+import { socket } from "@/features/online/service/socket";
+
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
   const manager = useLobbyManager();
   const navigate = useNavigate();
+
+  const { state } = useGameState();
 
   const roomCode = manager.getRoomCode();
   const [showSettings, setShowSettings] = useState(false);
@@ -38,7 +43,11 @@ function Lobby() {
 
   const openSettings = () => setShowSettings(!showSettings);
 
-  const goHome = () => navigate("/");
+  const goHome = () => {
+    //Habría que añadir un popPup o ventana emergente informando de que va a salir de la sala y/o es la ultima persona en salir
+    socket.emit("leaveRoom", state.user, state.code);
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center font-sans">

@@ -13,19 +13,20 @@ function Name({
   unirse?: boolean;
 }) {
   const navigate = useNavigate();
-  const { state, dispatch } = useGameState();
+  const { dispatch } = useGameState();
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
 
   const handleMesa = async () => {
+    const user = { name, id: name, color: null, role: null };
     await localStorage.setItem("name", name);
     dispatch({
       type: "SET_USER",
-      user: { name, id: name, color: null, role: null },
+      user,
     });
 
     if (!unirse) {
-      socket.emit("createRoom", state.user, (response) => {
+      socket.emit("createRoom", user, (response) => {
         if (!response.success) {
           alert(response.message);
         } else {
@@ -38,7 +39,7 @@ function Name({
         }
       });
     } else {
-      socket.emit("joinRoom", state.user, code, (response) => {
+      socket.emit("joinRoom", user, code, (response) => {
         if (!response.success) {
           alert(response.message);
         } else {

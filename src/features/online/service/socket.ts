@@ -19,7 +19,7 @@ interface ClientToServerEvents {
     user: User,
     callback: (response: { success: boolean; message?: string }) => void,
   ) => void;
-  leaveRoom: () => void;
+  leaveRoom: (user: User, code: string) => void;
   joinTeam: (data: { user: User; color: TeamColor; role: Role }) => void;
   sendMessage: (message: Message, roomCode: string) => void;
   startGame: () => void;
@@ -32,7 +32,7 @@ interface ServerToClientEvents {
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  "http://localhost:3001/",
+  "http://localhost:3002/",
 );
 
 export { socket };

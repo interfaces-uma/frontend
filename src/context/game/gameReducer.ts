@@ -63,8 +63,6 @@ export function gameReducer(
       return {
         ...action.state,
         user: state.user,
-        mode: state.mode,
-        code: state.code,
       };
 
     case "SET_CLUE":
