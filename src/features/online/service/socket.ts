@@ -35,7 +35,7 @@ interface ServerToClientEvents {
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  "http://localhost:3001/",
+  process.env.BACKEND_URL,
 );
 
 export { socket };
