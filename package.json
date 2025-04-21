@@ -6,8 +6,8 @@
   "scripts": {
     "build": "rsbuild build",
     "check": "biome check --write",
-    "dev": "rsbuild dev --open",
     "format": "biome format --write",
+    "dev": "rsbuild dev --open",
     "preview": "rsbuild preview",
     "prepare": "husky"
   },
