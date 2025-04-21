@@ -35,7 +35,7 @@ interface ServerToClientEvents {
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  "http://localhost:3002/",
+  "http://localhost:3001/",
 );
 
 export { socket };
