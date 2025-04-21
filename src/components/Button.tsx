@@ -1,3 +1,6 @@
+import type React from "react";
+import clickSound from "@/assets/click.mp3";
+
 function Button({
   children,
   onClick,
@@ -13,6 +16,7 @@ function Button({
 }) {
   let buttonStyle = "";
   let buttonCircle = "";
+
   if (children === "CREAR MESA") {
     buttonStyle = "w-75 h-25 bg-fondoAzul hover:brightness-85 text-fondo";
   } else if (children === "UNIRSE A MESA") {
@@ -33,14 +37,27 @@ function Button({
   } else {
     buttonCircle = "w-36 h-12 rounded-xl";
   }
+
   if (disabled) {
     buttonStyle = "bg-white text-gray-400 cursor-not-allowed";
   }
 
+  const handleClick = () => {
+    if (disabled) return;
+
+    // Clonamos el audio para que no se interrumpa si se hace click rápido
+    const click = new Audio(clickSound);
+    click.volume = 0.3; // Puedes ajustar el volumen si quieres
+    click.play().catch(() => {});
+
+    // Ejecutar lógica del botón
+    onClick?.();
+  };
+
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       className={`${buttonCircle} ${buttonStyle} transition duration-300 ease-in-out cursor-pointer`}
     >

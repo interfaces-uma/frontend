@@ -24,6 +24,7 @@ export const useLobbyManager = (): LobbyManager => {
     const code = state.code;
 
     if (gameMode !== "tutorial") {
+      dispatch({ type: "SET_TEAM", role, team: color, user: state.user });
       socket.emit("joinTeam", { user, color, role }, code);
     } else {
       dispatch({ type: "SET_TEAM", role, team: color, user: state.user });

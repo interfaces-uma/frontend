@@ -4,6 +4,7 @@ import IconFontSize from "@/components/Icons/IconFontSize";
 import IconLanguage from "@/components/Icons/IconLanguage";
 import IconVolume from "@/components/Icons/IconVolume";
 import { useEffect, useState } from "react";
+import { useVolume } from "@/context/Volume/VolumeContext";
 
 function Settings({
   onClose,
@@ -12,11 +13,41 @@ function Settings({
   onClose: () => void;
   roomCode?: string;
 }) {
-  const [volume, setVolume] = useState(50);
-  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVolume(Number(e.target.value));
-  };
+  const fontSizes = [16, 18, 20, 22, 24];
+  const { volume, setVolume } = useVolume();
+
   const [prevVolume, setPrevVolume] = useState<number | null>(null);
+  const [fontIndex, setFontSize] = useState(2);
+  const [language, setLanguage] = useState("es");
+  const [checked, setChecked] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const savedFontIndex = localStorage.getItem("fontIndex");
+    const savedLanguage = localStorage.getItem("language");
+    const savedHelpSound = localStorage.getItem("helpSound");
+
+    if (savedFontIndex !== null) setFontSize(Number(savedFontIndex));
+    if (savedLanguage !== null) setLanguage(savedLanguage);
+    if (savedHelpSound !== null) setChecked(savedHelpSound === "true");
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("fontIndex", fontIndex.toString());
+    document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
+  }, [fontIndex]);
+
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
+
+  useEffect(() => {
+    localStorage.setItem("helpSound", checked.toString());
+  }, [checked]);
+
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(Number(event.target.value));
+  };
 
   const muteVolume = () => {
     if (volume === 0 && prevVolume !== null) {
@@ -28,30 +59,16 @@ function Settings({
     }
   };
 
-  const fontSizes = [16, 18, 20, 22, 24];
-  const [fontIndex, setFontSize] = useState(2);
-
-  useEffect(() => {
-    document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
-  }, [fontIndex]);
-
-  const [checked, setChecked] = useState(false);
   const handleChange = () => {
     setChecked(!checked);
   };
 
-  const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     navigator.clipboard.writeText((roomCode ?? "").toString());
     setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  /*
-   *   Que el volumen realmente funcione
-   */
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
@@ -60,6 +77,8 @@ function Settings({
             <BackIcon />
           </Button>
         </div>
+
+        {/* Volumen */}
         <div className="w-full flex justify-between items-center gap-2 mt-10">
           <label htmlFor="volume">
             <IconVolume
@@ -72,17 +91,19 @@ function Settings({
           <input
             id="volume"
             type="range"
-            min={0}
-            max={100}
+            min="0"
+            max="1"
+            step="0.01"
             value={volume}
-            onChange={handleVolume}
+            onChange={handleVolumeChange}
             className="w-2/3 accent-fondo"
           />
         </div>
+
+        {/* Tamaño de texto */}
         <div className="w-full flex justify-between items-center gap-2 mt-10">
           <IconFontSize className="text-fondo" fill="currentColor" />
           <input
-            id="volume"
             type="range"
             min={0}
             max={4}
@@ -92,13 +113,14 @@ function Settings({
             className="w-2/3 accent-fondo"
           />
         </div>
+
+        {/* Idioma */}
         <div className="w-full flex justify-between items-center gap-2 mt-10">
           <IconLanguage className="text-fondo" fill="currentColor" />
-          {/* para el cambio de idioma se hace con i18next*/}
-
           <select
             className="w-2/3 accent-fondo bg-center text-fondo"
-            defaultValue="es"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
           >
             <option value="es">Español</option>
             <option value="en">English</option>
@@ -106,15 +128,19 @@ function Settings({
             <option value="de">Deutch</option>
           </select>
         </div>
+
+        {/* Ayuda de sonido */}
         <div className="w-full flex items-center gap-2 mt-10 text-fondo">
           <div>Ayuda de sonido</div>
           <input
             type="checkbox"
             checked={checked}
-            onClick={handleChange}
-            className="accent-fondo text- w-6 h-6 ml-4"
+            onChange={handleChange}
+            className="accent-fondo w-6 h-6 ml-4"
           />
         </div>
+
+        {/* Código de sala */}
         {roomCode && (
           <div className="w-full flex items-center gap-2 mt-10 text-fondo">
             <button
@@ -126,7 +152,7 @@ function Settings({
             </button>
             {copied && (
               <div className="w-full flex items-start mt-10 text-fondo opacity-50 cursor-pointer bg-transparent border-none p-0">
-                Código copiado!
+                ¡Código copiado!
               </div>
             )}
           </div>

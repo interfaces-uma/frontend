@@ -10,7 +10,7 @@ export function useChat() {
     const msg: Message = {
       message,
       user: state.user.name,
-      team: state.user.color || "red",
+      team: state.user.color || "blue",
     };
 
     socket.emit("sendMessage", msg, state.code);

@@ -3,6 +3,7 @@ import Lobby from "@/pages/LobbyPage";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { GameProvider } from "@/context/game/GameContext";
+import { VolumeProvider } from "@/context/Volume/VolumeContext";
 import "@/style.css";
 import GamePage from "./pages/GamePage";
 
@@ -23,6 +24,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <GameProvider>
-    <RouterProvider router={router} />,
+    <VolumeProvider>
+      <RouterProvider router={router} />
+    </VolumeProvider>
   </GameProvider>,
 );
