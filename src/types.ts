@@ -67,7 +67,7 @@ export type GameState = {
 };
 
 /**
- * Acciones que se pueden realizar en el juego
+ * Acciones que se pueden realizar en el juego desde gameReducer
  */
 export type DispatchActions =
   | { type: "SET_USER"; user: User }

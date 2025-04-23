@@ -59,7 +59,7 @@ function Settings({
     }
   };
 
-  const handleChange = () => {
+  const helpVolume = () => {
     setChecked(!checked);
   };
 
@@ -135,7 +135,7 @@ function Settings({
           <input
             type="checkbox"
             checked={checked}
-            onChange={handleChange}
+            onChange={helpVolume}
             className="accent-fondo w-6 h-6 ml-4"
           />
         </div>

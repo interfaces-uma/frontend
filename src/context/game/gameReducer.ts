@@ -1,14 +1,14 @@
-import type { GameState, DispatchActions } from "@/types";
+import type { GameState, DispatchActions } from "@/types"; //aqui estan todas las funciones que puedes hacer y que le pasas
 
 export function gameReducer(
-  state: GameState,
-  action: DispatchActions,
+  state: GameState, //Que quieres hacer
+  action: DispatchActions, //Lo que vas a usar/cambiar
 ): GameState {
   switch (action.type) {
-    case "SET_USER":
+    case "SET_USER": //entra aqui para cambiar el user
       return {
-        ...state,
-        user: action.user,
+        ...state, //lo que habia antes y lo que pones abajo se cambia o lo que quieras cambiar abajo
+        user: action.user, //cambia solo el user al nuevo que te llega(backend) o le pasas(caso de tutorial)
       };
     case "SET_TEAM": {
       const { user, team, role } = action;
