@@ -30,7 +30,6 @@ This is an online/local multiplayer game that recreates the "Codenames" board ga
 ## Features
 
 - **Online Multiplayer**: Play with friends remotely using real-time socket communication
-- **Local Game Mode**: Play on a single device with friends
 - **Interactive Tutorial**: Learn how to play with a step-by-step guide
 - **Team Management**: Join red or blue team as either a spymaster or field operative
 - **Real-time Chat**: Communicate with your team members
