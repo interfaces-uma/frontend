@@ -33,7 +33,7 @@ export const useLobbyManager = (): LobbyManager => {
 
   const startGame = () => {
     if (gameMode === "online") {
-      socket.emit("startGame");
+      socket.emit("startGame", state.code);
     } else {
       // redirect to game TODO
     }

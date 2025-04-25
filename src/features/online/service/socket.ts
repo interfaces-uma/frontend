@@ -25,13 +25,17 @@ interface ClientToServerEvents {
     code: string,
   ) => void;
   sendMessage: (message: Message, roomCode: string) => void;
-  startGame: () => void;
+  startGame: (
+    roomCode: string,
+    callback: (response: { success: boolean; message?: string }) => void,
+  ) => void;
   sendClue: (clue: Clue) => void;
   guessCard: (card: Card) => void;
 }
 
 interface ServerToClientEvents {
   updateState: (state: GameState) => void;
+  redirectGame: () => void;
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(

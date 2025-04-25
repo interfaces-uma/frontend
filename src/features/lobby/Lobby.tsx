@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
@@ -21,6 +21,7 @@ function Lobby() {
   const { state } = useGameState();
 
   const roomCode = manager.getRoomCode();
+  localStorage.setItem("roomCode", roomCode);
   const [showSettings, setShowSettings] = useState(false);
 
   //PARA LA MUSICA DE FONDO ↓
@@ -73,6 +74,16 @@ function Lobby() {
     navigate("/");
   };
 
+  useEffect(() => {
+    socket.on("redirectGame", () => {
+      navigate("/game");
+    });
+
+    return () => {
+      socket.off("redirectGame");
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center font-sans">
       {/* Botón salir y temporizador */}
@@ -89,6 +100,19 @@ function Lobby() {
           <SettingsIcon fill="currentColor" className="cartas" />
         </Button>
       </div>
+
+      {/* BOTON PARA PROBAR EL startGame */}
+      <Button
+        onClick={() =>
+          socket.emit("startGame", roomCode, (response) => {
+            if (!response.success) {
+              alert(response.message);
+            }
+          })
+        }
+      >
+        EMPEZAR JUEGO
+      </Button>
 
       {/* Código de sala */}
       <div className="bg-fondo text-cartas py-2 px-4 rounded-t-lg text-center mb-2">
