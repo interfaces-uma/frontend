@@ -54,6 +54,15 @@ function Name({
     }
   };
 
+  //Enter para handleMesa
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (!unirse || (unirse && code.length === 4)) {
+        handleMesa();
+      }
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
@@ -69,6 +78,7 @@ function Name({
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
             placeholder="Escribe tu nombre"
           />
@@ -87,6 +97,7 @@ function Name({
                 const cleaned = e.target.value.replace(/[^0-9]/g, "");
                 setCode(cleaned);
               }}
+              onKeyDown={handleKeyDown}
               className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
               placeholder="Introduzca el código de la sala"
             />

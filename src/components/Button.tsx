@@ -47,7 +47,7 @@ function Button({
 
     // Clonamos el audio para que no se interrumpa si se hace click rápido
     const click = new Audio(clickSound);
-    click.volume = 0.3; // Puedes ajustar el volumen si quieres
+    click.volume = 0.3; // Volumen Click
     click.play().catch(() => {});
 
     // Ejecutar lógica del botón
