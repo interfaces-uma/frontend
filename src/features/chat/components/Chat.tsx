@@ -11,7 +11,7 @@ function showMessages(
   return (
     <ul
       ref={messagesEndRef}
-      className="max-h-80 min-h-80 max-w-70 overflow-y-auto overflow-x-hidden"
+      className="max-h-80 min-h-80 w-full overflow-y-auto overflow-x-hidden"
     >
       {data.map((data, index) => (
         <li
