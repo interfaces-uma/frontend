@@ -20,8 +20,6 @@ function OrientationLock() {
       setIsPortrait(value);
       if (value) {
         handleFullscreenPrompt();
-      } else {
-        setShowFullscreenPrompt(true);
       }
     };
 
