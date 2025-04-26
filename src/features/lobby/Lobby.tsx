@@ -18,7 +18,7 @@ function Lobby() {
   const MAX_TEAM_SIZE = 5;
   const manager = useLobbyManager();
   const navigate = useNavigate();
-  const { state } = useGameState();
+  const { state, dispatch } = useGameState();
 
   const roomCode = manager.getRoomCode();
   localStorage.setItem("roomCode", roomCode);
@@ -67,6 +67,9 @@ function Lobby() {
     ...teams.red.agents.map((player) => player.name),
   ]);
 
+  const players = manager.getPlayers();
+  const noTeamPlayers = players.map((player) => player.name);
+
   const openSettings = () => setShowSettings(!showSettings);
 
   const goHome = () => {
@@ -83,6 +86,10 @@ function Lobby() {
       socket.off("redirectGame");
     };
   }, []);
+
+  const handleLeaveTeam = () => {
+    manager.leaveTeam();
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center font-sans">
@@ -150,6 +157,21 @@ function Lobby() {
               {player}
             </PlayerCell>
           ))}
+        </div>
+
+        <div className="flex-1 bg-cartas p-8 flex flex-col items-center gap-4">
+          <h2 className="text-xl font-sans text-fondo">JUGADORES SIN EQUIPO</h2>
+          <ul>
+            {noTeamPlayers.map((player, index) => (
+              <li key={player}>{player}</li>
+            ))}
+          </ul>
+          {noTeamPlayers.length === 0 && (
+            <p className="text-xs text-fondo">No hay jugadores sin equipo</p>
+          )}
+          <Button onClick={handleLeaveTeam} inversed>
+            SALIR DEL EQUIPO
+          </Button>
         </div>
 
         <div className="flex-1 top-0 right-0">

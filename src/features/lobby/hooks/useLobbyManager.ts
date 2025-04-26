@@ -15,8 +15,22 @@ export const useLobbyManager = (): LobbyManager => {
     return state.teams;
   };
 
+  const getPlayers = () => {
+    return state.players;
+  };
+
   const getPlayerName = () => {
     return state.user.name;
+  };
+
+  const leaveTeam = () => {
+    dispatch({
+      type: "SET_TEAM",
+      role: "spectator",
+      team: null,
+      user: state.user,
+    });
+    socket.emit("leaveTeam", state.code, state.user);
   };
 
   const joinSlot = (color: TeamColor, role: Role) => {
@@ -45,5 +59,7 @@ export const useLobbyManager = (): LobbyManager => {
     getPlayerName,
     joinSlot,
     startGame,
+    getPlayers,
+    leaveTeam,
   };
 };

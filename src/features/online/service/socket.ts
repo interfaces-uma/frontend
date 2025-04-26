@@ -31,6 +31,7 @@ interface ClientToServerEvents {
   ) => void;
   sendClue: (clue: Clue) => void;
   guessCard: (card: Card) => void;
+  leaveTeam: (code: string, user: User) => void;
 }
 
 interface ServerToClientEvents {
