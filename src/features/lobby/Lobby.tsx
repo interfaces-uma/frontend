@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
@@ -18,7 +18,7 @@ function Lobby() {
   const MAX_TEAM_SIZE = 5;
   const manager = useLobbyManager();
   const navigate = useNavigate();
-  const { state, dispatch } = useGameState();
+  const { state } = useGameState();
 
   const roomCode = manager.getRoomCode();
   localStorage.setItem("roomCode", roomCode);
@@ -109,17 +109,7 @@ function Lobby() {
       </div>
 
       {/* BOTON PARA PROBAR EL startGame */}
-      <Button
-        onClick={() =>
-          socket.emit("startGame", roomCode, (response) => {
-            if (!response.success) {
-              alert(response.message);
-            }
-          })
-        }
-      >
-        EMPEZAR JUEGO
-      </Button>
+      <Button onClick={() => manager.startGame()}>EMPEZAR JUEGO</Button>
 
       {/* Código de sala */}
       <div className="bg-fondo text-cartas py-2 px-4 rounded-t-lg text-center mb-2">
@@ -162,7 +152,7 @@ function Lobby() {
         <div className="flex-1 bg-cartas p-8 flex flex-col items-center gap-4">
           <h2 className="text-xl font-sans text-fondo">JUGADORES SIN EQUIPO</h2>
           <ul>
-            {noTeamPlayers.map((player, index) => (
+            {noTeamPlayers.map((player) => (
               <li key={player}>{player}</li>
             ))}
           </ul>
