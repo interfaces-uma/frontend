@@ -1,9 +1,9 @@
 import Board from "@/components/Board";
 import type { Card } from "@/types";
 import { socket } from "./service/socket";
-import { useOnlineManager } from "./hooks/useOnlineManager";
+import { useGameState } from "@/context/game/GameContext";
 export default function Game() {
-  const { state } = useOnlineManager();
+  const { state } = useGameState();
 
   const pruebaBack = (cardWord: string) => {
     const card: Card = {

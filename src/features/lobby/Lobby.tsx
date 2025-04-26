@@ -145,7 +145,7 @@ function Lobby() {
         <button
           type="button"
           onClick={() => {
-            manager.startGame;
+            manager.startGame();
           }}
           className="w-full h-full cursor-pointer"
         >
