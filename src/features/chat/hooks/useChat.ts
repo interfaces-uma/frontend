@@ -6,6 +6,10 @@ import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
 export function useChat() {
   const { state } = useOnlineManager();
 
+  /**
+   * Metodo que se ejecuta al enviar un mensaje
+   * @param message - Mensaje a enviar
+   */
   const handleSendMessage = (message: string) => {
     const msg: Message = {
       message,
