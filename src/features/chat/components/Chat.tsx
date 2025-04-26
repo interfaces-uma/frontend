@@ -1,7 +1,7 @@
 import type { Message } from "@/types";
 import { useState } from "react";
 import { useChat } from "@/features/chat/hooks/useChat";
-import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
+import { useGameState } from "@/context/game/GameContext";
 
 function showMessages(
   data: Message[],
@@ -35,7 +35,7 @@ function showMessages(
 }
 
 function Chat() {
-  const { state } = useOnlineManager();
+  const { state } = useGameState();
   const { handleSendMessage } = useChat();
 
   const [input, setInput] = useState<string>("");

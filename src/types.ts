@@ -51,6 +51,9 @@ export type User = {
   role: Role | null;
 };
 
+/**
+ * Define el estado de una partida
+ */
 export type GameState = {
   mode: GameMode;
   code: string;
@@ -67,7 +70,7 @@ export type GameState = {
 };
 
 /**
- * Acciones que se pueden realizar en el juego desde gameReducer
+ * Distintos tipos de funciones que puede ejecutar el gameReducer
  */
 export type DispatchActions =
   | { type: "SET_USER"; user: User }
@@ -79,3 +82,14 @@ export type DispatchActions =
   | { type: "NEXT_TURN" }
   | { type: "END_GAME" }
   | { type: "SEND_MESSAGE"; message: Message };
+
+/**
+ * Define las acciones que un usuario puede realizar en una partida
+ */
+export interface UserActions {
+  setClue: (clue: Clue) => void;
+  selectCard?: (cardText: Card["word"]) => void;
+  revealCard: (cardText: Card["word"]) => void;
+  nextTurn: () => void;
+  leaveGame: () => void;
+}
