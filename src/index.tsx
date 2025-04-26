@@ -6,6 +6,7 @@ import { GameProvider } from "@/context/game/GameContext";
 import { VolumeProvider } from "@/context/Volume/VolumeContext";
 import "@/style.css";
 import GamePage from "./pages/GamePage";
+import OrientationLock from "./components/OrientationLock";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <GameProvider>
+    <OrientationLock />
     <VolumeProvider>
       <RouterProvider router={router} />
     </VolumeProvider>
