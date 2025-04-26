@@ -1,13 +1,15 @@
 import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types";
 import { useEffect, useRef } from "react";
-import { useOnlineManager } from "@/features/online/hooks/useOnlineManager";
+import { useGameState } from "@/context/game/GameContext";
 
 export function useChat() {
-  const { state } = useOnlineManager();
+  const { state, dispatch } = useGameState();
 
   /**
    * Metodo que se ejecuta al enviar un mensaje
+   * En caso de ser online manda un evento la backend
+   * En caso de ser !online ejecuta dispathc directamente sobre el game state
    * @param message - Mensaje a enviar
    */
   const handleSendMessage = (message: string) => {
@@ -17,8 +19,11 @@ export function useChat() {
       team: state.user.color || "blue",
     };
 
-    socket.emit("sendMessage", msg, state.code);
-    console.log(state);
+    if (state.mode === "online") {
+      socket.emit("sendMessage", msg, state.code);
+    } else {
+      dispatch({ type: "SEND_MESSAGE", message: msg });
+    }
   };
 
   const messagesEndRef = useRef<HTMLUListElement | null>(null);
