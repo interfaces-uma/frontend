@@ -7,16 +7,16 @@ function PlayerCell({
 }) {
   let buttonStyle = "";
   if (children === "Unirse...") {
-    buttonStyle = "w-50 h-10 bg-chat hover:brightness-85 text-fondo";
+    buttonStyle = "bg-chat hover:brightness-85 text-fondo";
   } else {
-    buttonStyle = "w-50 h-10 bg-cartas hover:brightness-85 text-fondo";
+    buttonStyle = "bg-cartas hover:brightness-85 text-fondo";
   }
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`${buttonStyle} cursor-pointer`}
+      className={`${buttonStyle} cursor-pointer rounded-md w-[100%] aspect-7/1 max-h-10`}
     >
       {children}
     </button>
