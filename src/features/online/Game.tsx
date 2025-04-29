@@ -1,24 +1,24 @@
 import Board from "@/components/Board";
-import type { Card } from "@/types";
-import { socket } from "./service/socket";
 import { useGameState } from "@/context/game/GameContext";
 import Chat from "@/features/chat/components/Chat";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
+import { useOnlineManager } from "./hooks/useOnlineManager";
 export default function Game() {
   const { state } = useGameState();
+  const manager = useOnlineManager();
 
-  const pruebaBack = (cardWord: string) => {
-    const card: Card = {
-      word: cardWord,
-      color: "red",
-      isFlipped: false,
-      isSelected: false,
-    };
-    console.log(cardWord);
-    socket.emit("guessCard", card);
-  };
+  // const pruebaBack = (cardWord: string) => {
+  //   const card: Card = {
+  //     word: cardWord,
+  //     color: "red",
+  //     isFlipped: false,
+  //     isSelected: false,
+  //   };
+  //   console.log(cardWord);
+  //   socket.emit("guessCard", card);
+  // };
 
   const cards = { cards: state.cards };
 
@@ -53,7 +53,7 @@ export default function Game() {
           <Board
             board={cards}
             role={state.user.role || "spectator"}
-            handleCardClick={pruebaBack}
+            handleCardClick={manager.revealCard}
           />
         </div>
       </div>
