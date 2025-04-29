@@ -39,6 +39,10 @@ export interface LobbyManager {
   startGame(): void;
 }
 
+/**
+ * Hook que gestiona la logica de la sala
+ * @returns LobbyManager
+ */
 export const useLobbyManager = (): LobbyManager => {
   const { state, dispatch } = useGameState();
 
