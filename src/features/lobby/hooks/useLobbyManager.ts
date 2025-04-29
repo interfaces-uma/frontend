@@ -4,12 +4,38 @@ import { socket } from "@/features/online/service/socket";
 import type { Role, TeamColor, Teams, User } from "@/types";
 
 export interface LobbyManager {
+  /**
+   * @returns El codigo de la sala en la que se encuentra el usuario
+   */
   getRoomCode(): string;
+  /**
+   * Devuelve la lista de jugadores de la partida. Tanto del equipo rojo como azul
+   */
   getTeams(): Teams;
-  getPlayerName(): string;
+  /**
+   * Devuelve la lista de jugadores sin asignar a ningun equipo
+   */
   getPlayers(): User[];
+  /**
+   * Devuelve el nombre del usuario
+   */
+  getPlayerName(): string;
+  /**
+   * Manda un evento al backend informando del usuario que quiere abandonar un equipo.
+   * Será añadido a la lista de jugadores sin equipo
+   */
   leaveTeam(): void;
+  /**
+   * Los datos del jugador son cogidos del game context
+   * Manda un evento al backend informando de la seleccion
+   * @param color - Color al que quiero unirse el jugador
+   * @param role - Role al que quiere unirse el jugador
+   */
   joinSlot(color: TeamColor, role: Role): void;
+  /**
+   * Manda una peticion al backend para empezar la partida si esta es online
+   * En caso de ser una partida offline/tutorial redirige al game
+   */
   startGame(): void;
 }
 
@@ -21,38 +47,22 @@ export const useLobbyManager = (): LobbyManager => {
    */
   const gameMode = state.mode;
 
-  /**
-   * @returns El codigo de la sala en la que se encuentra el usuario
-   */
   const getRoomCode = (): string => {
     return state.code;
   };
 
-  /**
-   * Devuelve la lista de jugadores de la partida. Tanto del equipo rojo como azul
-   */
   const getTeams = (): Teams => {
     return state.teams;
   };
 
-  /**
-   * Devuelve la lista de jugadores sin asignar a ningun equipo
-   */
   const getPlayers = (): User[] => {
     return state.players;
   };
 
-  /**
-   * Devuelve el nombre del usuario
-   */
   const getPlayerName = () => {
     return state.user.name;
   };
 
-  /**
-   * Manda un evento al backend informando del usuario que quiere abandonar un equipo.
-   * Será añadido a la lista de jugadores sin equipo
-   */
   const leaveTeam = () => {
     dispatch({
       type: "SET_TEAM",
@@ -63,12 +73,6 @@ export const useLobbyManager = (): LobbyManager => {
     socket.emit("leaveTeam", state.code, state.user);
   };
 
-  /**
-   * Los datos del jugador son cogidos del game context
-   * Manda un evento al backend informando de la seleccion
-   * @param color - Color al que quiero unirse el jugador
-   * @param role - Role al que quiere unirse el jugador
-   */
   const joinSlot = (color: TeamColor, role: Role) => {
     const user = state.user;
     const code = state.code;
@@ -77,10 +81,6 @@ export const useLobbyManager = (): LobbyManager => {
     socket.emit("joinTeam", { user, color, role }, code);
   };
 
-  /**
-   * Manda una peticion al backend para empezar la partida si esta es online
-   * En caso de ser una partida offline/tutorial redirige al game
-   */
   const startGame = () => {
     if (gameMode === "online") {
       socket.emit(

@@ -48,7 +48,7 @@ function Home() {
       <Popup
         isOpen={isPopupOpen}
         onClose={openPopup}
-        message="TUTORIAL EN CONSTRUCCIÓN 🏗️🚧🚧👷👷👷"
+        message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
       />
     </div>
   );
