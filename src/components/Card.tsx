@@ -1,9 +1,10 @@
-import type { Card as CardType } from "@/types";
+import type { Card as CardType, Role } from "@/types";
 
 export default function Card({
   card,
+  role,
   handleCardClick,
-}: { card: CardType; handleCardClick: (word: string) => void }) {
+}: { card: CardType; role: Role; handleCardClick: (word: string) => void }) {
   const colors: Record<string, string> = {
     red: "bg-red-500",
     blue: "bg-blue-500",
@@ -28,7 +29,7 @@ export default function Card({
       onKeyDown={() => handleCardClick(card.word)}
     >
       <div className="card-inner aspect-[3/2] border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
-        {card.isFlipped ? (
+        {card.isFlipped || role === "leader" ? (
           <span
             className={`${colors[card.color]} uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]`}
           >
