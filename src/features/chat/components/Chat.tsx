@@ -47,7 +47,7 @@ function Chat() {
   const { messagesEndRef } = useChat();
 
   return (
-    <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg">
+    <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg w-full">
       <div
         className={
           team === "red"
@@ -88,8 +88,8 @@ function Chat() {
           }}
           className={
             team === "red"
-              ? " bg-fuerteRojo px-4 py-2 whitespace-nowrap rounded-br hover:brightness-90"
-              : " bg-fuerteAzul px-4 py-2 whitespace-nowrap rounded-br hover:brightness-90"
+              ? " bg-fuerteRojo whitespace-nowrap rounded-br hover:brightness-90"
+              : " bg-fuerteAzul whitespace-nowrap rounded-br hover:brightness-90"
           }
         >
           <strong>Enviar</strong>
