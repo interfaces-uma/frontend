@@ -37,6 +37,10 @@ export interface LobbyManager {
    * En caso de ser una partida offline/tutorial redirige al game
    */
   startGame(): void;
+  /**
+   * Manda un evento al backend informando de que el jugador quiere abandonar la partida
+   */
+  leaveGame(): void;
 }
 
 /**
@@ -100,6 +104,12 @@ export const useLobbyManager = (): LobbyManager => {
       // redirect to game TODO
     }
   };
+  const leaveGame = () => {
+    if (state.mode === "online") {
+      socket.emit("leaveRoom", state.user, state.code);
+    }
+  };
+
 
   return {
     getRoomCode,
@@ -109,5 +119,6 @@ export const useLobbyManager = (): LobbyManager => {
     startGame,
     getPlayers,
     leaveTeam,
+    leaveGame,
   };
 };
