@@ -1,11 +1,11 @@
 export type CardColor = "red" | "blue" | "black" | "empty";
 export type Role = "leader" | "agent" | "spectator";
-export type TeamColor = "red" | "blue" | null;
+export type TeamColor = "red" | "blue";
 export type GameMode = "online" | "tutorial";
 
 export type Clue = {
   word: string;
-  count: number;
+  cards: Card;
 } | null;
 
 type minimapCell = {
@@ -47,7 +47,7 @@ export type Board = {
 export type User = {
   id: string;
   name: string;
-  color: TeamColor;
+  color: TeamColor | null;
   role: Role | null;
 };
 

@@ -15,7 +15,7 @@ import { socket } from "../service/socket";
 // }
 
 export const useOnlineManager = (): UserActions => {
-  const { state } = useGameState();
+  const { state, dispatch } = useGameState();
 
   const setClue = (clue: Clue) => {
     if (state.mode === "online") {
@@ -36,9 +36,10 @@ export const useOnlineManager = (): UserActions => {
     const card = state.cards.find((card) => card.word === cardText);
     if (!card) return;
 
-    if (state.mode === "online") {
-      // socket.emit("selectCard", card);
-    }
+    dispatch({
+      type: "SELECT_CARD",
+      cardText,
+    });
   };
 
   const nextTurn = () => {

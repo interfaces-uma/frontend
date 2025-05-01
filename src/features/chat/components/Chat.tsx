@@ -62,8 +62,8 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fuerteRojo flex w-full rounded-bl rounded-br text-white"
-            : "bg-fuerteAzul flex w-full rounded-bl rounded-br text-black"
+            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white"
+            : "bg-fuerteAzul flex rounded-bl rounded-br text-black"
         }
       >
         <input
@@ -76,7 +76,7 @@ function Chat() {
               setInput("");
             }
           }}
-          className="flex-grow p-2 focus:outline-none"
+          className="mr-auto p-2 "
         />
         <button
           type="button"
@@ -88,8 +88,8 @@ function Chat() {
           }}
           className={
             team === "red"
-              ? " bg-fuerteRojo whitespace-nowrap rounded-br hover:brightness-90"
-              : " bg-fuerteAzul whitespace-nowrap rounded-br hover:brightness-90"
+              ? " bg-fuerteRojo ml-auto rounded-br hover:brightness-90"
+              : " bg-fuerteAzul ml-auto rounded-br hover:brightness-90"
           }
         >
           <strong>Enviar</strong>
