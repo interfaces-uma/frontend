@@ -76,7 +76,7 @@ function Chat() {
               setInput("");
             }
           }}
-          className="mr-auto p-2 "
+          className="w-full p-2 "
         />
         <button
           type="button"
@@ -88,8 +88,8 @@ function Chat() {
           }}
           className={
             team === "red"
-              ? " bg-fuerteRojo ml-auto rounded-br hover:brightness-90"
-              : " bg-fuerteAzul ml-auto rounded-br hover:brightness-90"
+              ? " bg-fuerteRojo p-2 rounded-br hover:brightness-90"
+              : " bg-fuerteAzul p-2 rounded-br hover:brightness-90"
           }
         >
           <strong>Enviar</strong>

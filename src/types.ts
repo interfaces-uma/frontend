@@ -5,7 +5,7 @@ export type GameMode = "online" | "tutorial";
 
 export type Clue = {
   word: string;
-  cards: Card;
+  cards: Card[];
 } | null;
 
 type minimapCell = {
@@ -19,10 +19,12 @@ export type Teams = {
   blue: {
     leader: User | null;
     agents: User[];
+    clueList: Clue[];
   };
   red: {
     leader: User | null;
     agents: User[];
+    clueList: Clue[];
   };
 };
 

@@ -8,6 +8,8 @@ import { useOnlineManager } from "./hooks/useOnlineManager";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import Popup from "@/components/Popup";
+import ClueList from "@/components/ClueList";
+import type { Clue } from "@/types";
 
 export default function Game() {
   const { state } = useGameState();
@@ -25,6 +27,16 @@ export default function Game() {
   };
 
   const cards = { cards: state.cards };
+
+  const [clueInput, setClueInput] = useState("");
+
+  const handleCreateClue = () => {
+    const selectedCards = state.cards.filter((card) => card.isSelected);
+    if (selectedCards.length === 0 || clueInput === "") return;
+    const clue: Clue = { word: clueInput, cards: selectedCards };
+    manager.setClue(clue);
+    setClueInput("");
+  };
 
   return (
     <div className="bg-fondo w-full h-full">
@@ -66,6 +78,20 @@ export default function Game() {
       </div>
 
       <Button onClick={() => {}}>LISTO</Button>
+
+      {state.user.role === "leader" && (
+        <div>
+          <input
+            value={clueInput}
+            placeholder="Introduzca una pista"
+            onChange={(e) => setClueInput(e.target.value)}
+            className="p-2 bg-cartas"
+          />
+          <Button onClick={handleCreateClue}>Prueba sendClue</Button>
+        </div>
+      )}
+
+      <ClueList />
 
       <Popup
         isOpen={isPopupOpen}

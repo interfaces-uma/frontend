@@ -34,7 +34,7 @@ export const useOnlineManager = (): UserActions => {
 
   const selectCard = (cardText: string) => {
     const card = state.cards.find((card) => card.word === cardText);
-    if (!card) return;
+    if (!card || card.color !== state.turn.team || card.isFlipped) return;
 
     dispatch({
       type: "SELECT_CARD",
