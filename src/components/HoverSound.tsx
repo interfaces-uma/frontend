@@ -1,15 +1,29 @@
 import hoverSoundFile from "@/assets/hover.mp3";
-import { useVolume } from "@/context/hoverVolume/hoverVolumeContext";
+import { useEffect, useRef } from "react";
+import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 
 export const useHoverSound = () => {
-	const { volume } = useVolume();
-	const hoverSound = localStorage.getItem("hvolume") === "true";
+	const { hvolume } = huseVolume();
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+
+	// Crear instancia única
+	useEffect(() => {
+		audioRef.current = new Audio(hoverSoundFile);
+		audioRef.current.volume = hvolume;
+	}, []);
+
+	// Actualizar volumen al cambiar
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = hvolume;
+		}
+	}, [hvolume]);
 
 	const playHoverSound = () => {
-		if (hoverSound && volume > 0) {
-			const audio = new Audio(hoverSoundFile);
-			audio.volume = volume;
-			audio.play().catch(() => {});
+		const enabled = localStorage.getItem("hvolume") !== "0";
+		if (enabled && audioRef.current) {
+			audioRef.current.currentTime = 0; // Reiniciar para permitir reproducir múltiples veces
+			audioRef.current.play().catch(() => {});
 		}
 	};
 

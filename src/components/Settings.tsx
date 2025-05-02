@@ -5,6 +5,7 @@ import IconFontSize from "@/components/Icons/IconFontSize";
 import IconLanguage from "@/components/Icons/IconLanguage";
 import IconVolume from "@/components/Icons/IconVolume";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 
 function Settings({
 	onClose,
@@ -12,12 +13,13 @@ function Settings({
 }: { onClose: () => void; roomCode?: string }) {
 	const fontSizes = [16, 18, 20, 22, 24];
 	const { volume, setVolume } = useVolume();
+	const { hvolume, hsetVolume } = huseVolume();
 
 	const [prevVolume, setPrevVolume] = useState<number | null>(null);
+	const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
 	const [fontIndex, setFontSize] = useState(2);
 	const [language, setLanguage] = useState("es");
 	const [clickSound, setClickSound] = useState(true);
-	const [hoverSound, setHoverSound] = useState(true);
 	const [helpSound, setHelpSound] = useState(true);
 	const [copied, setCopied] = useState(false);
 
@@ -26,13 +28,11 @@ function Settings({
 		const savedFont = localStorage.getItem("fontIndex");
 		const savedLang = localStorage.getItem("language");
 		const savedClick = localStorage.getItem("clickSound");
-		const savedHover = localStorage.getItem("hvolume");
 		const savedHelp = localStorage.getItem("helpSound");
 
 		if (savedFont) setFontSize(Number(savedFont));
 		if (savedLang) setLanguage(savedLang);
 		if (savedClick !== null) setClickSound(savedClick === "true");
-		if (savedHover !== null) setHoverSound(savedHover === "true");
 		if (savedHelp !== null) setHelpSound(savedHelp === "true");
 	}, []);
 
@@ -47,10 +47,7 @@ function Settings({
 		() => localStorage.setItem("clickSound", clickSound.toString()),
 		[clickSound],
 	);
-	useEffect(
-		() => localStorage.setItem("hvolume", hoverSound.toString()),
-		[hoverSound],
-	);
+
 	useEffect(
 		() => localStorage.setItem("helpSound", helpSound.toString()),
 		[helpSound],
@@ -63,6 +60,16 @@ function Settings({
 		} else {
 			setPrevVolume(volume);
 			setVolume(0);
+		}
+	};
+
+	const toggleHoverMute = () => {
+		if (hvolume === 0 && hprevVolume !== null) {
+			hsetVolume(hprevVolume);
+			hsetPrevVolume(null);
+		} else {
+			hsetPrevVolume(hvolume);
+			hsetVolume(0);
 		}
 	};
 
@@ -122,12 +129,27 @@ function Settings({
 
 				{/* Sonido al pasar el ratón */}
 				<div className="flex items-center justify-between text-fondo font-medium">
-					<span>Sonido al pasar el ratón</span>
+					<label
+						htmlFor="hmusic-volume"
+						id="music-volume"
+						className="flex items-center gap-2 text-fondo font-medium cursor-pointer"
+					>
+						<IconVolume
+							volume={hvolume}
+							onClick={toggleHoverMute}
+							className="text-fondo"
+							fill="currentColor"
+						/>
+						Volumen al pasar el ratón
+					</label>
 					<input
-						type="checkbox"
-						checked={hoverSound}
-						onChange={() => setHoverSound(!hoverSound)}
-						className="w-6 h-6 accent-fondo"
+						type="range"
+						min={0}
+						max={1}
+						step={0.01}
+						value={hvolume}
+						onChange={(e) => hsetVolume(Number(e.target.value))}
+						className="w-full accent-fondo"
 					/>
 				</div>
 
