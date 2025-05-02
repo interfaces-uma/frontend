@@ -18,16 +18,26 @@ function showMessages(
           key={index}
           className={index % 2 !== 0 ? "bg-gray-200 w-full text-l" : "text-l"}
         >
-          <strong
-            className={
-              data.team === "red"
-                ? "text-fuerteRojo ml-2"
-                : "text-fuerteAzul ml-2"
-            }
-          >
-            {data.user}
-          </strong>
-          : {data.message}
+          {data.isLog ? (
+            <strong className="text-amber-500 w-full block text-center">
+              {data.message}
+            </strong>
+          ) : (
+            <>
+              <strong
+                className={
+                  data.team === "red"
+                    ? "text-fuerteRojo ml-2"
+                    : data.team === "blue"
+                      ? "text-fuerteAzul ml-2"
+                      : "text-cartas ml-2"
+                }
+              >
+                {data.user}
+              </strong>
+              : {data.message}
+            </>
+          )}
         </li>
       ))}
     </ul>
@@ -52,7 +62,9 @@ function Chat() {
         className={
           team === "red"
             ? "bg-fuerteRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
-            : "bg-fuerteAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
+            : team === "blue"
+              ? "bg-fuerteAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
+              : "bg-cartas flex w-full rounded-tl rounded-tr justify-center items-center text-black"
         }
       >
         <strong>CHAT</strong>
@@ -63,7 +75,9 @@ function Chat() {
         className={
           team === "red"
             ? "bg-fuerteRojo flex rounded-bl rounded-br text-white"
-            : "bg-fuerteAzul flex rounded-bl rounded-br text-black"
+            : team === "blue"
+              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black"
+              : "bg-cartas flex rounded-bl rounded-br text-black"
         }
       >
         <input
@@ -76,7 +90,7 @@ function Chat() {
               setInput("");
             }
           }}
-          className="w-full p-2 "
+          className="w-full p-2 outline-none focus:outline-none border-none"
         />
         <button
           type="button"
@@ -89,7 +103,9 @@ function Chat() {
           className={
             team === "red"
               ? " bg-fuerteRojo p-2 rounded-br hover:brightness-90"
-              : " bg-fuerteAzul p-2 rounded-br hover:brightness-90"
+              : team === "blue"
+                ? " bg-fuerteAzul p-2 rounded-br hover:brightness-90"
+                : " bg-cartas p-2 rounded-br hover:brightness-90"
           }
         >
           <strong>Enviar</strong>
