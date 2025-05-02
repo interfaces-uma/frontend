@@ -12,20 +12,13 @@ export default function ClueList() {
   return (
     <div className="bg-cartas">
       <h2> CLUE LIST</h2>
-      {clues.length === 0 ? (
-        <p>No hay pistas aún.</p>
+      {state.clue === null ? (
+        <p>No hay pista aún.</p>
       ) : (
-        <ul>
-          {clues.map(
-            (clue, index) =>
-              clue && (
-                <li key={index}>
-                  <strong>{clue.word}</strong> — Numero de cartas por adivinar:{" "}
-                  {clue.cards.filter((card) => !card.isFlipped).length}
-                </li>
-              ),
-          )}
-        </ul>
+        <p>
+          {state.clue.word} ---{"---"}
+          {state.clue.cards.filter((c) => !c.isFlipped).length}
+        </p>
       )}
     </div>
   );
