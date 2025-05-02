@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
+import MenuIcon from "@/components/Icons/IconMenu";
 import PlayerCell from "@/components/PlayerCell";
 import Settings from "@/components/Settings";
 import { useNavigate } from "react-router";
@@ -13,7 +14,7 @@ import Popup from "@/components/Popup";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
 import type { User } from "@/types";
-import Chat from "../chat/components/Chat";
+import Menu from "@/components/Menu";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
@@ -23,7 +24,7 @@ function Lobby() {
 
   const roomCode = manager.getRoomCode();
   localStorage.setItem("roomCode", roomCode);
-  const [showSettings, setShowSettings] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   //PARA LA MUSICA DE FONDO ↓
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -92,7 +93,7 @@ function Lobby() {
   const players = manager.getPlayers();
   const noTeamPlayers = players.map((player) => renderName(player, state.user));
 
-  const openSettings = () => setShowSettings(!showSettings);
+  const openMenu = () => setShowMenu(!showMenu);
 
   const goHome = () => {
     socket.emit("leaveRoom", state.user, state.code);
@@ -140,8 +141,8 @@ function Lobby() {
 
       {/* Botón ajustes */}
       <section className="absolute top-2 right-2 xl:top-7 xl:right-7 z-10">
-        <Button onClick={openSettings} circular inversed>
-          <SettingsIcon
+        <Button onClick={openMenu} circular inversed>
+          <MenuIcon
             fill="currentColor"
             className="cartas"
             width={20}
@@ -265,7 +266,9 @@ function Lobby() {
       </section>
 
       {/* Ajustes */}
-      {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />}
+      {/* {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />} */}
+      {/* Menu */}
+      {showMenu && <Menu onClose={openMenu} />}
 
       <Popup
         isOpen={isPopupOpen}
