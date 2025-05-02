@@ -1,3 +1,4 @@
+import { useGameState } from "@/context/game/GameContext";
 import type { Card as CardType, Role } from "@/types";
 
 export default function Card({
@@ -5,6 +6,7 @@ export default function Card({
   role,
   handleCardClick,
 }: { card: CardType; role: Role; handleCardClick: (word: string) => void }) {
+  const { state } = useGameState();
   const colors: Record<string, string> = {
     red: "bg-red-500",
     blue: "bg-blue-500",
@@ -16,6 +18,13 @@ export default function Card({
 
   if (card.isSelected) {
     className += " outline outline-4 outline-blue-300";
+  }
+
+  if (state.user.role === "leader") {
+    className += ` ${colors[card.color]}`;
+    if (card.color === "black") {
+      className += " text-white";
+    }
   }
 
   if (card.isFlipped) {
