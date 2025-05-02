@@ -62,9 +62,19 @@ function Name({
       }
     }
   };
+  // Maneja el clic fuera del popup
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget && onClose) {
+      onClose();
+    }
+  };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      onClick={handleOverlayClick} // Agrega el evento de clic
+    >
       <div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
         <div className="self-start">
           <Button onClick={onClose} inversed circular>
