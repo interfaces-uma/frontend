@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import { GameProvider } from "@/context/game/GameContext";
 import { VolumeProvider } from "@/context/backgroundVolume/backgroundVolumeContext";
 import { HoverVolumeProvider } from "@/context/hoverVolume/hoverVolumeContext";
+import { ClickVolumeProvider } from "@/context/clickVolume/clickVolumeContext";
 import "@/style.css";
 import GamePage from "./pages/GamePage";
 import OrientationLock from "./components/OrientationLock";
@@ -28,9 +29,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<GameProvider>
 		<OrientationLock />
 		<VolumeProvider>
-			<HoverVolumeProvider>
-				<RouterProvider router={router} />
-			</HoverVolumeProvider>
+			<ClickVolumeProvider>
+				<HoverVolumeProvider>
+					<RouterProvider router={router} />
+				</HoverVolumeProvider>
+			</ClickVolumeProvider>
 		</VolumeProvider>
 	</GameProvider>,
 );

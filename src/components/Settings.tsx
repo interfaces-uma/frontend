@@ -6,6 +6,7 @@ import IconLanguage from "@/components/Icons/IconLanguage";
 import IconVolume from "@/components/Icons/IconVolume";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
+import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 
 function Settings({
 	onClose,
@@ -14,12 +15,13 @@ function Settings({
 	const fontSizes = [16, 18, 20, 22, 24];
 	const { volume, setVolume } = useVolume();
 	const { hvolume, hsetVolume } = huseVolume();
+	const { cvolume, csetVolume } = cuseVolume();
 
 	const [prevVolume, setPrevVolume] = useState<number | null>(null);
 	const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
+	const [cprevVolume, csetPrevVolume] = useState<number | null>(null);
 	const [fontIndex, setFontSize] = useState(2);
 	const [language, setLanguage] = useState("es");
-	const [clickSound, setClickSound] = useState(true);
 	const [helpSound, setHelpSound] = useState(true);
 	const [copied, setCopied] = useState(false);
 
@@ -27,12 +29,10 @@ function Settings({
 	useEffect(() => {
 		const savedFont = localStorage.getItem("fontIndex");
 		const savedLang = localStorage.getItem("language");
-		const savedClick = localStorage.getItem("clickSound");
 		const savedHelp = localStorage.getItem("helpSound");
 
 		if (savedFont) setFontSize(Number(savedFont));
 		if (savedLang) setLanguage(savedLang);
-		if (savedClick !== null) setClickSound(savedClick === "true");
 		if (savedHelp !== null) setHelpSound(savedHelp === "true");
 	}, []);
 
@@ -43,10 +43,6 @@ function Settings({
 	}, [fontIndex]);
 
 	useEffect(() => localStorage.setItem("language", language), [language]);
-	useEffect(
-		() => localStorage.setItem("clickSound", clickSound.toString()),
-		[clickSound],
-	);
 
 	useEffect(
 		() => localStorage.setItem("helpSound", helpSound.toString()),
@@ -70,6 +66,16 @@ function Settings({
 		} else {
 			hsetPrevVolume(hvolume);
 			hsetVolume(0);
+		}
+	};
+
+	const toggleClickMute = () => {
+		if (cvolume === 0 && cprevVolume !== null) {
+			csetVolume(cprevVolume);
+			csetPrevVolume(null);
+		} else {
+			csetPrevVolume(cvolume);
+			csetVolume(0);
 		}
 	};
 
@@ -117,18 +123,33 @@ function Settings({
 				</div>
 
 				{/* Sonido de clic */}
-				<div className="flex items-center justify-between text-fondo font-medium">
-					<span>Sonido al hacer clic</span>
+				<div className="space-y-2">
+					<label
+						htmlFor="cmusic-volume"
+						id="music-volume"
+						className="flex items-center gap-2 text-fondo font-medium cursor-pointer"
+					>
+						<IconVolume
+							volume={cvolume}
+							onClick={toggleClickMute}
+							className="text-fondo"
+							fill="currentColor"
+						/>
+						Volumen al click
+					</label>
 					<input
-						type="checkbox"
-						checked={clickSound}
-						onChange={() => setClickSound(!clickSound)}
-						className="w-6 h-6 accent-fondo"
+						type="range"
+						min={0}
+						max={1}
+						step={0.01}
+						value={cvolume}
+						onChange={(e) => csetVolume(Number(e.target.value))}
+						className="w-full accent-fondo"
 					/>
 				</div>
 
 				{/* Sonido al pasar el ratón */}
-				<div className="flex items-center justify-between text-fondo font-medium">
+				<div className="space-y-2">
 					<label
 						htmlFor="hmusic-volume"
 						id="music-volume"

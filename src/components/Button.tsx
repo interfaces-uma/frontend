@@ -1,6 +1,6 @@
 import type React from "react";
 import clickSound from "@/assets/newClick.mp3";
-import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { useHoverSound } from "@/components/HoverSound";
 
 function Button({
@@ -20,7 +20,7 @@ function Button({
 }) {
 	let buttonStyle = "";
 	let buttonCircle = "";
-	const { volume } = useVolume();
+	const { cvolume } = cuseVolume();
 
 	const { playHoverSound } = useHoverSound();
 
@@ -54,12 +54,13 @@ function Button({
 	}
 
 	const handleClick = () => {
+		// Reproducir sonido de clic
+		if (cvolume > 0) {
+			const audio = new Audio(clickSound);
+			audio.volume = cvolume;
+			audio.play();
+		}
 		if (disabled) return;
-
-		// Clonamos el audio para que no se interrumpa si se hace click rápido
-		const click = new Audio(clickSound);
-		click.volume = volume;
-		click.play().catch(() => {});
 
 		// Ejecutar lógica del botón
 		onClick?.();
