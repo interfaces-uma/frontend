@@ -1,9 +1,9 @@
 import hoverSoundFile from "@/assets/hover.mp3";
-import { useVolume } from "@/context/Volume/VolumeContext";
+import { useVolume } from "@/context/hoverVolume/hoverVolumeContext";
 
 export const useHoverSound = () => {
 	const { volume } = useVolume();
-	const hoverSound = localStorage.getItem("hoverSound") === "true";
+	const hoverSound = localStorage.getItem("hvolume") === "true";
 
 	const playHoverSound = () => {
 		if (hoverSound && volume > 0) {

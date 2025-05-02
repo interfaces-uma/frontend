@@ -10,7 +10,7 @@ import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
 import Popup from "@/components/Popup";
 
-import { useVolume } from "@/context/Volume/VolumeContext";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
 import type { User } from "@/types";
 

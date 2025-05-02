@@ -4,7 +4,7 @@ import BackIcon from "@/components/Icons/IconBack";
 import IconFontSize from "@/components/Icons/IconFontSize";
 import IconLanguage from "@/components/Icons/IconLanguage";
 import IconVolume from "@/components/Icons/IconVolume";
-import { useVolume } from "@/context/Volume/VolumeContext";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 
 function Settings({
 	onClose,
@@ -26,7 +26,7 @@ function Settings({
 		const savedFont = localStorage.getItem("fontIndex");
 		const savedLang = localStorage.getItem("language");
 		const savedClick = localStorage.getItem("clickSound");
-		const savedHover = localStorage.getItem("hoverSound");
+		const savedHover = localStorage.getItem("hvolume");
 		const savedHelp = localStorage.getItem("helpSound");
 
 		if (savedFont) setFontSize(Number(savedFont));
@@ -48,7 +48,7 @@ function Settings({
 		[clickSound],
 	);
 	useEffect(
-		() => localStorage.setItem("hoverSound", hoverSound.toString()),
+		() => localStorage.setItem("hvolume", hoverSound.toString()),
 		[hoverSound],
 	);
 	useEffect(

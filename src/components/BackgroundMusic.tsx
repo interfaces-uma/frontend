@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
-import { useVolume } from "@/context/Volume/VolumeContext";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 
 import music1 from "@/assets/homemusic.mp3";
 import music2 from "@/assets/lobbymusic.mp3";

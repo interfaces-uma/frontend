@@ -7,18 +7,20 @@ type VolumeContextType = {
 
 const VolumeContext = createContext<VolumeContextType | undefined>(undefined);
 
-export function VolumeProvider({ children }: { children: React.ReactNode }) {
+export function HoverVolumeProvider({
+	children,
+}: { children: React.ReactNode }) {
 	const [volume, setVolume] = useState(0.5);
 
 	useEffect(() => {
-		const saved = localStorage.getItem("volume");
+		const saved = localStorage.getItem("hvolume");
 		if (saved !== null) {
 			setVolume(Number(saved));
 		}
 	}, []);
 
 	useEffect(() => {
-		localStorage.setItem("volume", volume.toString());
+		localStorage.setItem("hvolume", volume.toString());
 	}, [volume]);
 
 	return (
