@@ -18,24 +18,27 @@ export const useOnlineManager = (): UserActions => {
   const { state, dispatch } = useGameState();
 
   const setClue = (clue: Clue) => {
-    // Comprueba que la pista no lleve el valor de una carta
-    const lista = clue?.cards.filter((c) => {
-      // coge la pista le quita los espacios lo pone a mayusculas y busca una subcadena que sea una carta
-      if (clue.word.replace(/\s+/g, "").toUpperCase().includes(c.word)) {
-        return c;
-      }
-    });
-    console.log(lista);
-
-    if (lista?.length !== 0) {
-      alert("La pista no puede coincidir con ninguna carta");
+    /*
+    // Comprueba que la pista no contenga ninguna de las cartas seleccionadas
+    const incluyeCartaSeleccionada = clue?.cards.some((c) =>
+      clue?.word.replace(/\s+/g, "").toUpperCase().includes(c.word.toUpperCase())
+    );
+  */
+    // Comprueba que la pista no contenga ninguna carta del tablero
+    const incluyeCartaDelTablero = state.cards.some((c) =>
+      clue?.word.replace(/\s+/g, "").toUpperCase().includes(c.word.toUpperCase())
+    );
+  
+    if (/*incluyeCartaSeleccionada ||*/ incluyeCartaDelTablero) {
+      alert("La pista no puede coincidir con ninguna carta del tablero");
       return;
     }
-
+  
     if (state.mode === "online") {
       socket.emit("sendClue", clue);
     }
   };
+  
 
   const revealCard = (cardText: string) => {
     const card = state.cards.find((card) => card.word === cardText);
