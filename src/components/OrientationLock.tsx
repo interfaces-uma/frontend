@@ -14,12 +14,21 @@ function OrientationLock() {
   };
 
   useEffect(() => {
+    function isPhone() {
+      const ua = navigator.userAgent;
+      const isMobileUA = /Mobi|Android|iPhone/i.test(ua);
+      return isMobileUA;
+    }
+
     const checkOrientation = () => {
       const { innerWidth, innerHeight } = window;
-      const value = innerWidth < innerHeight;
-      setIsPortrait(value);
-      if (value) {
-        handleFullscreenPrompt();
+      // comprobar si es un movil
+      if (isPhone()) {
+        const value = innerWidth < innerHeight;
+        setIsPortrait(value);
+        if (value) {
+          handleFullscreenPrompt();
+        }
       }
     };
 

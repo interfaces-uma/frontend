@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
-import SettingsIcon from "@/components/Icons/IconSettings";
 import MenuIcon from "@/components/Icons/IconMenu";
 import PlayerCell from "@/components/PlayerCell";
-import Settings from "@/components/Settings";
 import { useNavigate } from "react-router";
 import { useLobbyManager } from "./hooks/useLobbyManager";
 import { useGameState } from "@/context/game/GameContext";
@@ -15,7 +13,7 @@ import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
 import type { User } from "@/types";
 import Menu from "@/components/Menu";
-import Chat from "../chat/components/Chat";
+import FullScreenIcon from "@/components/Icons/IconFullScreen";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
@@ -141,13 +139,29 @@ function Lobby() {
       </section>
 
       {/* Botón ajustes */}
-      <section className="absolute top-2 right-2 xl:top-7 xl:right-7 z-10">
+      <section className="absolute flex flex-col gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
         <Button onClick={openMenu} circular inversed>
           <MenuIcon
             fill="currentColor"
             className="cartas"
             width={20}
             height={20}
+          />
+        </Button>
+
+        <Button
+          onClick={() => {
+            document.documentElement.requestFullscreen();
+            console.log(screen.orientation.angle);
+          }}
+          circular
+          inversed
+        >
+          <FullScreenIcon
+            className="cartas"
+            width={20}
+            height={20}
+            strokeWidth={3}
           />
         </Button>
       </section>
@@ -283,8 +297,6 @@ function Lobby() {
           </Button>
         </div>
       </Popup>
-
-      <Chat />
     </div>
   );
 }
