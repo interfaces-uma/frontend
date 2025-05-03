@@ -7,6 +7,9 @@ const BACKEND_URL = JSON.stringify(
 
 export default defineConfig({
   plugins: [pluginReact()],
+  html: {
+    title: "CODIGO SECRETO",
+  },
   source: {
     define: {
       "process.env.BACKEND_URL": BACKEND_URL,
