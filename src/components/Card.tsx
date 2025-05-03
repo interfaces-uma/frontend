@@ -3,11 +3,18 @@ import type { Card as CardType } from "@/types";
 import backSprite from "@/assets/backs.png";
 import redAgents from "@/assets/redAgents.png";
 import blueAgents from "@/assets/blueAgents.png";
+import greyAgents from "@/assets/greyAgents.png";
+import blackCard from "@/assets/black-back.png";
 
 export default function Card({
   card,
+  iconIndex,
   handleCardClick,
-}: { card: CardType; handleCardClick: (word: string) => void }) {
+}: {
+  card: CardType;
+  iconIndex: number;
+  handleCardClick: (word: string) => void;
+}) {
   const { state } = useGameState();
   const colors: Record<string, string> = {
     red: "bg-red-500",
@@ -44,19 +51,32 @@ export default function Card({
   }[card.color];
 
   // numero aleatorio entre 0 y 9
-  const randomNumber = Math.floor(Math.random() * 10);
+  const spriteOffset = iconIndex;
 
-  return card.isFlipped ? (
-    <div className="relative w-full h-full">
+  const colorBackgrounds = {
+    backgroundSize: "100% 910%",
+    backgroundPosition: `0 ${(spriteOffset % 9) * 12.5}%`,
+  };
+
+  const greyBackgrounds = {
+    backgroundSize: "100% 610%",
+    backgroundPosition: `0 ${(spriteOffset % 6) * 20}%`,
+  };
+
+  const coloredCardHtml = (
+    <div>
       <div className="absolute z-10 left-1/2 transform -translate-x-[50%] bottom-0 w-full h-full">
         <div
           id="agent"
           className="m-auto w-[70%] h-[100%] bg-cover bg-no-repeat"
           style={{
-            backgroundImage: `url(${card.color === "red" ? redAgents : blueAgents})`,
+            backgroundImage: `url(${card.color === "red" ? redAgents : card.color === "blue" ? blueAgents : card.color === "empty" ? greyAgents : ""})`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 910%",
-            backgroundPosition: `0 ${randomNumber * 12.5}%`,
+            ...(card.color === "red" || card.color === "blue"
+              ? colorBackgrounds
+              : card.color === "empty"
+                ? greyBackgrounds
+                : {}),
           }}
         />
       </div>
@@ -69,6 +89,23 @@ export default function Card({
           backgroundPosition: `0 ${backSpriteIndex * 33.33}%`,
         }}
       />
+    </div>
+  );
+
+  const assassinCardHtml = (
+    <div
+      className={className}
+      style={{
+        backgroundImage: `url(${blackCard})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+      }}
+    />
+  );
+
+  return card.isFlipped ? (
+    <div className="relative w-full h-full">
+      {card.color === "black" ? assassinCardHtml : coloredCardHtml}
     </div>
   ) : (
     <div

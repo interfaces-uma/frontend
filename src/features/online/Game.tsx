@@ -63,7 +63,6 @@ export default function Game() {
         <div className="w-full max-w-[60%] min-w-[650px]">
           <Board
             board={cards}
-            role={state.user.role || "spectator"}
             handleCardClick={
               state.user.role === "leader"
                 ? manager.selectCard
