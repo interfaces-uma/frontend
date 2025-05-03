@@ -109,6 +109,12 @@ function Home() {
       {showSettings && <Settings onClose={openSettings} />}
       {showName && !showNameCode && <Name onClose={openName} />}
       {showNameCode && <Name onClose={openNameCode} unirse />}
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={openPopup}
+        message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
+      />
+      <Popup autoWelcome />
     </div>
   );
 }
