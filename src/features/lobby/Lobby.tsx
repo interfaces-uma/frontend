@@ -15,6 +15,7 @@ import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
 import type { User } from "@/types";
 import Menu from "@/components/Menu";
+import Chat from "../chat/components/Chat";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
@@ -282,6 +283,8 @@ function Lobby() {
           </Button>
         </div>
       </Popup>
+
+      <Chat />
     </div>
   );
 }
