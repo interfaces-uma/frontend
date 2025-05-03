@@ -20,51 +20,6 @@ function Home() {
     setShowNameCode(!showNameCode);
   };
   const openPopup = () => setPopupOpen(!isPopupOpen);
-  // <div className="bg-fondo flex flex-col items-center justify-center w-full h-full">
-  //     <h1 className="text-7xl text-center text-white">CÓDIGO SECRETO</h1>
-  //
-  //     <img src={homePhoto} alt="home" className="w-[30%] h-" />
-  //
-  //     <div className="flex flex-col items-center gap-6 mt-10 w-[50%] h-[50%]">
-  //       <div id="botones" className="h-[50%]">
-  //         <Button onClick={openName} style="w-full h-auto">
-  //           CREAR MESA
-  //         </Button>
-  //         <Button onClick={openNameCode} style="w-full h-auto">
-  //           UNIRSE A MESA
-  //         </Button>
-  //         <Button onClick={openPopup} style="w-full h-auto" narrator="TUTORIAL">
-  //           TUTORIAL
-  //         </Button>
-  //       </div>
-  //       <Button narrator="Ajustes" onClick={openSettings} circular>
-  //         <SettingsIcon stroke="fondo" />
-  //       </Button>
-  //     </div>
-  //
-  //     <div className="absolute top-3 right-3">
-  //       <Button onClick={openPopup} narrator="TUTORIAL">
-  //         TUTORIAL
-  //       </Button>
-  //     </div>
-  //
-  //     <BackgroundMusic />
-  //
-  //     {showSettings && <Settings onClose={openSettings} />}
-  //     {showName && !showNameCode && <Name onClose={openName} />}
-  //     {showNameCode && <Name onClose={openNameCode} unirse />}
-  //
-  //     {/* Tutorial popup manual */}
-  //     <Popup
-  //       isOpen={isPopupOpen}
-  //       onClose={openPopup}
-  //       message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
-  //     />
-  //
-  //     {/* Auto-popup de bienvenida + explicación */}
-  //     <Popup autoWelcome />
-  //   </div>
-
   return (
     <>
       {/* Vista movil */}
