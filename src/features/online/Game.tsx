@@ -1,15 +1,16 @@
 import Board from "@/components/Board";
-import { useGameState } from "@/context/game/GameContext";
-import Chat from "@/features/chat/components/Chat";
 import Button from "@/components/Button";
+import ClueList from "@/components/ClueList";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
-import { useOnlineManager } from "./hooks/useOnlineManager";
-import { useNavigate } from "react-router";
-import { useState } from "react";
 import Popup from "@/components/Popup";
-import ClueList from "@/components/ClueList";
+import { useGameState } from "@/context/game/GameContext";
+import Chat from "@/features/chat/components/Chat";
 import type { Clue } from "@/types";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useOnlineManager } from "./hooks/useOnlineManager";
+import GameStatus from "@/components/GameStatus";
 
 export default function Game() {
   const { state } = useGameState();
@@ -57,6 +58,10 @@ export default function Game() {
             />
           </Button>
         </div>
+      </div>
+
+      <div className="w-[50%]">
+        <GameStatus />
       </div>
 
       <div className="flex mt-2 gap-2 mb-2">
