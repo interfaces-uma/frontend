@@ -77,15 +77,23 @@ function Settings({
 	};
 
 	//narrador
-	const [narratorEnabled, setNarratorEnabled] = useState(false);
+	const [narratorEnabled, setNarratorEnabled] = useState<boolean | undefined>(
+		undefined,
+	);
 
 	useEffect(() => {
 		const saved = localStorage.getItem("helpSound");
-		if (saved !== null) setNarratorEnabled(saved === "true");
+		if (saved !== null) {
+			setNarratorEnabled(saved === "true");
+		} else {
+			setNarratorEnabled(true); // valor por defecto si no está en localStorage
+		}
 	}, []);
 
 	useEffect(() => {
-		localStorage.setItem("helpSound", narratorEnabled.toString());
+		if (narratorEnabled !== undefined) {
+			localStorage.setItem("helpSound", narratorEnabled.toString());
+		}
 	}, [narratorEnabled]);
 
 	//narrador
@@ -103,7 +111,11 @@ function Settings({
 	};
 
 	const handleMouseEnter = (text: string) => {
-		playHoverSound(text);
+		if (narratorEnabled) {
+			playHoverSound(text);
+		} else {
+			playHoverSound();
+		}
 	};
 
 	return (
@@ -233,7 +245,7 @@ function Settings({
 					<input
 						onMouseEnter={() =>
 							handleMouseEnter(
-								`tamaño del texto al ${Math.round(fontIndex * 100)} por ciento`,
+								`tamaño del texto al ${Math.round(fontIndex * 100) - 100} por ciento`,
 							)
 						}
 						type="range"
@@ -266,7 +278,7 @@ function Settings({
 						className="w-full bg-cartas text-fondo font-semibold px-4 py-2 rounded-lg"
 					>
 						<option value="español">🇪🇸 Español</option>
-						<option value="englisk">🇬🇧 English</option>
+						<option value="english">🇬🇧 English</option>
 						<option value="français">🇫🇷 Français</option>
 						<option value="Deutsch">🇩🇪 Deutsch</option>
 						<option value="wuanbatan">普通话</option>
@@ -305,6 +317,3 @@ function Settings({
 }
 
 export default Settings;
-function playHoverSound(text: string) {
-	throw new Error("Function not implemented.");
-}
