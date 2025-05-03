@@ -80,7 +80,11 @@ const BackgroundMusic = () => {
 	return (
 		<div className="absolute bottom-5 left-10 z-50">
 			<div className="flex items-center gap-2">
-				<Button onClick={() => setShowMusicList(!showMusicList)} circular>
+				<Button
+					narrator="musica de fondo"
+					onClick={() => setShowMusicList(!showMusicList)}
+					circular
+				>
 					🎵
 				</Button>
 				<span className="text-white text-sm font-semibold truncate max-w-[160px]">
@@ -99,11 +103,11 @@ const BackgroundMusic = () => {
 				{musicList.map((music) => {
 					const isActive = music.src === currentMusic;
 					return (
-						<button
+						<Button
 							key={music.name}
-							type="button"
 							onClick={() => selectMusic(music)}
-							className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition ${
+							narrator={music.name}
+							style={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition ${
 								isActive
 									? "bg-gray-200 font-semibold text-gray-800"
 									: "text-gray-600"
@@ -111,7 +115,7 @@ const BackgroundMusic = () => {
 						>
 							{isActive ? "✓ " : ""}
 							{music.name}
-						</button>
+						</Button>
 					);
 				})}
 			</div>

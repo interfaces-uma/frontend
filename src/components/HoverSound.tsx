@@ -1,10 +1,12 @@
 import hoverSoundFile from "@/assets/hover.mp3";
 import { useEffect, useRef } from "react";
 import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
+import { useNarrator } from "@/components/Narrator";
 
 export const useHoverSound = () => {
 	const { hvolume } = huseVolume();
 	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const { speak } = useNarrator();
 
 	// Crear instancia única
 	useEffect(() => {
@@ -19,7 +21,11 @@ export const useHoverSound = () => {
 		}
 	}, [hvolume]);
 
-	const playHoverSound = () => {
+	const playHoverSound = (text?: string) => {
+		if (text) {
+			speak(text);
+		}
+
 		const enabled = localStorage.getItem("hvolume") !== "0";
 		if (enabled && audioRef.current) {
 			audioRef.current.currentTime = 0; // Reiniciar para permitir reproducir múltiples veces

@@ -2,6 +2,7 @@ import type React from "react";
 import clickSound from "@/assets/newClick.mp3";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { useHoverSound } from "@/components/HoverSound";
+import { n } from "node_modules/react-router/dist/development/fog-of-war-1hWhK5ey.d.mts";
 
 function Button({
 	children,
@@ -10,6 +11,7 @@ function Button({
 	inversed,
 	disabled,
 	style,
+	narrator,
 }: {
 	children?: React.ReactNode;
 	onClick: () => void;
@@ -17,6 +19,7 @@ function Button({
 	inversed?: boolean;
 	disabled?: boolean;
 	style?: string;
+	narrator?: string;
 }) {
 	let buttonStyle = "";
 	let buttonCircle = "";
@@ -66,11 +69,17 @@ function Button({
 		onClick?.();
 	};
 
+	const handleMouseEnter = () => {
+		const narrationText =
+			narrator ?? (typeof children === "string" ? children : "");
+		playHoverSound(narrationText);
+	};
+
 	return (
 		<button
 			type="button"
 			onClick={handleClick}
-			onMouseEnter={playHoverSound}
+			onMouseEnter={handleMouseEnter}
 			disabled={disabled}
 			className={`${buttonCircle} ${buttonStyle} ${style} transition duration-300 ease-in-out cursor-pointer`}
 		>

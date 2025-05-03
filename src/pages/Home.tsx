@@ -27,14 +27,16 @@ function Home() {
 
 			<div className="flex items-center gap-6 mt-10">
 				<Button onClick={openName}>CREAR MESA</Button>
-				<Button onClick={openSettings} circular>
+				<Button narrator="Ajustes" onClick={openSettings} circular>
 					<SettingsIcon stroke="fondo" />
 				</Button>
 				<Button onClick={openNameCode}>UNIRSE A MESA</Button>
 			</div>
 
 			<div className="absolute top-3 right-3">
-				<Button onClick={openPopup}>TUTORIAL</Button>
+				<Button onClick={openPopup} narrator="TUTORIAL">
+					TUTORIAL
+				</Button>
 			</div>
 
 			<BackgroundMusic />
