@@ -16,7 +16,7 @@ export function useChat() {
     const msg: Message = {
       message,
       user: state.user.name,
-      team: state.user.color || "blue",
+      team: state.user.color || "spectator",
     };
 
     if (state.mode === "online") {

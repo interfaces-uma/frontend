@@ -26,19 +26,21 @@ export const useOnlineManager = (): UserActions => {
   */
     // Comprueba que la pista no contenga ninguna carta del tablero
     const incluyeCartaDelTablero = state.cards.some((c) =>
-      clue?.word.replace(/\s+/g, "").toUpperCase().includes(c.word.toUpperCase())
+      clue?.word
+        .replace(/\s+/g, "")
+        .toUpperCase()
+        .includes(c.word.toUpperCase()),
     );
-  
+
     if (/*incluyeCartaSeleccionada ||*/ incluyeCartaDelTablero) {
       alert("La pista no puede coincidir con ninguna carta del tablero");
       return;
     }
-  
+
     if (state.mode === "online") {
       socket.emit("sendClue", clue);
     }
   };
-  
 
   const revealCard = (cardText: string) => {
     const card = state.cards.find((card) => card.word === cardText);

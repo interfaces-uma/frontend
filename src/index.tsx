@@ -11,29 +11,29 @@ import GamePage from "./pages/GamePage";
 import OrientationLock from "./components/OrientationLock";
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Home />,
-	},
-	{
-		path: "/lobby",
-		element: <Lobby />,
-	},
-	{
-		path: "/game",
-		element: <GamePage />,
-	},
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/lobby",
+    element: <Lobby />,
+  },
+  {
+    path: "/game",
+    element: <GamePage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-	<GameProvider>
-		<OrientationLock />
-		<VolumeProvider>
-			<ClickVolumeProvider>
-				<HoverVolumeProvider>
-					<RouterProvider router={router} />
-				</HoverVolumeProvider>
-			</ClickVolumeProvider>
-		</VolumeProvider>
-	</GameProvider>,
+  <GameProvider>
+    <OrientationLock />
+    <VolumeProvider>
+      <ClickVolumeProvider>
+        <HoverVolumeProvider>
+          <RouterProvider router={router} />
+        </HoverVolumeProvider>
+      </ClickVolumeProvider>
+    </VolumeProvider>
+  </GameProvider>,
 );

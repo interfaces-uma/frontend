@@ -32,6 +32,7 @@ export type Message = {
   team: string;
   user: string;
   message: string;
+  isLog?: boolean;
 };
 
 export type Card = {
