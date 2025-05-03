@@ -17,13 +17,18 @@ import { socket } from "../service/socket";
 export const useOnlineManager = (): UserActions => {
   const { state, dispatch } = useGameState();
 
+  const isMyTurn = () => {
+    const roleTurn = state.turn.role;
+    const teamTurn = state.turn.team;
+
+    if (state.user.role === roleTurn && state.user.color === teamTurn) {
+      return true;
+    }
+    return false;
+  };
+
   const setClue = (clue: Clue) => {
-    /*
-    // Comprueba que la pista no contenga ninguna de las cartas seleccionadas
-    const incluyeCartaSeleccionada = clue?.cards.some((c) =>
-      clue?.word.replace(/\s+/g, "").toUpperCase().includes(c.word.toUpperCase())
-    );
-  */
+    if (!isMyTurn()) return;
     // Comprueba que la pista no contenga ninguna carta del tablero
     const incluyeCartaDelTablero = state.cards.some((c) =>
       clue?.word
@@ -43,6 +48,7 @@ export const useOnlineManager = (): UserActions => {
   };
 
   const revealCard = (cardText: string) => {
+    if (!isMyTurn()) return;
     const card = state.cards.find((card) => card.word === cardText);
     if (!card) return;
 
@@ -52,6 +58,7 @@ export const useOnlineManager = (): UserActions => {
   };
 
   const selectCard = (cardText: string) => {
+    if (!isMyTurn()) return;
     const card = state.cards.find((card) => card.word === cardText);
     if (!card || card.color !== state.turn.team || card.isFlipped) return;
 
@@ -62,6 +69,7 @@ export const useOnlineManager = (): UserActions => {
   };
 
   const nextTurn = () => {
+    if (!isMyTurn()) return;
     if (state.mode === "online") {
       // socket.emit("nextTurn");
     }
@@ -79,5 +87,6 @@ export const useOnlineManager = (): UserActions => {
     selectCard,
     nextTurn,
     leaveGame,
+    isMyTurn,
   };
 };
