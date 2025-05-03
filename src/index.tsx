@@ -8,7 +8,6 @@ import { HoverVolumeProvider } from "@/context/hoverVolume/hoverVolumeContext";
 import { ClickVolumeProvider } from "@/context/clickVolume/clickVolumeContext";
 import "@/style.css";
 import GamePage from "./pages/GamePage";
-import OrientationLock from "./components/OrientationLock";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +26,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <GameProvider>
-    <OrientationLock />
     <VolumeProvider>
       <ClickVolumeProvider>
         <HoverVolumeProvider>

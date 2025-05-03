@@ -8,54 +8,109 @@ import { useState } from "react";
 import BackgroundMusic from "@/components/BackgroundMusic";
 
 function Home() {
-	const [showSettings, setShowSettings] = useState(false);
-	const [showName, setShowName] = useState(false);
-	const [showNameCode, setShowNameCode] = useState(false);
-	const [isPopupOpen, setPopupOpen] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showName, setShowName] = useState(false);
+  const [showNameCode, setShowNameCode] = useState(false);
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
-	const openSettings = () => setShowSettings(!showSettings);
-	const openName = () => setShowName(!showName);
-	const openNameCode = () => {
-		setShowName(!showName);
-		setShowNameCode(!showNameCode);
-	};
-	const openPopup = () => setPopupOpen(!isPopupOpen);
+  const openSettings = () => setShowSettings(!showSettings);
+  const openName = () => setShowName(!showName);
+  const openNameCode = () => {
+    setShowName(!showName);
+    setShowNameCode(!showNameCode);
+  };
+  const openPopup = () => setPopupOpen(!isPopupOpen);
+  // <div className="bg-fondo flex flex-col items-center justify-center w-full h-full">
+  //     <h1 className="text-7xl text-center text-white">CÓDIGO SECRETO</h1>
+  //
+  //     <img src={homePhoto} alt="home" className="w-[30%] h-" />
+  //
+  //     <div className="flex flex-col items-center gap-6 mt-10 w-[50%] h-[50%]">
+  //       <div id="botones" className="h-[50%]">
+  //         <Button onClick={openName} style="w-full h-auto">
+  //           CREAR MESA
+  //         </Button>
+  //         <Button onClick={openNameCode} style="w-full h-auto">
+  //           UNIRSE A MESA
+  //         </Button>
+  //         <Button onClick={openPopup} style="w-full h-auto" narrator="TUTORIAL">
+  //           TUTORIAL
+  //         </Button>
+  //       </div>
+  //       <Button narrator="Ajustes" onClick={openSettings} circular>
+  //         <SettingsIcon stroke="fondo" />
+  //       </Button>
+  //     </div>
+  //
+  //     <div className="absolute top-3 right-3">
+  //       <Button onClick={openPopup} narrator="TUTORIAL">
+  //         TUTORIAL
+  //       </Button>
+  //     </div>
+  //
+  //     <BackgroundMusic />
+  //
+  //     {showSettings && <Settings onClose={openSettings} />}
+  //     {showName && !showNameCode && <Name onClose={openName} />}
+  //     {showNameCode && <Name onClose={openNameCode} unirse />}
+  //
+  //     {/* Tutorial popup manual */}
+  //     <Popup
+  //       isOpen={isPopupOpen}
+  //       onClose={openPopup}
+  //       message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
+  //     />
+  //
+  //     {/* Auto-popup de bienvenida + explicación */}
+  //     <Popup autoWelcome />
+  //   </div>
 
-	return (
-		<div className="bg-fondo min-h-screen flex flex-col items-center justify-center">
-			<img src={homePhoto} alt="not found" className="w-120 h-120" />
-
-			<div className="flex items-center gap-6 mt-10">
-				<Button onClick={openName}>CREAR MESA</Button>
-				<Button narrator="Ajustes" onClick={openSettings} circular>
-					<SettingsIcon stroke="fondo" />
-				</Button>
-				<Button onClick={openNameCode}>UNIRSE A MESA</Button>
-			</div>
-
-			<div className="absolute top-3 right-3">
-				<Button onClick={openPopup} narrator="TUTORIAL">
-					TUTORIAL
-				</Button>
-			</div>
-
-			<BackgroundMusic />
-
-			{showSettings && <Settings onClose={openSettings} />}
-			{showName && !showNameCode && <Name onClose={openName} />}
-			{showNameCode && <Name onClose={openNameCode} unirse />}
-
-			{/* Tutorial popup manual */}
-			<Popup
-				isOpen={isPopupOpen}
-				onClose={openPopup}
-				message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
-			/>
-
-			{/* Auto-popup de bienvenida + explicación */}
-			<Popup autoWelcome />
-		</div>
-	);
+  return (
+    <div className="w-full h-full bg-fondo overflow-hidden">
+      <div className="flex flex-col mx-[15%] justify-center items-center h-full">
+        <h1 className="text-center text-[clamp(3rem,5.5vw,100.5rem)]/12 w-full text-white mt-10">
+          CÓDIGO SECRETO
+        </h1>
+        <img
+          src={homePhoto}
+          alt="home"
+          className="aspect-square w-full mt-5 lg:w-[30%]"
+        />
+        <div id="botones" className="h-[25%] w-full mt-5 flex flex-col">
+          <Button onClick={openName} style="w-full h-[30%] m-auto">
+            CREAR MESA
+          </Button>
+          <Button onClick={openNameCode} style="w-full h-[30%] m-auto">
+            UNIRSE A MESA
+          </Button>
+          <Button
+            onClick={openPopup}
+            style="w-full h-[30%] m-auto"
+            narrator="TUTORIAL"
+          >
+            TUTORIAL
+          </Button>
+        </div>
+        <div
+          id="opciones"
+          className="flex justify-center items-center gap-4 mt-5 mb-5 w-full"
+        >
+          <Button
+            narrator="Ajustes"
+            onClick={openSettings}
+            circular
+            style="w-13 h-13 flex items-center justify-center"
+          >
+            <SettingsIcon stroke="fondo" />
+          </Button>
+          <BackgroundMusic />
+        </div>
+      </div>
+      {showSettings && <Settings onClose={openSettings} />}
+      {showName && !showNameCode && <Name onClose={openName} />}
+      {showNameCode && <Name onClose={openNameCode} unirse />}
+    </div>
+  );
 }
 
 export default Home;
