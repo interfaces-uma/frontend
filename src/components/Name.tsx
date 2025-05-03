@@ -1,131 +1,168 @@
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import { useGameState } from "@/context/game/GameContext";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { socket } from "@/features/online/service/socket";
 
+import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
+import { useHoverSound } from "@/components/HoverSound";
+import clickSound from "@/assets/newClick.mp3";
+
 function Name({
-  onClose,
-  unirse,
+	onClose,
+	unirse,
 }: {
-  onClose: () => void;
-  unirse?: boolean;
+	onClose: () => void;
+	unirse?: boolean;
 }) {
-  const navigate = useNavigate();
-  const { dispatch } = useGameState();
-  const [code, setCode] = useState("");
-  const [name, setName] = useState("");
+	const navigate = useNavigate();
+	const { dispatch } = useGameState();
+	const [code, setCode] = useState("");
+	const [name, setName] = useState("");
 
-  const handleMesa = async () => {
-    const user = { name, id: name, color: null, role: null };
-    await localStorage.setItem("name", name);
-    dispatch({
-      type: "SET_USER",
-      user,
-    });
+	const { cvolume } = cuseVolume();
+	const { playHoverSound } = useHoverSound();
 
-    if (!unirse) {
-      socket.emit("createRoom", user, (response) => {
-        if (!response.success) {
-          alert(response.message);
-        } else {
-          navigate("/lobby", {
-            state: {
-              unirse,
-              codigo: unirse ? Number(code) : undefined,
-            },
-          });
-        }
-      });
-    } else {
-      socket.emit("joinRoom", user, code, (response) => {
-        if (!response.success) {
-          alert(response.message);
-        } else {
-          navigate("/lobby", {
-            state: {
-              unirse,
-              codigo: unirse ? Number(code) : undefined,
-            },
-          });
-        }
-      });
-    }
-  };
+	const lastNarratedName = useRef("");
+	const lastNarratedCode = useRef("");
 
-  //Enter para handleMesa
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (!unirse || (unirse && code.length === 4)) {
-        handleMesa();
-      }
-    }
-  };
-  // Maneja el clic fuera del popup
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget && onClose) {
-      onClose();
-    }
-  };
+	useEffect(() => {
+		if (name && name !== lastNarratedName.current) {
+			lastNarratedName.current = name;
+			playHoverSound(name);
+		}
+	}, [name]);
 
-  return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-    <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      onClick={handleOverlayClick} // Agrega el evento de clic
-    >
-      <div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
-        <div className="self-start">
-          <Button onClick={onClose} inversed circular>
-            <BackIcon />
-          </Button>
-        </div>
+	useEffect(() => {
+		if (code && code !== lastNarratedCode.current) {
+			lastNarratedCode.current = code;
+			playHoverSound(code);
+		}
+	}, [code]);
 
-        <label className="text-fondo text-2xl font-bold mb-4 mt-4">
-          Nombre
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
-            placeholder="Escribe tu nombre"
-          />
-        </label>
+	const handleClick = () => {
+		if (cvolume > 0) {
+			const audio = new Audio(clickSound);
+			audio.volume = cvolume;
+			audio.play();
+		}
+		handleKeyDown;
+	};
 
-        {unirse && (
-          <label className="text-fondo text-2xl font-bold mb-4 mt-4">
-            Código de sala
-            <input
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={4}
-              value={code}
-              onChange={(e) => {
-                const cleaned = e.target.value.replace(/[^0-9]/g, "");
-                setCode(cleaned);
-              }}
-              onKeyDown={handleKeyDown}
-              className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
-              placeholder="Introduzca el código de la sala"
-            />
-          </label>
-        )}
+	const handleMouseEnter = (name: string) => {
+		playHoverSound(name);
+	};
 
-        <div className="flex flex-col items-center justify-center h-full">
-          <Button
-            onClick={handleMesa}
-            inversed
-            disabled={unirse && code.length !== 4}
-          >
-            {unirse ? "UNIRSE" : "CREAR"}
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
+	const handleMesa = async () => {
+		const user = { name, id: name, color: null, role: null };
+		await localStorage.setItem("name", name);
+		dispatch({
+			type: "SET_USER",
+			user,
+		});
+
+		if (!unirse) {
+			socket.emit("createRoom", user, (response) => {
+				if (!response.success) {
+					alert(response.message);
+				} else {
+					navigate("/lobby", {
+						state: {
+							unirse,
+							codigo: unirse ? Number(code) : undefined,
+						},
+					});
+				}
+			});
+		} else {
+			socket.emit("joinRoom", user, code, (response) => {
+				if (!response.success) {
+					alert(response.message);
+				} else {
+					navigate("/lobby", {
+						state: {
+							unirse,
+							codigo: unirse ? Number(code) : undefined,
+						},
+					});
+				}
+			});
+		}
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			if (!unirse || (unirse && code.length === 4)) {
+				handleMouseEnter("enter");
+				handleMesa();
+			}
+		}
+	};
+
+	const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+		if (event.target === event.currentTarget && onClose) {
+			onClose();
+		}
+	};
+
+	return (
+		<div
+			className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+			onClick={handleOverlayClick}
+		>
+			<div className="bg-cartas w-full max-w-md h-auto max-h-[90vh] rounded-lg flex flex-col justify-between p-6">
+				<div className="self-start">
+					<Button onClick={onClose} inversed circular narrator="cerrar">
+						<BackIcon />
+					</Button>
+				</div>
+
+				<label className="text-fondo text-2xl font-bold mb-4 mt-4">
+					Nombre
+					<input
+						type="text"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						onClick={handleClick}
+						onKeyDown={(e) => handleKeyDown(e)}
+						className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
+						placeholder="Escribe tu nombre"
+					/>
+				</label>
+
+				{unirse && (
+					<label className="text-fondo text-2xl font-bold mb-4 mt-4">
+						Código de sala
+						<input
+							type="text"
+							inputMode="numeric"
+							pattern="[0-9]*"
+							maxLength={4}
+							value={code}
+							onChange={(e) => {
+								const cleaned = e.target.value.replace(/[^0-9]/g, "");
+								setCode(cleaned);
+							}}
+							onKeyDown={handleKeyDown}
+							className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
+							placeholder="Introduzca el código de la sala"
+						/>
+					</label>
+				)}
+
+				<div className="flex flex-col items-center justify-center h-full">
+					<Button
+						onClick={handleMesa}
+						inversed
+						disabled={unirse && code.length !== 4}
+					>
+						{unirse ? "UNIRSE" : "CREAR"}
+					</Button>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Name;
