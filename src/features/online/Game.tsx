@@ -60,7 +60,7 @@ export default function Game() {
         </div>
       </div>
 
-      <div className="w-[50%]">
+      <div>
         <GameStatus />
       </div>
 
@@ -81,7 +81,13 @@ export default function Game() {
         </div>
       </div>
 
-      <Button onClick={() => {}}>LISTO</Button>
+      <Button
+        onClick={() => {
+          manager.nextTurn();
+        }}
+      >
+        LISTO
+      </Button>
 
       {state.user.role === "leader" && (
         <div>
