@@ -70,9 +70,8 @@ export const useOnlineManager = (): UserActions => {
 
   const nextTurn = () => {
     if (!isMyTurn()) return;
-    alert("Turno terminado");
     if (state.mode === "online") {
-      // socket.emit("nextTurn");
+      socket.emit("nextTurn");
     }
   };
 
