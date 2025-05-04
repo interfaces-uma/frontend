@@ -1,4 +1,4 @@
-import homePhoto from "@/assets/homePhoto.png";
+import homePhoto from "@/assets/homePhoto.webp";
 import Button from "@/components/Button";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import Name from "@/components/Name";
