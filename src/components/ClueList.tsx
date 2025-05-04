@@ -10,13 +10,13 @@ export default function ClueList() {
   if (teamColor) clues = state.teams[teamColor].clueList;
 
   return (
-    <div className="bg-cartas text-center text-2xl px-20">
-      <p className="text-xl">PISTA</p>
+    <div className="bg-cartas text-center px-20 flex items-center justify-center">
       {state.clue === null ? (
-        <p>No hay pista aún.</p>
+        <p>-</p>
       ) : (
-        <p className="text-2xl font-bold">
-          {state.clue.word.toUpperCase()}---{"---"}
+        <p className="text-3xl font-bold">
+          {state.clue.word.toUpperCase()}
+          {"     "}
           {state.clue.cards.filter((c) => !c.isFlipped).length}
         </p>
       )}
