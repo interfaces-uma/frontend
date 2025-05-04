@@ -73,7 +73,7 @@ const GameStatus = () => {
   }, [state.user, state.turn]);
 
   return (
-    <div className="bg-amber-50 rounded-2xl text-center p-1 ">
+    <div className="bg-amber-50 rounded-2xl text-center p-1">
       <p>{typedText}</p>
     </div>
   );

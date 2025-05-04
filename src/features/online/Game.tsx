@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import GameStatus from "@/components/GameStatus";
+import TeamInfo from "@/components/teamInfo";
 
 export default function Game() {
   const { state } = useGameState();
@@ -41,11 +42,23 @@ export default function Game() {
 
   return (
     <div className="bg-fondo w-full h-full">
-      <div className="flex bg-cartas p-2">
+      <div
+        className={
+          state.user.color === "red"
+            ? "flex bg-fondoRojo justify-center items-center h-[8%] px-2"
+            : "flex bg-fondoAzul justify-center items-center h-[8%] px-2"
+        }
+      >
         <div className="mr-auto">
           <Button onClick={handleBackClick} circular inversed>
             <BackIcon fill="currentColor" className="cartas" />
           </Button>
+        </div>
+
+        <div className="flex h-full">
+          <TeamInfo team="blue" />
+          <ClueList />
+          <TeamInfo team="red" />
         </div>
 
         <div className="ml-auto">
