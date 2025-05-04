@@ -1,7 +1,7 @@
 import { useGameState } from "@/context/game/GameContext";
 import type { TeamColor, User } from "@/types";
 
-export default function teamInfo({ team }: { team: TeamColor }) {
+export default function TeamInfo({ team }: { team: TeamColor }) {
   const { state } = useGameState();
 
   const cardsReamining = state.cards.filter(

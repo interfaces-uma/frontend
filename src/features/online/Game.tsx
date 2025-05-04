@@ -60,7 +60,7 @@ export default function Game() {
         </div>
       </div>
 
-      <div>
+      <div className="mt-2 mb-2 flex justify-center">
         <GameStatus />
       </div>
 
