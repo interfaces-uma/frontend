@@ -101,6 +101,7 @@ function Lobby() {
 
   useEffect(() => {
     socket.on("redirectGame", () => {
+      alert("La partida ha comenzado");
       navigate("/game");
     });
 

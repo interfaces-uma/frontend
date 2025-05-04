@@ -42,16 +42,13 @@ export default function Game() {
   };
 
   useEffect(() => {
-    socket.on("endGame", (winner) => {
+    socket.on("endGame", (state, winner) => {
       alert(`El equipo ${winner} ha ganado la partida`);
       navigate("/lobby");
     });
 
     return () => {
-      socket.off("endGame", (winner) => {
-        alert(`El equipo ${winner} ha ganado la partida`);
-        navigate("/lobby");
-      });
+      socket.off("endGame", (winner) => {});
     };
   }, []);
 
