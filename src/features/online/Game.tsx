@@ -7,14 +7,15 @@ import Popup from "@/components/Popup";
 import { useGameState } from "@/context/game/GameContext";
 import Chat from "@/features/chat/components/Chat";
 import type { Clue } from "@/types";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import GameStatus from "@/components/GameStatus";
-import TeamInfo from "@/components/teamInfo";
+import TeamInfo from "@/components/TeamInfo";
+import { socket } from "@/features/online/service/socket";
 
 export default function Game() {
-  const { state } = useGameState();
+  const { state, dispatch } = useGameState();
   const manager = useOnlineManager();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,6 +40,20 @@ export default function Game() {
     manager.setClue(clue);
     setClueInput("");
   };
+
+  useEffect(() => {
+    socket.on("endGame", (winner) => {
+      alert(`El equipo ${winner} ha ganado la partida`);
+      navigate("/lobby");
+    });
+
+    return () => {
+      socket.off("endGame", (winner) => {
+        alert(`El equipo ${winner} ha ganado la partida`);
+        navigate("/lobby");
+      });
+    };
+  }, []);
 
   return (
     <div className="bg-fondo w-full h-full">
