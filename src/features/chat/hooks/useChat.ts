@@ -26,6 +26,10 @@ export function useChat() {
     }
   };
 
+  const handleRecieveMessage = (message: Message) => {
+    dispatch({ type: "SEND_MESSAGE", message });
+  };
+
   const messagesEndRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
@@ -36,6 +40,7 @@ export function useChat() {
 
   return {
     handleSendMessage,
+    handleRecieveMessage,
     messagesEndRef,
   };
 }

@@ -1,7 +1,8 @@
 import type { Message } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { useGameState } from "@/context/game/GameContext";
+import { socket } from "@/features/online/service/socket";
 
 function showMessages(
   data: Message[],
@@ -46,7 +47,7 @@ function showMessages(
 
 function Chat() {
   const { state } = useGameState();
-  const { handleSendMessage } = useChat();
+  const { handleSendMessage, handleRecieveMessage } = useChat();
 
   const [input, setInput] = useState<string>("");
 
@@ -55,6 +56,16 @@ function Chat() {
   const messages = state.messages;
 
   const { messagesEndRef } = useChat();
+
+  useEffect(() => {
+    socket.on("updateMessages", (message: Message) => {
+      handleRecieveMessage(message);
+    });
+
+    return () => {
+      socket.off("updateMessages");
+    };
+  }, []);
 
   return (
     <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg w-full">

@@ -39,6 +39,7 @@ interface ServerToClientEvents {
   updateState: (state: GameState) => void;
   redirectGame: () => void;
   endGame: (state: GameState, winner: TeamColor) => void;
+  updateMessages: (message: Message) => void;
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
