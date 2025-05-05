@@ -174,12 +174,13 @@ function Lobby() {
       >
         <button
           type="button"
+          disabled={state.isGameStarted}
           onClick={() => {
             manager.startGame();
           }}
           className="w-full h-full cursor-pointer"
         >
-          JUGAR
+          {state.isGameStarted ? "PARTIDA EN CURSO" : "JUGAR"}
         </button>
       </section>
 

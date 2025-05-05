@@ -58,6 +58,7 @@ export type User = {
  * Define el estado de una partida
  */
 export type GameState = {
+  isGameStarted: boolean;
   mode: GameMode;
   code: string;
   user: User;
