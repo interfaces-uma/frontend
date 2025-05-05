@@ -84,9 +84,17 @@ export const useLobbyManager = (): LobbyManager => {
   const joinSlot = (color: TeamColor, role: Role) => {
     const user = state.user;
     const code = state.code;
-
-    dispatch({ type: "SET_TEAM", role, team: color, user: state.user });
-    socket.emit("joinTeam", { user, color, role }, code);
+    if (state.mode === "online") {
+      socket.emit("joinTeam", { user, color, role }, code, (res) => {
+        if (!res.success) {
+          //alert(res.message);
+        } else {
+          dispatch({ type: "SET_TEAM", role, team: color, user });
+        }
+      });
+    } else {
+      dispatch({ type: "SET_TEAM", role, team: color, user: state.user });
+    }
   };
 
   const startGame = () => {
@@ -109,7 +117,6 @@ export const useLobbyManager = (): LobbyManager => {
       socket.emit("leaveRoom", state.user, state.code);
     }
   };
-
 
   return {
     getRoomCode,
