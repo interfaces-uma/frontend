@@ -1,18 +1,18 @@
 import Board from "@/components/Board";
 import Button from "@/components/Button";
 import ClueList from "@/components/ClueList";
+import GameStatus from "@/components/GameStatus";
 import BackIcon from "@/components/Icons/IconBack";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import Popup from "@/components/Popup";
+import TeamInfo from "@/components/TeamInfo";
 import { useGameState } from "@/context/game/GameContext";
 import Chat from "@/features/chat/components/Chat";
+import { socket } from "@/features/online/service/socket";
 import type { Clue } from "@/types";
 import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
-import GameStatus from "@/components/GameStatus";
-import TeamInfo from "@/components/TeamInfo";
-import { socket } from "@/features/online/service/socket";
 
 export default function Game() {
   const { state, dispatch } = useGameState();

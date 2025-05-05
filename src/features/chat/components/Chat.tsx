@@ -1,8 +1,8 @@
+import { useGameState } from "@/context/game/GameContext";
+import { useChat } from "@/features/chat/hooks/useChat";
+import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types";
 import { useEffect, useState } from "react";
-import { useChat } from "@/features/chat/hooks/useChat";
-import { useGameState } from "@/context/game/GameContext";
-import { socket } from "@/features/online/service/socket";
 
 function showMessages(
   data: Message[],

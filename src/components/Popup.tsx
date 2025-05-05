@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 type PopupProps = {
   isOpen?: boolean;
@@ -116,7 +116,6 @@ function BasePopup({
   };
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={handleOverlayClick} // Agrega el evento de clic

@@ -1,4 +1,4 @@
-import type { GameState, DispatchActions } from "@/types"; //aqui estan todas las funciones que puedes hacer y que le pasas
+import type { DispatchActions, GameState } from "@/types"; //aqui estan todas las funciones que puedes hacer y que le pasas
 
 export function gameReducer(
   state: GameState, //Que quieres hacer

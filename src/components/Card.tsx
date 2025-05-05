@@ -1,10 +1,10 @@
-import { useGameState } from "@/context/game/GameContext";
-import type { Card as CardType } from "@/types";
 import backSprite from "@/assets/backs.png";
-import redAgents from "@/assets/redAgents.png";
+import blackCard from "@/assets/black-back.png";
 import blueAgents from "@/assets/blueAgents.png";
 import greyAgents from "@/assets/greyAgents.png";
-import blackCard from "@/assets/black-back.png";
+import redAgents from "@/assets/redAgents.png";
+import { useGameState } from "@/context/game/GameContext";
+import type { Card as CardType } from "@/types";
 
 export default function Card({
   card,
@@ -108,11 +108,7 @@ export default function Card({
       {card.color === "black" ? assassinCardHtml : coloredCardHtml}
     </div>
   ) : (
-    <div
-      className={className}
-      onClick={() => handleCardClick(card.word)}
-      onKeyDown={() => handleCardClick(card.word)}
-    >
+    <div className={className} onClick={() => handleCardClick(card.word)}>
       <div className="card-inner aspect-[3/2] border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
         <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]">
           {card.word}

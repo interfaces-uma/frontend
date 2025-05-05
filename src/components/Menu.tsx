@@ -1,8 +1,8 @@
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
-import Settings from "./Settings";
-import { useState } from "react";
 import { useGameState } from "@/context/game/GameContext";
+import { useState } from "react";
+import Settings from "./Settings";
 
 function Menu({ onClose }: { onClose: () => void }) {
   const [showSettings, setShowSettings] = useState(false);

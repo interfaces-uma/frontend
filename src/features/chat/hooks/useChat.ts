@@ -1,7 +1,7 @@
+import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types";
 import { useEffect, useRef } from "react";
-import { useGameState } from "@/context/game/GameContext";
 
 export function useChat() {
   const { state, dispatch } = useGameState();

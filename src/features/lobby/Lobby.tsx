@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import MenuIcon from "@/components/Icons/IconMenu";
 import PlayerCell from "@/components/PlayerCell";
-import { useNavigate } from "react-router";
-import { useLobbyManager } from "./hooks/useLobbyManager";
+import Popup from "@/components/Popup";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
-import Popup from "@/components/Popup";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { useLobbyManager } from "./hooks/useLobbyManager";
 
-import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
-import type { User } from "@/types";
-import Menu from "@/components/Menu";
 import FullScreenIcon from "@/components/Icons/IconFullScreen";
+import Menu from "@/components/Menu";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import type { User } from "@/types";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;

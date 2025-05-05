@@ -1,11 +1,11 @@
 import homePhoto from "@/assets/homePhoto.webp";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import Button from "@/components/Button";
 import SettingsIcon from "@/components/Icons/IconSettings";
 import Name from "@/components/Name";
 import Popup from "@/components/Popup";
 import Settings from "@/components/Settings";
 import { useState } from "react";
-import BackgroundMusic from "@/components/BackgroundMusic";
 
 function Home() {
   const [showSettings, setShowSettings] = useState(false);
