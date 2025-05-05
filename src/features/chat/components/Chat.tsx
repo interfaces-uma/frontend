@@ -12,7 +12,8 @@ function showMessages(
   return (
     <ul
       ref={messagesEndRef}
-      className="max-h-80 min-h-80 w-full overflow-y-auto overflow-x-hidden"
+      // con el max-h-115 se ve bien en mi pantalla, seguramente en otra se vea mal. Pero sin max-h la lista de mensajes se va para abajo el chat entero
+      className="w-full max-h-115 overflow-y-auto overflow-x-hidden"
     >
       {data.map((data, index) => (
         <li
@@ -68,7 +69,7 @@ function Chat() {
   }, []);
 
   return (
-    <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg w-full">
+    <div className="bg-chat flex flex-col border-fondo rounded-lg w-full h-[80%]">
       <div
         className={
           team === "red"
@@ -95,10 +96,10 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white"
+            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white mt-auto"
             : team === "blue"
-              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black"
-              : "bg-fondo flex rounded-bl rounded-br text-cartas"
+              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black mt-auto"
+              : "bg-fondo flex rounded-bl rounded-br text-cartas mt-auto"
         }
       >
         <input

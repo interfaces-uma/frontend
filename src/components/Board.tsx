@@ -11,25 +11,23 @@ export default function Board({
   let greySpriteCounter = 0;
 
   return (
-    <div className="board">
-      <div className="card-grid grid grid-cols-5 gap-3 w-full">
-        {board.cards.map((card) => {
-          return (
-            <Card
-              card={card}
-              iconIndex={
-                card.color === "red"
-                  ? redSpriteCounter++
-                  : card.color === "blue"
-                    ? blueSpriteCounter++
-                    : greySpriteCounter++
-              }
-              handleCardClick={handleCardClick}
-              key={card.word}
-            />
-          );
-        })}
-      </div>
+    <div className="grid grid-cols-5 gap-3 w-full">
+      {board.cards.map((card) => {
+        return (
+          <Card
+            card={card}
+            iconIndex={
+              card.color === "red"
+                ? redSpriteCounter++
+                : card.color === "blue"
+                  ? blueSpriteCounter++
+                  : greySpriteCounter++
+            }
+            handleCardClick={handleCardClick}
+            key={card.word}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -15,7 +15,7 @@ import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 
 export default function Game() {
-  const { state, dispatch } = useGameState();
+  const { state } = useGameState();
   const manager = useOnlineManager();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -89,8 +89,8 @@ export default function Game() {
         <GameStatus />
       </div>
 
-      <div className="flex mt-2 gap-2 mb-2">
-        <div className="w-full max-w-[60%] min-w-[650px]">
+      <div className="flex gap-10">
+        <div className="w-full min-w-[50%]">
           <Board
             board={cards}
             handleCardClick={
@@ -101,32 +101,33 @@ export default function Game() {
           />
         </div>
 
-        <div className="right-0 absolute w-[25%]">
+        <div className="w-[60%]">
           <Chat />
+          <div className="flex">
+            {state.user.role === "leader" && (
+              <div>
+                <input
+                  value={clueInput}
+                  placeholder="Introduzca una pista"
+                  onChange={(e) => setClueInput(e.target.value)}
+                  className="p-2 bg-cartas"
+                />
+              </div>
+            )}
+            <Button
+              onClick={
+                state.user.role === "leader"
+                  ? handleCreateClue
+                  : () => {
+                      manager.nextTurn();
+                    }
+              }
+            >
+              {state.user.role === "leader" ? "ENVIAR PISTA" : "LISTO"}
+            </Button>
+          </div>
         </div>
       </div>
-
-      <Button
-        onClick={() => {
-          manager.nextTurn();
-        }}
-      >
-        LISTO
-      </Button>
-
-      {state.user.role === "leader" && (
-        <div>
-          <input
-            value={clueInput}
-            placeholder="Introduzca una pista"
-            onChange={(e) => setClueInput(e.target.value)}
-            className="p-2 bg-cartas"
-          />
-          <Button onClick={handleCreateClue}>Prueba sendClue</Button>
-        </div>
-      )}
-
-      <ClueList />
 
       <Popup
         isOpen={isPopupOpen}
