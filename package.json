@@ -12,10 +12,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "**/*.{js,ts,jsx,tsx}": [
-      "biome lint --fix",
-      "biome format --write"
-    ]
+    "**/*.{js,ts,jsx,tsx}": ["biome lint --fix", "biome format --write"]
   },
   "dependencies": {
     "react": "^19.1.0",
