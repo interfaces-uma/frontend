@@ -1,5 +1,5 @@
 import { useGameState } from "@/context/game/GameContext";
-import type { TeamColor, User } from "@/types";
+import type { TeamColor } from "@/types";
 
 export default function TeamInfo({ team }: { team: TeamColor }) {
   const { state } = useGameState();

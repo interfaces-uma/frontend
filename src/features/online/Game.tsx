@@ -89,8 +89,8 @@ export default function Game() {
         <GameStatus />
       </div>
 
-      <div className="flex gap-10">
-        <div className="w-full min-w-[50%]">
+      <div className="flex gap-10 ml-2 mr-2">
+        <div className="w-full">
           <Board
             board={cards}
             handleCardClick={
@@ -103,14 +103,14 @@ export default function Game() {
 
         <div className="w-[60%]">
           <Chat />
-          <div className="flex">
+          <div className="flex mt-5">
             {state.user.role === "leader" && (
-              <div>
+              <div className="w-[50%] flex pr-2">
                 <input
                   value={clueInput}
                   placeholder="Introduzca una pista"
                   onChange={(e) => setClueInput(e.target.value)}
-                  className="p-2 bg-cartas"
+                  className="p-2 bg-cartas rounded-2xl"
                 />
               </div>
             )}
@@ -122,6 +122,7 @@ export default function Game() {
                       manager.nextTurn();
                     }
               }
+              style="w-full"
             >
               {state.user.role === "leader" ? "ENVIAR PISTA" : "LISTO"}
             </Button>

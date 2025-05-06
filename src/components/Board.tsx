@@ -11,7 +11,7 @@ export default function Board({
   let greySpriteCounter = 0;
 
   return (
-    <div className="grid grid-cols-5 gap-3 w-full">
+    <div className="grid grid-cols-5 gap-3 w-full aspect-video">
       {board.cards.map((card) => {
         return (
           <Card
