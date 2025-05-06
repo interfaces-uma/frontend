@@ -53,7 +53,7 @@ export default function Game() {
   }, []);
 
   return (
-    <div className="bg-fondo w-full h-full">
+    <div className="bg-fondo w-full h-screen flex flex-col">
       <div
         className={
           state.user.color === "red"
@@ -89,31 +89,69 @@ export default function Game() {
         <GameStatus />
       </div>
 
-      <div className="flex gap-10 ml-2 mr-2">
-        <div className="w-full">
-          <Board
-            board={cards}
-            handleCardClick={
-              state.user.role === "leader"
-                ? manager.selectCard
-                : manager.revealCard
-            }
-          />
-        </div>
-
-        <div className="w-[60%]">
-          <Chat />
-          <div className="flex mt-5">
-            {state.user.role === "leader" && (
-              <div className="w-[50%] flex pr-2">
-                <input
-                  value={clueInput}
-                  placeholder="Introduzca una pista"
-                  onChange={(e) => setClueInput(e.target.value)}
-                  className="p-2 bg-cartas rounded-2xl"
-                />
-              </div>
-            )}
+      <div className="flex w-full flex-1 min-h-0">
+        <div className="w-[70%]">board</div>
+        <div className="flex-1 flex flex-col min-h-0">
+          <div className="overflow-y-scroll overflow-x-hidden min-h-0">
+            <ul className="w-full">
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+              <li>aa</li>
+            </ul>
+          </div>
+          <div className="mt-auto">
             <Button
               onClick={
                 state.user.role === "leader"
