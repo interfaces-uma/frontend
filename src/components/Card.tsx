@@ -10,10 +10,12 @@ export default function Card({
   card,
   iconIndex,
   handleCardClick,
+  cardAnimationString,
 }: {
   card: CardType;
   iconIndex: number;
   handleCardClick: (word: string) => void;
+  cardAnimationString: string;
 }) {
   const { state } = useGameState();
   const colors: Record<string, string> = {
@@ -23,7 +25,7 @@ export default function Card({
     empty: "bg-card",
   };
   let className =
-    "card bg-[#F0D9B9] rounded-lg flex items-center justify-center drop-shadow-md cursor-pointer";
+    "card bg-[#F0D9B9] rounded-lg flex items-center justify-center drop-shadow-md";
 
   if (card.isSelected) {
     className += " outline outline-4 outline-yellow-300";
@@ -108,9 +110,12 @@ export default function Card({
       {card.color === "black" ? assassinCardHtml : coloredCardHtml}
     </div>
   ) : (
-    <div className={className} onClick={() => handleCardClick(card.word)}>
+    <div
+      className={`${className} ${cardAnimationString}`}
+      onClick={() => handleCardClick(card.word)}
+    >
       <div className="card-inner border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
-        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)] text-nowrap">
+        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)] text-nowrap select-none">
           {card.word}
         </span>
       </div>
