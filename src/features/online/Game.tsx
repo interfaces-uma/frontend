@@ -53,9 +53,13 @@ export default function Game() {
     };
   }, []);
 
-  const isActualLeader = (): boolean => {
+  const isActualLeaderTurn = (): boolean => {
     const currentColor = state.turn.team;
-    return state.user.role === "leader" && state.user.color === currentColor;
+    return (
+      state.user.role === "leader" &&
+      state.user.color === currentColor &&
+      state.user.role === state.turn.role
+    );
   };
 
   return (
@@ -75,7 +79,7 @@ export default function Game() {
 
         <div className="flex h-full">
           <TeamInfo team="blue" />
-          {isActualLeader() ? (
+          {isActualLeaderTurn() ? (
             <input
               className="bg-cartas text-center text-xl"
               value={clueInput}
