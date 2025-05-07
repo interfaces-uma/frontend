@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import { o } from "node_modules/react-router/dist/development/fog-of-war-1hWhK5ey.d.mts";
+import FullScreenIcon from "@/components/Icons/IconFullScreen";
 
 export default function Game() {
   const { state } = useGameState();
@@ -93,7 +94,22 @@ export default function Game() {
           <TeamInfo team="red" />
         </div>
 
-        <div className="ml-auto">
+        <div className="flex gap-2 ml-auto">
+          <Button
+            onClick={() => {
+              document.documentElement.requestFullscreen();
+              console.log(screen.orientation.angle);
+            }}
+            circular
+            inversed
+          >
+            <FullScreenIcon
+              className="cartas"
+              width={20}
+              height={20}
+              strokeWidth={3}
+            />
+          </Button>
           <Button onClick={() => {}} circular inversed>
             <SettingsIcon
               fill="currentColor"
@@ -131,7 +147,7 @@ export default function Game() {
                       manager.nextTurn();
                     }
               }
-              style="w-full h-full text-4xl"
+              style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold"
             >
               {state.user.role === "leader" ? "ENVIAR PISTA" : "LISTO"}
             </Button>
