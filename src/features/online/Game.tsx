@@ -118,7 +118,7 @@ export default function Game() {
         </div>
         <div className="flex-1 flex flex-col min-h-0 mr-4">
           <Chat />
-          <div className="mt-4 mb-4">
+          <div className="mt-4 mb-4 h-[15%]">
             <Button
               onClick={
                 state.user.role === "leader"
@@ -127,7 +127,7 @@ export default function Game() {
                       manager.nextTurn();
                     }
               }
-              style="w-full"
+              style="w-full h-full text-4xl"
             >
               {state.user.role === "leader" ? "ENVIAR PISTA" : "LISTO"}
             </Button>
