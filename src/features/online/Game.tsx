@@ -55,9 +55,7 @@ export default function Game() {
 
   const isActualLeader = (): boolean => {
     const currentColor = state.turn.team;
-    const currentRole = state.turn.role;
-
-    return state.user.role === currentRole && state.user.color === currentColor;
+    return state.user.role === "leader" && state.user.color === currentColor;
   };
 
   return (

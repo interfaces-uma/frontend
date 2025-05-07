@@ -81,7 +81,7 @@ export default function Card({
         />
       </div>
       <div
-        className={className}
+        className={`${className} w-full h-full absolute z-9`}
         style={{
           backgroundImage: `url(${backSprite})`,
           backgroundRepeat: "no-repeat",
