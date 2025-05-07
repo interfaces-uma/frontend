@@ -20,13 +20,13 @@ export default function Card({
     red: "bg-red-500",
     blue: "bg-blue-500",
     black: "bg-black",
-    empty: "bg-yellow-500",
+    empty: "bg-card",
   };
   let className =
-    "card bg-[#F0D9B9] aspect-[3/2] rounded-lg flex items-center justify-center drop-shadow-md cursor-pointer";
+    "card bg-[#F0D9B9] rounded-lg flex items-center justify-center drop-shadow-md cursor-pointer";
 
   if (card.isSelected) {
-    className += " outline outline-4 outline-blue-300";
+    className += " outline outline-4 outline-yellow-300";
   }
 
   if (state.user.role === "leader") {
@@ -109,8 +109,8 @@ export default function Card({
     </div>
   ) : (
     <div className={className} onClick={() => handleCardClick(card.word)}>
-      <div className="card-inner aspect-[3/2] border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
-        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]">
+      <div className="card-inner border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
+        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)] text-nowrap">
           {card.word}
         </span>
       </div>

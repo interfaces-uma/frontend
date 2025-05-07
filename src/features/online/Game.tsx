@@ -13,6 +13,7 @@ import type { Clue } from "@/types";
 import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
+import { o } from "node_modules/react-router/dist/development/fog-of-war-1hWhK5ey.d.mts";
 
 export default function Game() {
   const { state } = useGameState();
@@ -48,9 +49,16 @@ export default function Game() {
     });
 
     return () => {
-      socket.off("endGame", (winner) => {});
+      socket.off("endGame");
     };
   }, []);
+
+  const isActualLeader = (): boolean => {
+    const currentColor = state.turn.team;
+    const currentRole = state.turn.role;
+
+    return state.user.role === currentRole && state.user.color === currentColor;
+  };
 
   return (
     <div className="bg-fondo w-full h-screen flex flex-col">
@@ -69,7 +77,17 @@ export default function Game() {
 
         <div className="flex h-full">
           <TeamInfo team="blue" />
-          <ClueList />
+          {isActualLeader() ? (
+            <input
+              className="bg-cartas text-center text-xl"
+              value={clueInput}
+              type="text"
+              placeholder="Pista..."
+              onChange={(e) => setClueInput(e.target.value)}
+            />
+          ) : (
+            <ClueList />
+          )}
           <TeamInfo team="red" />
         </div>
 
@@ -90,7 +108,16 @@ export default function Game() {
       </div>
 
       <div className="flex w-full flex-1 min-h-0">
-        <div className="w-[70%]">board</div>
+        <div className="w-[70%] flex ml-4 mr-4 mb-4">
+          <Board
+            board={cards}
+            handleCardClick={
+              state.user.role === "leader"
+                ? manager.selectCard
+                : manager.revealCard
+            }
+          />
+        </div>
         <div className="flex-1 flex flex-col min-h-0 mr-4">
           <Chat />
           <div className="mt-4 mb-4">

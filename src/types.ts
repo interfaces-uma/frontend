@@ -92,7 +92,7 @@ export type DispatchActions =
  */
 export interface UserActions {
   setClue: (clue: Clue) => void;
-  selectCard?: (cardText: Card["word"]) => void;
+  selectCard: (cardText: Card["word"]) => void;
   revealCard: (cardText: Card["word"]) => void;
   isMyTurn: () => boolean;
   nextTurn: () => void;
