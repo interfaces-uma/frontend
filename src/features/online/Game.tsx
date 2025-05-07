@@ -85,7 +85,7 @@ export default function Game() {
               className="bg-cartas text-center text-xl"
               value={clueInput}
               type="text"
-              placeholder="Pista..."
+              placeholder="Escribe tu pista..."
               onChange={(e) => setClueInput(e.target.value)}
             />
           ) : (

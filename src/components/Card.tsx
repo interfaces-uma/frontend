@@ -19,11 +19,12 @@ export default function Card({
 }) {
   const { state } = useGameState();
   const colors: Record<string, string> = {
-    red: "bg-red-500",
-    blue: "bg-blue-500",
-    black: "bg-black",
+    red: "bg-fondoRojo",
+    blue: "bg-fondoAzul",
+    black: "bg-fondoNegro",
     empty: "bg-card",
   };
+
   let className =
     "card bg-[#F0D9B9] rounded-lg flex items-center justify-center drop-shadow-md";
 
