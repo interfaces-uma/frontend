@@ -91,67 +91,9 @@ export default function Game() {
 
       <div className="flex w-full flex-1 min-h-0">
         <div className="w-[70%]">board</div>
-        <div className="flex-1 flex flex-col min-h-0">
-          <div className="overflow-y-scroll overflow-x-hidden min-h-0">
-            <ul className="w-full">
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-              <li>aa</li>
-            </ul>
-          </div>
-          <div className="mt-auto">
+        <div className="flex-1 flex flex-col min-h-0 mr-4">
+          <Chat />
+          <div className="mt-4 mb-4">
             <Button
               onClick={
                 state.user.role === "leader"
