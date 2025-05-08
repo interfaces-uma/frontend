@@ -1,9 +1,9 @@
-import Button from "@/components/Button";
-import { useHoverSound } from "@/components/HoverSound";
-import BackIcon from "@/components/Icons/IconBack";
-import IconFontSize from "@/components/Icons/IconFontSize";
-import IconLanguage from "@/components/Icons/IconLanguage";
-import IconVolume from "@/components/Icons/IconVolume";
+import Button from "@/features/shared/components/Button";
+import { useHoverSound } from "@/features/shared/components/HoverSound";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import IconFontSize from "@/features/shared/components/Icons/IconFontSize";
+import IconLanguage from "@/features/shared/components/Icons/IconLanguage";
+import IconVolume from "@/features/shared/components/Icons/IconVolume";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";

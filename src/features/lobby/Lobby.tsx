@@ -1,8 +1,8 @@
-import Button from "@/components/Button";
-import BackIcon from "@/components/Icons/IconBack";
-import MenuIcon from "@/components/Icons/IconMenu";
-import PlayerCell from "@/components/PlayerCell";
-import Popup from "@/components/Popup";
+import Button from "@/features/shared/components/Button";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import MenuIcon from "@/features/shared/components/Icons/IconMenu";
+import PlayerCell from "@/features/online/components/PlayerCell";
+import Popup from "@/features/shared/components/Popup";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
 import { useEffect, useRef, useState } from "react";
@@ -10,8 +10,8 @@ import { useNavigate } from "react-router";
 import { useLobbyManager } from "./hooks/useLobbyManager";
 
 import backgroundMusic from "@/assets/lobbymusic.mp3";
-import FullScreenIcon from "@/components/Icons/IconFullScreen";
-import Menu from "@/components/Menu";
+import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
+import Menu from "@/features/shared/components/Menu";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import type { User } from "@/types";
 

@@ -1,10 +1,10 @@
 import homePhoto from "@/assets/homePhoto.webp";
-import BackgroundMusic from "@/components/BackgroundMusic";
-import Button from "@/components/Button";
-import SettingsIcon from "@/components/Icons/IconSettings";
-import Name from "@/components/Name";
-import Popup from "@/components/Popup";
-import Settings from "@/components/Settings";
+import BackgroundMusic from "@/features/shared/components/BackgroundMusic";
+import Button from "@/features/shared/components/Button";
+import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
+import Name from "@/features/lobby/components/Name";
+import Popup from "@/features/shared/components/Popup";
+import Settings from "@/features/settings/components/Settings";
 import { useState } from "react";
 
 function Home() {

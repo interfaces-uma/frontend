@@ -1,5 +1,5 @@
 import clickSound from "@/assets/newClick.mp3";
-import { useHoverSound } from "@/components/HoverSound";
+import { useHoverSound } from "@/features/shared/components/HoverSound";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import type React from "react";
 

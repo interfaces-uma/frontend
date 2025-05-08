@@ -1,11 +1,11 @@
-import Board from "@/components/Board";
-import Button from "@/components/Button";
-import ClueList from "@/components/ClueList";
-import GameStatus from "@/components/GameStatus";
-import BackIcon from "@/components/Icons/IconBack";
-import SettingsIcon from "@/components/Icons/IconSettings";
-import Popup from "@/components/Popup";
-import TeamInfo from "@/components/TeamInfo";
+import Board from "@/features/online/components/Board";
+import Button from "@/features/shared/components/Button";
+import ClueList from "@/features/online/components/ClueList";
+import GameStatus from "@/features/online/components/GameStatus";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
+import Popup from "@/features/shared/components/Popup";
+import TeamInfo from "@/features/online/components/TeamInfo";
 import { useGameState } from "@/context/game/GameContext";
 import Chat from "@/features/chat/components/Chat";
 import { socket } from "@/features/online/service/socket";
@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import { o } from "node_modules/react-router/dist/development/fog-of-war-1hWhK5ey.d.mts";
-import FullScreenIcon from "@/components/Icons/IconFullScreen";
+import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
 
 export default function Game() {
   const { state } = useGameState();

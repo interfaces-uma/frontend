@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
-import BackIcon from "@/components/Icons/IconBack";
+import Button from "@/features/shared/components/Button";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { type ReactNode, useEffect, useState } from "react";
 
 type PopupProps = {

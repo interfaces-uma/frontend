@@ -1,5 +1,5 @@
 import hoverSoundFile from "@/assets/hover.mp3";
-import { useNarrator } from "@/components/Narrator";
+import { useNarrator } from "@/features/shared/components/Narrator";
 import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 import { useEffect, useRef } from "react";
 

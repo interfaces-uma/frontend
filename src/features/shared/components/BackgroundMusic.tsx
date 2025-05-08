@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "@/features/shared/components/Button";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import { useEffect, useRef, useState } from "react";
 

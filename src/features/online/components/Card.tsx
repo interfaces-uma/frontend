@@ -66,6 +66,13 @@ export default function Card({
     backgroundPosition: `0 ${(spriteOffset % 6) * 20}%`,
   };
 
+  const getFontSize = (word: string) => {
+    if (word.length <= 6) return "clamp(0.75rem,2.5vw,1.5rem)";
+    if (word.length <= 10) return "clamp(0.7rem,2vw,1.2rem)";
+    if (word.length <= 15) return "clamp(0.6rem,1.5vw,1rem)";
+    return "clamp(0.5rem,1vw,0.8rem)";
+  };
+
   const coloredCardHtml = (
     <div>
       <div className="absolute z-10 left-1/2 transform -translate-x-[50%] bottom-0 w-full h-full">
@@ -116,7 +123,10 @@ export default function Card({
       onClick={() => handleCardClick(card.word)}
     >
       <div className="card-inner border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
-        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)] text-nowrap select-none">
+        <span
+          className="uppercase text-nowrap select-none"
+          style={{ fontSize: getFontSize(card.word) }}
+        >
           {card.word}
         </span>
       </div>

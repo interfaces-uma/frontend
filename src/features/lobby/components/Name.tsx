@@ -1,12 +1,12 @@
-import Button from "@/components/Button";
-import BackIcon from "@/components/Icons/IconBack";
+import Button from "@/features/shared/components/Button";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 import clickSound from "@/assets/newClick.mp3";
-import { useHoverSound } from "@/components/HoverSound";
+import { useHoverSound } from "@/features/shared/components/HoverSound";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 
 function Name({
