@@ -104,7 +104,7 @@ export default function Card({
 
   const assassinCardHtml = (
     <div
-      className={className}
+      className={`${className} w-full h-full`}
       style={{
         backgroundImage: `url(${blackCard})`,
         backgroundRepeat: "no-repeat",
