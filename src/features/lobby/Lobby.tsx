@@ -14,6 +14,7 @@ import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
 import Menu from "@/features/shared/components/Menu";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import type { User } from "@/types";
+import TimedPopup from "@/features/shared/components/TimedPopup";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
@@ -51,6 +52,7 @@ function Lobby() {
   //PARA LA MUSICA DE FONDO ↑
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showStartPopup, setShowStartPopup] = useState(false);
 
   const handleConfirmExit = () => {
     manager.leaveGame();
@@ -101,8 +103,7 @@ function Lobby() {
 
   useEffect(() => {
     socket.on("redirectGame", () => {
-      alert("La partida ha comenzado");
-      navigate("/game");
+      setShowStartPopup(true);
     });
 
     return () => {
@@ -299,6 +300,13 @@ function Lobby() {
           </Button>
         </div>
       </Popup>
+
+      <TimedPopup
+        open={showStartPopup}
+        message="La partida va a comenzar..."
+        duration={3000}
+        onClose={() => navigate("/game")}
+      />
     </div>
   );
 }

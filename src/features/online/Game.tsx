@@ -11,16 +11,19 @@ import Chat from "@/features/chat/components/Chat";
 import { socket } from "@/features/online/service/socket";
 import type { Clue } from "@/types";
 import { useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
 import ClueInput from "@/features/shared/components/ClueInput";
+import TimedPopup from "@/features/shared/components/TimedPopup";
 
 export default function Game() {
   const { state } = useGameState();
   const manager = useOnlineManager();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showEndPopup, setShowEndPopup] = useState(false);
+  const [endMessage, setEndMessage] = useState("");
 
   const handleBackClick = () => {
     setIsPopupOpen(true);
@@ -42,8 +45,8 @@ export default function Game() {
 
   useEffect(() => {
     socket.on("endGame", (state, winner) => {
-      alert(`El equipo ${winner} ha ganado la partida`);
-      navigate("/lobby");
+      setEndMessage(`El equipo ${winner} ha ganado la partida`);
+      setShowEndPopup(true);
     });
 
     return () => {
@@ -156,6 +159,12 @@ export default function Game() {
           </Button>
         </div>
       </Popup>
+      <TimedPopup
+        open={showEndPopup}
+        message={endMessage}
+        duration={3000}
+        onClose={() => navigate("/lobby")}
+      />
     </div>
   );
 }
