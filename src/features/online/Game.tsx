@@ -13,8 +13,8 @@ import type { Clue } from "@/types";
 import { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router";
 import { useOnlineManager } from "./hooks/useOnlineManager";
-import { o } from "node_modules/react-router/dist/development/fog-of-war-1hWhK5ey.d.mts";
 import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
+import ClueInput from "@/features/shared/components/ClueInput";
 
 export default function Game() {
   const { state } = useGameState();
@@ -33,14 +33,11 @@ export default function Game() {
 
   const cards = { cards: state.cards };
 
-  const [clueInput, setClueInput] = useState("");
-
-  const handleCreateClue = () => {
+  const handleClueSend = (word: string) => {
     const selectedCards = state.cards.filter((card) => card.isSelected);
-    if (selectedCards.length === 0 || clueInput === "") return;
-    const clue: Clue = { word: clueInput, cards: selectedCards };
+    if (selectedCards.length === 0 || word === "") return;
+    const clue: Clue = { word, cards: selectedCards };
     manager.setClue(clue);
-    setClueInput("");
   };
 
   useEffect(() => {
@@ -81,13 +78,7 @@ export default function Game() {
         <div className="flex h-full">
           <TeamInfo team="blue" />
           {isActualLeaderTurn() ? (
-            <input
-              className="bg-cartas text-center text-xl"
-              value={clueInput}
-              type="text"
-              placeholder="Escribe tu pista..."
-              onChange={(e) => setClueInput(e.target.value)}
-            />
+            <ClueInput onSend={handleClueSend} />
           ) : (
             <ClueList />
           )}
@@ -136,22 +127,20 @@ export default function Game() {
             }
           />
         </div>
-        <div className="flex-1 flex flex-col min-h-0 mr-4">
+        <div className="flex-1 flex flex-col min-h-0 mr-4 mb-4">
           <Chat />
-          <div className="mt-4 mb-4 h-[15%]">
-            <Button
-              onClick={
-                state.user.role === "leader"
-                  ? handleCreateClue
-                  : () => {
-                      manager.nextTurn();
-                    }
-              }
-              style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold"
-            >
-              {state.user.role === "leader" ? "ENVIAR PISTA" : "LISTO"}
-            </Button>
-          </div>
+          {state.user.role !== "leader" && (
+            <div className="mt-4 h-[15%] mt-0">
+              <Button
+                onClick={() => {
+                  manager.nextTurn();
+                }}
+                style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold transition-transform duration-200 hover:scale-102"
+              >
+                PASAR TURNO
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

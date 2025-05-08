@@ -56,8 +56,6 @@ const GameStatus = () => {
     const duration = 2500; // 1 segundo
     const interval = duration / info.length;
 
-    setTypedText("");
-
     const intervalId = setInterval(() => {
       currentIndex += 1;
       setTypedText(info.slice(0, currentIndex));
