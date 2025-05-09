@@ -70,8 +70,10 @@ function Home() {
         <Popup
           isOpen={isPopupOpen}
           onClose={openPopup}
-          message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
-        />
+          message="APRENDE A JUGAR"
+        >
+          <Button onClick={() => navigate("/tutorial")}>JUGAR TUTORIAL</Button>
+        </Popup>
         <Popup autoWelcome />
       </div>
 
