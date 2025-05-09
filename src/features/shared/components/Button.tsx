@@ -11,6 +11,7 @@ function Button({
   disabled,
   style,
   narrator,
+  id,
 }: {
   children?: React.ReactNode;
   onClick: () => void;
@@ -19,6 +20,7 @@ function Button({
   disabled?: boolean;
   style?: string;
   narrator?: string;
+  id?: string;
 }) {
   let buttonStyle = "";
   let buttonCircle = "";
@@ -76,6 +78,7 @@ function Button({
 
   return (
     <button
+      id={id}
       type="button"
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}

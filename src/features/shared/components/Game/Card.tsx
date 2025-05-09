@@ -119,6 +119,7 @@ export default function Card({
     </div>
   ) : (
     <div
+      id={`card-${card.word}`}
       className={`${className} ${cardAnimationString}`}
       onClick={() => handleCardClick(card.word)}
     >

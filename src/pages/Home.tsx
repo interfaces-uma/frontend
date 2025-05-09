@@ -6,13 +6,14 @@ import Button from "@/features/shared/components/Button";
 import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
 import Popup from "@/features/shared/components/Popup";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showName, setShowName] = useState(false);
   const [showNameCode, setShowNameCode] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
-
+  const navigate = useNavigate();
   const openSettings = () => setShowSettings(!showSettings);
   const openName = () => setShowName(!showName);
   const openNameCode = () => {
@@ -107,8 +108,10 @@ function Home() {
         <Popup
           isOpen={isPopupOpen}
           onClose={openPopup}
-          message="TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷"
-        />
+          message="APRENDE A JUGAR"
+        >
+          <Button onClick={() => navigate("/tutorial")}>JUGAR TUTORIAL</Button>
+        </Popup>
 
         {/* Auto-popup de bienvenida + explicación */}
         <Popup autoWelcome />

@@ -65,10 +65,81 @@ export function gameReducer(
         user: state.user,
       };
 
-    case "SET_CLUE":
-      return { ...state, clue: { word: action.word, count: action.count } };
+    case "SET_CLUE": {
+      const newClue = { word: action.word, cards: action.cards };
+      if (state.turn.team === "blue") {
+        return {
+          ...state,
+          clue: newClue,
+          teams: {
+            ...state.teams,
+            blue: {
+              ...state.teams.blue,
+              clueList: [...state.teams.blue.clueList, newClue],
+            },
+            red: { ...state.teams.red },
+          },
+        };
+      }
+      // Si es turno rojo
+      return {
+        ...state,
+        clue: newClue,
+        teams: {
+          ...state.teams,
+          red: {
+            ...state.teams.red,
+            clueList: [...state.teams.red.clueList, newClue],
+          },
+          blue: { ...state.teams.blue },
+        },
+      };
+    }
 
     case "REVEAL_CARD":
+      if (state.turn.team === "blue") {
+        return {
+          ...state,
+          cards: state.cards.map((card) => {
+            if (card.word === action.cardText) {
+              return { ...card, isFlipped: true };
+            }
+            return card;
+          }),
+          clue: state.clue && {
+            ...state.clue,
+            cards: (state.clue.cards ?? []).map((card) => {
+              if (card.word === action.cardText) {
+                return { ...card, isFlipped: true };
+              }
+              return card;
+            }),
+          },
+          teams: {
+            ...state.teams,
+            blue: {
+              ...state.teams.blue,
+              clueList: state.teams.blue.clueList
+                .filter((clue) => clue?.word)
+                .map((clue) =>
+                  clue
+                    ? {
+                        ...clue,
+                        word: clue.word || "",
+                        cards: (clue.cards ?? []).map((card) => {
+                          if (card.word === action.cardText) {
+                            return { ...card, isFlipped: true };
+                          }
+                          return card;
+                        }),
+                      }
+                    : null,
+                )
+                .filter(Boolean),
+            },
+          },
+        };
+      }
       return {
         ...state,
         cards: state.cards.map((card) => {
@@ -77,6 +148,38 @@ export function gameReducer(
           }
           return card;
         }),
+        clue: state.clue && {
+          ...state.clue,
+          cards: (state.clue.cards ?? []).map((card) => {
+            if (card.word === action.cardText) {
+              return { ...card, isFlipped: true };
+            }
+            return card;
+          }),
+        },
+        teams: {
+          ...state.teams,
+          red: {
+            ...state.teams.red,
+            clueList: state.teams.red.clueList
+              .filter((clue) => clue?.word)
+              .map((clue) =>
+                clue
+                  ? {
+                      ...clue,
+                      word: clue.word || "",
+                      cards: (clue.cards ?? []).map((card) => {
+                        if (card.word === action.cardText) {
+                          return { ...card, isFlipped: true };
+                        }
+                        return card;
+                      }),
+                    }
+                  : null,
+              )
+              .filter(Boolean),
+          },
+        },
       };
 
     case "SELECT_CARD":

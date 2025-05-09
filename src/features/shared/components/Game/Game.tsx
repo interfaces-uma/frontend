@@ -128,6 +128,7 @@ export default function Game({ manager }: { manager: UserActions }) {
           {state.user.role !== "leader" && (
             <div className="mt-4 h-[15%] mt-0">
               <Button
+                id="next-turn-button"
                 onClick={() => {
                   manager.nextTurn();
                 }}
