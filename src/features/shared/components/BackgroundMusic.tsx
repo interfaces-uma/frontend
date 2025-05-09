@@ -1,5 +1,5 @@
-import Button from "@/features/shared/components/Button";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import Button from "@/features/shared/components/Button";
 import { useEffect, useRef, useState } from "react";
 
 import music3 from "@/assets/2TheSky.mp3";

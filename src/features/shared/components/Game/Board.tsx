@@ -1,5 +1,5 @@
-import Card from "@/features/online/components/Card";
 import { useGameState } from "@/context/game/GameContext";
+import Card from "@/features/shared/components/Game/Card";
 import type { Board as BoardType, Card as CardType } from "@/types";
 export default function Board({
   board,

@@ -1,13 +1,8 @@
-/**
- * @module useOnlineManager
- * Modulo encargado del manejo de las partidas online
- * Aqui se definen las acciones que un usuario puede hacer sobre la partida online
- */
 import { useGameState } from "@/context/game/GameContext";
-import type { Clue, UserActions } from "@/types";
-import { socket } from "../service/socket";
+import initialState from "@/features/tutorial/initialState";
+import type { Card, Clue, TutorialActions, UserActions } from "@/types";
 
-export const useOnlineManager = (): UserActions => {
+export const useTutorialManager = (): UserActions & TutorialActions => {
   const { state, dispatch } = useGameState();
 
   const isMyTurn = () => {
@@ -22,12 +17,13 @@ export const useOnlineManager = (): UserActions => {
 
   const setClue = (clue: Clue) => {
     if (!isMyTurn()) return;
+    if (!clue) return;
     // Comprueba que la pista no contenga ninguna carta del tablero
-    const incluyeCartaDelTablero = state.cards.some((c) =>
-      clue?.word
+    const incluyeCartaDelTablero = state.cards.some((card: Card) =>
+      clue.word
         .replace(/\s+/g, "")
         .toUpperCase()
-        .includes(c.word.toUpperCase()),
+        .includes(card.word.toUpperCase()),
     );
 
     if (/*incluyeCartaSeleccionada ||*/ incluyeCartaDelTablero) {
@@ -36,23 +32,21 @@ export const useOnlineManager = (): UserActions => {
     }
 
     if (state.mode === "online") {
-      socket.emit("sendClue", clue);
     }
   };
 
   const revealCard = (cardText: string) => {
     if (!isMyTurn()) return;
-    const card = state.cards.find((card) => card.word === cardText);
+    const card = state.cards.find((card: Card) => card.word === cardText);
     if (!card) return;
 
     if (state.mode === "online") {
-      socket.emit("guessCard", card);
     }
   };
 
   const selectCard = (cardText: string) => {
     if (!isMyTurn()) return;
-    const card = state.cards.find((card) => card.word === cardText);
+    const card = state.cards.find((card: Card) => card.word === cardText);
     if (!card || card.color !== state.turn.team || card.isFlipped) return;
 
     dispatch({
@@ -64,14 +58,23 @@ export const useOnlineManager = (): UserActions => {
   const nextTurn = () => {
     if (!isMyTurn()) return;
     if (state.mode === "online") {
-      socket.emit("nextTurn");
     }
   };
 
   const leaveGame = () => {
     if (state.mode === "online") {
-      socket.emit("leaveRoom", state.user, state.code);
     }
+  };
+
+  const setInitialState = () => {
+    dispatch({
+      type: "SET_STATE",
+      state: initialState,
+    });
+    dispatch({
+      type: "SET_USER",
+      user: initialState.user,
+    });
   };
 
   return {
@@ -81,5 +84,6 @@ export const useOnlineManager = (): UserActions => {
     nextTurn,
     leaveGame,
     isMyTurn,
+    setInitialState,
   };
 };

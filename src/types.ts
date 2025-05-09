@@ -98,3 +98,7 @@ export interface UserActions {
   nextTurn: () => void;
   leaveGame: () => void;
 }
+
+export interface TutorialActions {
+  setInitialState: () => void;
+}

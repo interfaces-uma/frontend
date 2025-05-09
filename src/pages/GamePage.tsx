@@ -1,5 +1,5 @@
-import Game from "@/features/online/Game";
+import OnlineGame from "@/features/online/OnlineGame";
 
 export default function GamePage() {
-  return <Game />;
+  return <OnlineGame />;
 }

@@ -1,6 +1,6 @@
+import { useGameState } from "@/context/game/GameContext";
 import type React from "react";
 import { useState } from "react";
-import { useGameState } from "@/context/game/GameContext";
 
 interface ClueInputProps {
   onSend: (clueWord: string) => void;

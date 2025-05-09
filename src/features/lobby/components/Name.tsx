@@ -1,13 +1,13 @@
-import Button from "@/features/shared/components/Button";
-import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
+import Button from "@/features/shared/components/Button";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 import clickSound from "@/assets/newClick.mp3";
-import { useHoverSound } from "@/features/shared/components/HoverSound";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
+import { useHoverSound } from "@/features/shared/components/HoverSound";
 
 function Name({
   onClose,

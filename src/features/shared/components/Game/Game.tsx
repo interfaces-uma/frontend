@@ -1,25 +1,23 @@
-import Board from "@/features/online/components/Board";
-import Button from "@/features/shared/components/Button";
-import ClueList from "@/features/online/components/ClueList";
-import GameStatus from "@/features/online/components/GameStatus";
-import BackIcon from "@/features/shared/components/Icons/IconBack";
-import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
-import Popup from "@/features/shared/components/Popup";
-import TeamInfo from "@/features/online/components/TeamInfo";
 import { useGameState } from "@/context/game/GameContext";
 import Chat from "@/features/chat/components/Chat";
 import { socket } from "@/features/online/service/socket";
-import type { Clue } from "@/types";
+import Button from "@/features/shared/components/Button";
+import ClueInput from "@/features/shared/components/ClueInput";
+import Board from "@/features/shared/components/Game/Board";
+import ClueList from "@/features/shared/components/Game/ClueList";
+import GameStatus from "@/features/shared/components/Game/GameStatus";
+import TeamInfo from "@/features/shared/components/Game/TeamInfo";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
+import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
+import Popup from "@/features/shared/components/Popup";
+import TimedPopup from "@/features/shared/components/TimedPopup";
+import type { Card, Clue, GameState, UserActions } from "@/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useOnlineManager } from "./hooks/useOnlineManager";
-import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
-import ClueInput from "@/features/shared/components/ClueInput";
-import TimedPopup from "@/features/shared/components/TimedPopup";
 
-export default function Game() {
+export default function Game({ manager }: { manager: UserActions }) {
   const { state } = useGameState();
-  const manager = useOnlineManager();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [showEndPopup, setShowEndPopup] = useState(false);
@@ -37,18 +35,18 @@ export default function Game() {
   const cards = { cards: state.cards };
 
   const handleClueSend = (word: string) => {
-    const selectedCards = state.cards.filter((card) => card.isSelected);
+    const selectedCards = state.cards.filter((card: Card) => card.isSelected);
     if (selectedCards.length === 0 || word === "") return;
     const clue: Clue = { word, cards: selectedCards };
     manager.setClue(clue);
   };
 
   useEffect(() => {
-    socket.on("endGame", (state, winner) => {
+    if (!socket) return;
+    socket.on("endGame", (_state: GameState, winner: string) => {
       setEndMessage(`El equipo ${winner} ha ganado la partida`);
       setShowEndPopup(true);
     });
-
     return () => {
       socket.off("endGame");
     };
@@ -77,7 +75,6 @@ export default function Game() {
             <BackIcon fill="currentColor" className="cartas" />
           </Button>
         </div>
-
         <div className="flex h-full">
           <TeamInfo team="blue" />
           {isActualLeaderTurn() ? (
@@ -87,12 +84,10 @@ export default function Game() {
           )}
           <TeamInfo team="red" />
         </div>
-
         <div className="flex gap-2 ml-auto">
           <Button
             onClick={() => {
               document.documentElement.requestFullscreen();
-              console.log(screen.orientation.angle);
             }}
             circular
             inversed
@@ -114,19 +109,17 @@ export default function Game() {
           </Button>
         </div>
       </div>
-
       <div className="mt-2 mb-2 flex justify-center">
         <GameStatus />
       </div>
-
       <div className="flex w-full flex-1 min-h-0">
         <div className="w-[70%] flex ml-4 mr-4 mb-4">
           <Board
             board={cards}
             handleCardClick={
               state.user.role === "leader"
-                ? manager.selectCard
-                : manager.revealCard
+                ? manager.selectCard || (() => {})
+                : manager.revealCard || (() => {})
             }
           />
         </div>
@@ -146,7 +139,6 @@ export default function Game() {
           )}
         </div>
       </div>
-
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}

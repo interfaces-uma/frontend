@@ -7,7 +7,8 @@ import Lobby from "@/pages/LobbyPage";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import "@/style.css";
-import GamePage from "./pages/GamePage";
+import GamePage from "@/pages/GamePage";
+import TutorialPage from "@/pages/TutorialPage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/game",
     element: <GamePage />,
+  },
+  {
+    path: "/tutorial",
+    element: <TutorialPage />,
   },
 ]);
 

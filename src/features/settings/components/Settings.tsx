@@ -1,12 +1,12 @@
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
+import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 import Button from "@/features/shared/components/Button";
 import { useHoverSound } from "@/features/shared/components/HoverSound";
 import BackIcon from "@/features/shared/components/Icons/IconBack";
 import IconFontSize from "@/features/shared/components/Icons/IconFontSize";
 import IconLanguage from "@/features/shared/components/Icons/IconLanguage";
 import IconVolume from "@/features/shared/components/Icons/IconVolume";
-import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
-import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
-import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 import { useEffect, useState } from "react";
 
 function Settings({
@@ -118,7 +118,6 @@ function Settings({
   };
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={handleOverlayClick} // Agrega el evento de clic

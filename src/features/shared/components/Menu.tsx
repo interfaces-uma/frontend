@@ -1,8 +1,7 @@
-import Button from "@/features/shared/components/Button";
-import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { useGameState } from "@/context/game/GameContext";
-import { useState } from "react";
 import Settings from "@/features/settings/components/Settings";
+import Button from "@/features/shared/components/Button";
+import { useState } from "react";
 
 function Menu({ onClose }: { onClose: () => void }) {
   const [showSettings, setShowSettings] = useState(false);
@@ -19,7 +18,6 @@ function Menu({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={handleOverlayClick} // Agrega el evento de clic

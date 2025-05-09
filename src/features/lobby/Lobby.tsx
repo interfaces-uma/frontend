@@ -1,20 +1,20 @@
-import Button from "@/features/shared/components/Button";
-import BackIcon from "@/features/shared/components/Icons/IconBack";
-import MenuIcon from "@/features/shared/components/Icons/IconMenu";
-import PlayerCell from "@/features/online/components/PlayerCell";
-import Popup from "@/features/shared/components/Popup";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
+import Button from "@/features/shared/components/Button";
+import PlayerCell from "@/features/shared/components/Game/PlayerCell";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import MenuIcon from "@/features/shared/components/Icons/IconMenu";
+import Popup from "@/features/shared/components/Popup";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useLobbyManager } from "./hooks/useLobbyManager";
 
 import backgroundMusic from "@/assets/lobbymusic.mp3";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
 import Menu from "@/features/shared/components/Menu";
-import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
-import type { User } from "@/types";
 import TimedPopup from "@/features/shared/components/TimedPopup";
+import type { User } from "@/types";
 
 function Lobby() {
   const MAX_TEAM_SIZE = 5;
