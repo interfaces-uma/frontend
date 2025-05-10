@@ -72,13 +72,9 @@ export const useLobbyManager = (): LobbyManager => {
   };
 
   const leaveTeam = () => {
-    // dispatch({
-    //   type: "SET_TEAM",
-    //   role: "spectator",
-    //   team: null,
-    //   user: state.user,
-    // });
     socket.emit("leaveTeam", state.code, state.user);
+    state.user.color = null;
+    state.user.role = "spectator";
   };
 
   const joinSlot = (color: TeamColor, role: Role) => {

@@ -27,7 +27,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => {
-      socket.off("updateState", (newState) => {});
+      socket.off("updateState");
     };
   }, []);
 
