@@ -82,24 +82,18 @@ export const useTutorialManager = (): UserActions & TutorialActions => {
   };
 
   const revealCard = (cardText: string) => {
-    console.log("a");
     if (!currentStep) return;
-    console.log("b");
     if (currentStep.expectedAction?.type !== "flipCard") return;
-    console.log("c");
     if (!isMyTurn()) return;
-    console.log("d");
     if (
       !currentStep.expectedAction.payload.words
         .map((word) => word.toUpperCase())
         .includes(cardText.toUpperCase())
     )
       return;
-    console.log("e");
     const card = state.cards.find(
       (card: Card) => card.word.toUpperCase() === cardText.toUpperCase(),
     );
-    console.log("f");
     if (!card) return;
 
     dispatch({

@@ -23,7 +23,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     socket.on("updateState", (newState) => {
-      console.log(newState);
       dispatch({ type: "SET_STATE", state: newState });
     });
 

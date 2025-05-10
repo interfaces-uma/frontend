@@ -2,7 +2,6 @@ import Game from "@/features/shared/components/Game/Game";
 import { useTutorialManager } from "@/features/tutorial/hooks/useTutorialManager";
 import { useEffect, useState } from "react";
 import IntroTutorial from "./components/IntroTutorial";
-import { useGameState } from "@/context/game/GameContext";
 import TutorialPopup from "./components/TutorialPopup";
 import { useNavigate } from "react-router";
 
@@ -10,15 +9,12 @@ const TutorialGame = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false);
   const manager = useTutorialManager();
-  const { state } = useGameState();
 
   useEffect(() => {
     manager.setInitialState();
   }, []);
 
   useEffect(() => {
-    console.log(state);
-    console.log(manager.currentStep);
     if (!manager.currentStep) return;
     setShowTutorial(true);
 
