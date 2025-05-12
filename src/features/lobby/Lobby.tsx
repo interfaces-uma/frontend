@@ -141,7 +141,7 @@ function Lobby() {
       </section>
 
       {/* Botón menu */}
-      <section className="absolute flex flex-col gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
+      <section className="absolute flex gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
         <Button onClick={openMenu} circular inversed>
           <MenuIcon
             fill="currentColor"
@@ -171,15 +171,15 @@ function Lobby() {
       {/* Boton jugar */}
       <section
         id="botonJugar"
-        className="absolute left-1/2 bottom-7 transform -translate-x-1/2 z-10 w-[15%] h-[10%] rounded-xl bg-fondo text-cartas lg:text-3xl"
+        className="absolute left-1/2 bottom-7 transform -translate-x-1/2 z-10 w-[15%] h-[10%] rounded-xl text-cartas lg:text-3xl"
       >
         <button
           type="button"
-          disabled={state.isGameStarted}
+          disabled={state.isGameStarted || state.user.role !== "leader"}
           onClick={() => {
             manager.startGame();
           }}
-          className="w-full h-full cursor-pointer"
+          className="w-full h-full cursor-pointer bg-fondo disabled:bg-gray-400 rounded-xl"
         >
           {state.isGameStarted ? "PARTIDA EN CURSO" : "JUGAR"}
         </button>
