@@ -54,7 +54,7 @@ function Button({
   }
 
   if (children === "¡Entendido!") {
-    buttonStyle = "bg-fondo hover:brightness-85 text-cartas";
+    buttonStyle = "bg-fondo hover:brightness-85 text-cartas hover:bg-fondo";
   }
 
   const handleClick = () => {

@@ -1,5 +1,6 @@
 import Button from "@/features/shared/components/Button";
 import BackIcon from "@/features/shared/components/Icons/IconBack";
+import { useNavigate } from "react-router-dom";
 import { type ReactNode, useEffect, useState } from "react";
 
 type PopupProps = {
@@ -41,6 +42,8 @@ function Popup({
     }
   };
 
+  const navigate = useNavigate();
+
   // Lógica para renderizar uno de los tres posibles popups
   const renderPopup = () => {
     if (showWelcome) {
@@ -69,7 +72,16 @@ function Popup({
            un líder da pistas para que sus compañeros adivinen palabras ocultas. 
            El reto es evitar las palabras del rival… ¡y sobre todo la palabra de color negro! 💣"
         >
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center gap-4 mt-4">
+            <Button
+              style="border-3 border-fondo"
+              onClick={() => {
+                navigate("/tutorial");
+                setShowExplanation(false);
+              }}
+            >
+              Jugar Tutorial
+            </Button>
             <Button onClick={() => setShowExplanation(false)}>
               ¡Entendido!
             </Button>

@@ -74,7 +74,6 @@ function Home() {
         >
           <Button onClick={() => navigate("/tutorial")}>JUGAR TUTORIAL</Button>
         </Popup>
-        <Popup autoWelcome />
       </div>
 
       {/* Vista pc */}
@@ -116,8 +115,8 @@ function Home() {
         </Popup>
 
         {/* Auto-popup de bienvenida + explicación */}
-        <Popup autoWelcome />
       </div>
+      <Popup autoWelcome />
     </>
   );
 }
