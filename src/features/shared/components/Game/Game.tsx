@@ -9,7 +9,6 @@ import GameStatus from "@/features/shared/components/Game/GameStatus";
 import TeamInfo from "@/features/shared/components/Game/TeamInfo";
 import BackIcon from "@/features/shared/components/Icons/IconBack";
 import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
-import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
 import Popup from "@/features/shared/components/Popup";
 import TimedPopup from "@/features/shared/components/TimedPopup";
 import type { Card, Clue, GameState, UserActions } from "@/types";
@@ -50,8 +49,13 @@ export default function Game({ manager }: { manager: UserActions }) {
       setEndMessage(`El equipo ${winner} ha ganado la partida`);
       setShowEndPopup(true);
     });
+    socket.on("redirectLobby", () => {
+      console.log("Redirecting to lobby");
+      navigate("/lobby");
+    });
     return () => {
       socket.off("endGame");
+      socket.off("redirectLobby");
     };
   }, []);
 
@@ -157,7 +161,7 @@ export default function Game({ manager }: { manager: UserActions }) {
         </div>
       </Popup>
       {/* Menu */}
-      {showMenu && <Menu onClose={openMenu} />}
+      {showMenu && <Menu onClose={openMenu} isGame={true} />}
       <TimedPopup
         open={showEndPopup}
         message={endMessage}

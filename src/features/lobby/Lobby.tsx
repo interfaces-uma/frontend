@@ -286,7 +286,7 @@ function Lobby() {
       {/* Ajustes */}
       {/* {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />} */}
       {/* Menu */}
-      {showMenu && <Menu onClose={openMenu} />}
+      {showMenu && <Menu onClose={openMenu} isGame={false} />}
 
       <Popup
         isOpen={isPopupOpen}

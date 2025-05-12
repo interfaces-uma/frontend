@@ -29,9 +29,9 @@ function showMessages(
               <strong
                 className={
                   data.team === "red"
-                    ? "text-fuerteRojo ml-2"
+                    ? "text-[#b60808] ml-2"
                     : data.team === "blue"
-                      ? "text-fuerteAzul ml-2"
+                      ? "text-[#16a9c7] ml-2"
                       : "text-fondo ml-2"
                 }
               >
@@ -73,9 +73,9 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fuerteRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
+            ? "bg-fondoRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
             : team === "blue"
-              ? "bg-fuerteAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
+              ? "bg-fondoAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
               : "bg-fondo flex w-full rounded-tl rounded-tr justify-center items-center text-black"
         }
       >
@@ -96,9 +96,9 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white mt-auto"
+            ? "bg-fondoRojo flex rounded-bl rounded-br text-white mt-auto"
             : team === "blue"
-              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black mt-auto"
+              ? "bg-fondoAzul flex rounded-bl rounded-br text-black mt-auto"
               : "bg-fondo flex rounded-bl rounded-br text-cartas mt-auto"
         }
       >
@@ -126,7 +126,7 @@ function Chat() {
             team === "red"
               ? " bg-fuerteRojo p-2 rounded-br hover:brightness-90"
               : team === "blue"
-                ? " bg-fuerteAzul p-2 rounded-br hover:brightness-90"
+                ? " bg-[#16a9c7] p-2 rounded-br hover:brightness-90"
                 : " bg-fondo p-2 rounded-br hover:brightness-90"
           }
         >

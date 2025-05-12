@@ -34,12 +34,14 @@ interface ClientToServerEvents {
   guessCard: (card: Card) => void;
   leaveTeam: (code: string, user: User) => void;
   nextTurn: () => void;
+  resetGame: (roomCode: string, user: User) => void;
 }
 
 interface ServerToClientEvents {
   updateState: (state: GameState) => void;
   redirectGame: () => void;
   endGame: (state: GameState, winner: TeamColor) => void;
+  redirectLobby: () => void;
   updateMessages: (message: Message) => void;
 }
 

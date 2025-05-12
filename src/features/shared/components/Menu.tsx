@@ -2,10 +2,18 @@ import { useGameState } from "@/context/game/GameContext";
 import Settings from "@/features/settings/components/Settings";
 import Button from "@/features/shared/components/Button";
 import { useState } from "react";
+import { socket } from "@/features/online/service/socket";
+import { useNavigate } from "react-router";
+import { useLobbyManager } from "@/features/lobby/hooks/useLobbyManager";
+import Popup from "./Popup";
 
-function Menu({ onClose }: { onClose: () => void }) {
+function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
   const [showSettings, setShowSettings] = useState(false);
   const { state } = useGameState();
+  const manager = useLobbyManager();
+  const navigate = useNavigate();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isToLobby, setIsToLobby] = useState(false);
 
   const openSettings = () => {
     setShowSettings(!showSettings);
@@ -13,8 +21,17 @@ function Menu({ onClose }: { onClose: () => void }) {
   const openReglas = () => {
     console.log("Abrir reglas");
   };
-  const salirPartida = () => {
-    console.log("Salir de la partida");
+  const handleGoOut = ({ aLobby }: { aLobby: boolean }) => {
+    setIsToLobby(aLobby);
+    setIsPopupOpen(true);
+  };
+  const salirDelLobby = () => {
+    manager.leaveGame();
+    navigate("/");
+  };
+  const salirDeLaPartida = () => {
+    manager.leaveGame();
+    navigate("/lobby");
   };
   // Maneja el clic fuera del popup
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -24,6 +41,7 @@ function Menu({ onClose }: { onClose: () => void }) {
   };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={handleOverlayClick} // Agrega el evento de clic
@@ -37,18 +55,67 @@ function Menu({ onClose }: { onClose: () => void }) {
           <Button onClick={openReglas} inversed style="w-full">
             Reglas 📜
           </Button>
-          {state.isGameStarted && (
-            <Button onClick={salirPartida} inversed style="w-full">
-              Salir de la partida ❌
-            </Button>
+          <Button
+            onClick={() => {
+              handleGoOut({ aLobby: true });
+            }}
+            inversed
+            style="w-full"
+          >
+            Salir al inicio 🏠
+          </Button>
+          {isGame && (
+            <>
+              <Button
+                onClick={() => {
+                  handleGoOut({ aLobby: false });
+                }}
+                inversed
+                style="w-full"
+              >
+                Salir de la partida ❌
+              </Button>
+              <Button
+                onClick={() => {
+                  if (state.user.role === "leader") {
+                    socket.emit("resetGame", state.code, state.user);
+                  } else {
+                    alert("Solo los capitanes pueden reiniciar la partida.");
+                  }
+                }}
+                inversed
+                disabled={state.user.role !== "leader"}
+                style="w-full"
+              >
+                Reiniciar Partida 🔄
+              </Button>
+            </>
           )}
         </div>
-      </div>
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          message={
+            isToLobby
+              ? "¿Seguro que quieres salir al inicio?"
+              : "¿Seguro que quieres salir de la partida?"
+          }
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button onClick={isToLobby ? salirDelLobby : salirDeLaPartida}>
+              Sí
+            </Button>
+            <Button onClick={() => setIsPopupOpen(false)} inversed>
+              No
+            </Button>
+          </div>
+        </Popup>
 
-      {/* Ajustes */}
-      {showSettings && (
-        <Settings onClose={openSettings} roomCode={state.code} />
-      )}
+        {/* Ajustes */}
+        {showSettings && (
+          <Settings onClose={openSettings} roomCode={state.code} />
+        )}
+      </div>
     </div>
   );
 }
