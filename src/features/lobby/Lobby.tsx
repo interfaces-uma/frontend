@@ -118,14 +118,14 @@ function Lobby() {
   return (
     <div className="flex h-screen">
       {/* Botón salir */}
-      <section
+      {/* <section
         id="botonSalir"
         className="absolute top-2 left-2 xl:top-7 xl:left-7 z-10"
       >
         <Button onClick={handleBackClick} inversed circular>
           <BackIcon stroke="fondo" />
         </Button>
-      </section>
+      </section> */}
 
       {/* Room code */}
       <section

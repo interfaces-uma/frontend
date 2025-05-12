@@ -73,13 +73,19 @@ export default function Game({ manager }: { manager: UserActions }) {
       <div
         className={
           state.user.color === "red"
-            ? "flex bg-fondoRojo justify-center items-center h-[8%] px-2"
-            : "flex bg-fondoAzul justify-center items-center h-[8%] px-2"
+            ? "flex bg-[#ce3a3a] justify-center items-center h-[8%] px-2"
+            : "flex bg-fuerteAzul justify-center items-center h-[8%] px-2"
         }
       >
         <div className="mr-auto">
-          <Button onClick={handleBackClick} circular inversed>
-            <BackIcon fill="currentColor" className="cartas" />
+          {/*menu*/}
+          <Button onClick={openMenu} circular inversed>
+            <MenuIcon
+              fill="currentColor"
+              className="cartas"
+              width={20}
+              height={20}
+            />
           </Button>
         </div>
         <div className="flex h-full">
@@ -104,15 +110,6 @@ export default function Game({ manager }: { manager: UserActions }) {
               width={20}
               height={20}
               strokeWidth={3}
-            />
-          </Button>
-          {/*menu*/}
-          <Button onClick={openMenu} circular inversed>
-            <MenuIcon
-              fill="currentColor"
-              className="cartas"
-              width={20}
-              height={20}
             />
           </Button>
         </div>

@@ -12,8 +12,8 @@ export default function TeamInfo({ team }: { team: TeamColor }) {
     <div
       className={
         team === "red"
-          ? "bg-[#b60808] text-white text-center rounded-br-2xl px-10 flex items-center justify-center"
-          : "bg-[#16a9c7] text-white text-center rounded-bl-2xl px-10 flex items-center justify-center"
+          ? "bg-[#7c0d0d] text-white text-center rounded-br-2xl px-10 flex items-center justify-center"
+          : "bg-[#178095] text-white text-center rounded-bl-2xl px-10 flex items-center justify-center"
       }
     >
       <div className="text-4xl font-bold">{cardsReamining} </div>

@@ -73,9 +73,9 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fondoRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
+            ? "bg-fuerteRojo flex w-full rounded-tl rounded-tr justify-center items-center text-white"
             : team === "blue"
-              ? "bg-fondoAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
+              ? "bg-fuerteAzul flex w-full rounded-tl rounded-tr justify-center items-center text-black"
               : "bg-fondo flex w-full rounded-tl rounded-tr justify-center items-center text-black"
         }
       >
@@ -96,9 +96,9 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fondoRojo flex rounded-bl rounded-br text-white mt-auto"
+            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white mt-auto"
             : team === "blue"
-              ? "bg-fondoAzul flex rounded-bl rounded-br text-black mt-auto"
+              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black mt-auto"
               : "bg-fondo flex rounded-bl rounded-br text-cartas mt-auto"
         }
       >
@@ -124,9 +124,9 @@ function Chat() {
           }}
           className={
             team === "red"
-              ? " bg-fuerteRojo p-2 rounded-br hover:brightness-90"
+              ? " bg-[#7c0d0d] p-2 rounded-br hover:brightness-90"
               : team === "blue"
-                ? " bg-[#16a9c7] p-2 rounded-br hover:brightness-90"
+                ? " bg-[#178095] p-2 rounded-br hover:brightness-90"
                 : " bg-fondo p-2 rounded-br hover:brightness-90"
           }
         >
