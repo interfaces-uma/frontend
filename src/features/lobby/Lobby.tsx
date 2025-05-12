@@ -140,7 +140,7 @@ function Lobby() {
         </div>
       </section>
 
-      {/* Botón ajustes */}
+      {/* Botón menu */}
       <section className="absolute flex flex-col gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
         <Button onClick={openMenu} circular inversed>
           <MenuIcon

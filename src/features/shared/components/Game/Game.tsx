@@ -15,6 +15,8 @@ import TimedPopup from "@/features/shared/components/TimedPopup";
 import type { Card, Clue, GameState, UserActions } from "@/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import MenuIcon from "../Icons/IconMenu";
+import Menu from "../Menu";
 
 export default function Game({ manager }: { manager: UserActions }) {
   const { state } = useGameState();
@@ -22,7 +24,8 @@ export default function Game({ manager }: { manager: UserActions }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [showEndPopup, setShowEndPopup] = useState(false);
   const [endMessage, setEndMessage] = useState("");
-
+  const [showMenu, setShowMenu] = useState(false);
+  const openMenu = () => setShowMenu(!showMenu);
   const handleBackClick = () => {
     setIsPopupOpen(true);
   };
@@ -99,8 +102,9 @@ export default function Game({ manager }: { manager: UserActions }) {
               strokeWidth={3}
             />
           </Button>
-          <Button onClick={() => {}} circular inversed>
-            <SettingsIcon
+          {/*menu*/}
+          <Button onClick={openMenu} circular inversed>
+            <MenuIcon
               fill="currentColor"
               className="cartas"
               width={20}
@@ -152,6 +156,8 @@ export default function Game({ manager }: { manager: UserActions }) {
           </Button>
         </div>
       </Popup>
+      {/* Menu */}
+      {showMenu && <Menu onClose={openMenu} />}
       <TimedPopup
         open={showEndPopup}
         message={endMessage}

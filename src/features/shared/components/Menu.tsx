@@ -10,6 +10,12 @@ function Menu({ onClose }: { onClose: () => void }) {
   const openSettings = () => {
     setShowSettings(!showSettings);
   };
+  const openReglas = () => {
+    console.log("Abrir reglas");
+  };
+  const salirPartida = () => {
+    console.log("Salir de la partida");
+  };
   // Maneja el clic fuera del popup
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget && onClose) {
@@ -23,14 +29,22 @@ function Menu({ onClose }: { onClose: () => void }) {
       onClick={handleOverlayClick} // Agrega el evento de clic
     >
       <div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
-        <Button onClick={openSettings} inversed>
-          Ajustes
-        </Button>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
+        <h1 className="text-center text-4xl font-bold text-fondo">Menú</h1>
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <Button onClick={openSettings} inversed style="w-full">
+            Ajustes ⚙️
+          </Button>
+          <Button onClick={openReglas} inversed style="w-full">
+            Reglas 📜
+          </Button>
+          {state.isGameStarted && (
+            <Button onClick={salirPartida} inversed style="w-full">
+              Salir de la partida ❌
+            </Button>
+          )}
+        </div>
       </div>
+
       {/* Ajustes */}
       {showSettings && (
         <Settings onClose={openSettings} roomCode={state.code} />
