@@ -21,6 +21,11 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
     onSend(input.trim());
     setInput("");
   };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };
 
   return (
     <div
@@ -33,6 +38,7 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
         type="text"
         placeholder="Escribe tu pista..."
         onChange={(e) => setInput(e.target.value.toUpperCase())}
+        onKeyDown={handleKeyDown}
         disabled={disabled}
         style={{ boxShadow: "none" }}
       />
