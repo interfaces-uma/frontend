@@ -36,7 +36,7 @@ function Button({
     buttonStyle =
       "w-50 h-15 bg-chat hover:brightness-85 text-fondo justify-center";
   } else {
-    buttonStyle = "bg-cartas hover:bg-yellow-100";
+    buttonStyle = "bg-cartas hover:brightness-50";
   }
 
   if (inversed) {
