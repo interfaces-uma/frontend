@@ -74,7 +74,7 @@ function Home() {
         >
           <Button
             onClick={() => navigate("/tutorial")}
-            style="w-full bg-fondo h-10 text-white rounded-lg"
+            style="w-full bg-fondo text-white rounded-lg"
           >
             JUGAR TUTORIAL
           </Button>
@@ -116,7 +116,12 @@ function Home() {
           onClose={openPopup}
           message="APRENDE A JUGAR"
         >
-          <Button onClick={() => navigate("/tutorial")}>JUGAR TUTORIAL</Button>
+          <Button
+            onClick={() => navigate("/tutorial")}
+            style="w-full bg-fondo text-white rounded-lg"
+          >
+            JUGAR TUTORIAL
+          </Button>
         </Popup>
 
         {/* Auto-popup de bienvenida + explicación */}
