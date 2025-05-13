@@ -15,6 +15,13 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isReinicio, setIsReinicio] = useState(false);
   const [isToLobby, setIsToLobby] = useState(false);
+  const [genericPopup, setGenericPopup] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: "",
+  });
   const response = isToLobby
     ? "¿Seguro que quieres salir al inicio?"
     : "¿Seguro que quieres salir de la partida?";
@@ -38,14 +45,19 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
     navigate("/lobby");
   };
   const reiniciarPartida = () => {
+    console.log(state.user.role);
     if (state.user.role === "leader") {
       socket.emit("resetGame", state.code, state.user);
     } else {
-      alert("Solo los capitanes pueden reiniciar la partida.");
+      showPopup("Solo los capitanes pueden reiniciar la partida.");
     }
   };
   const handleReinicio = () => {
     setIsReinicio(true);
+  };
+  //poppup generico reutilizable hecho para los alerts de momento
+  const showPopup = (message: string) => {
+    setGenericPopup({ isOpen: true, message });
   };
   // Maneja el clic fuera del popup
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -123,6 +135,19 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
             <Button onClick={reiniciarPartida}>Sí</Button>
             <Button onClick={() => setIsReinicio(false)} inversed>
               No
+            </Button>
+          </div>
+        </Popup>
+        <Popup
+          isOpen={genericPopup.isOpen}
+          onClose={() => setGenericPopup({ isOpen: false, message: "" })}
+          message={genericPopup.message}
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button
+              onClick={() => setGenericPopup({ isOpen: false, message: "" })}
+            >
+              Cerrar
             </Button>
           </div>
         </Popup>

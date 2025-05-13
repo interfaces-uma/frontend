@@ -6,6 +6,7 @@
 import { useGameState } from "@/context/game/GameContext";
 import type { Clue, UserActions } from "@/types";
 import { socket } from "../service/socket";
+import { useState } from "react";
 
 export const useOnlineManager = (): UserActions => {
   const { state, dispatch } = useGameState();
@@ -19,6 +20,20 @@ export const useOnlineManager = (): UserActions => {
     }
     return false;
   };
+  const [genericPopup, setGenericPopup] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: "",
+  });
+  const showPopup = (message?: string) => {
+    if (!message) {
+      setGenericPopup({ isOpen: false, message: "" });
+    } else {
+      setGenericPopup({ isOpen: true, message });
+    }
+  };
 
   const setClue = (clue: Clue) => {
     if (!isMyTurn()) return;
@@ -31,7 +46,7 @@ export const useOnlineManager = (): UserActions => {
     );
 
     if (/*incluyeCartaSeleccionada ||*/ incluyeCartaDelTablero) {
-      alert("La pista no puede coincidir con ninguna carta del tablero");
+      showPopup("La pista no puede coincidir con ninguna carta del tablero");
       return;
     }
 
@@ -81,5 +96,7 @@ export const useOnlineManager = (): UserActions => {
     nextTurn,
     leaveGame,
     isMyTurn,
+    showPopup,
+    genericPopup,
   };
 };

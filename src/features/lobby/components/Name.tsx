@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import clickSound from "@/assets/newClick.mp3";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { useHoverSound } from "@/features/shared/components/HoverSound";
+import Popup from "@/features/shared/components/Popup";
 
 function Name({
   onClose,
@@ -27,6 +28,14 @@ function Name({
   const lastNarratedName = useRef("");
   const lastNarratedCode = useRef("");
 
+  const [genericPopup, setGenericPopup] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: "",
+  });
+
   useEffect(() => {
     if (name && name !== lastNarratedName.current) {
       lastNarratedName.current = name;
@@ -40,7 +49,10 @@ function Name({
       playHoverSound(code);
     }
   }, [code]);
-
+  const showPopup = (message?: string) => {
+    if (!message) return;
+    setGenericPopup({ isOpen: true, message });
+  };
   const handleClick = () => {
     if (cvolume > 0) {
       const audio = new Audio(clickSound);
@@ -65,7 +77,7 @@ function Name({
     if (!unirse) {
       socket.emit("createRoom", user, (response) => {
         if (!response.success) {
-          alert(response.message);
+          showPopup(response.message);
         } else {
           navigate("/lobby", {
             state: {
@@ -78,7 +90,7 @@ function Name({
     } else {
       socket.emit("joinRoom", user, code, (response) => {
         if (!response.success) {
-          alert(response.message);
+          showPopup(response.message);
         } else {
           navigate("/lobby", {
             state: {
@@ -160,6 +172,19 @@ function Name({
             {unirse ? "UNIRSE" : "CREAR"}
           </Button>
         </div>
+        <Popup
+          isOpen={genericPopup.isOpen}
+          onClose={() => setGenericPopup({ isOpen: false, message: "" })}
+          message={genericPopup.message}
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button
+              onClick={() => setGenericPopup({ isOpen: false, message: "" })}
+            >
+              Cerrar
+            </Button>
+          </div>
+        </Popup>
       </div>
     </div>
   );

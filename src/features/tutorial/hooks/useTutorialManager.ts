@@ -50,10 +50,10 @@ export const useTutorialManager = (): UserActions & TutorialActions => {
         .includes(card.word.toUpperCase()),
     );
 
-    if (incluyeCartaDelTablero) {
-      alert("La pista no puede coincidir con ninguna carta del tablero");
-      return;
-    }
+    // if (incluyeCartaDelTablero) {
+    //   alert("La pista no puede coincidir con ninguna carta del tablero");
+    //   return;
+    // }
 
     dispatch({
       type: "SET_CLUE",

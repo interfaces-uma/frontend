@@ -7,7 +7,6 @@ import Board from "@/features/shared/components/Game/Board";
 import ClueList from "@/features/shared/components/Game/ClueList";
 import GameStatus from "@/features/shared/components/Game/GameStatus";
 import TeamInfo from "@/features/shared/components/Game/TeamInfo";
-import BackIcon from "@/features/shared/components/Icons/IconBack";
 import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
 import Popup from "@/features/shared/components/Popup";
 import TimedPopup from "@/features/shared/components/TimedPopup";
@@ -25,9 +24,9 @@ export default function Game({ manager }: { manager: UserActions }) {
   const [endMessage, setEndMessage] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const openMenu = () => setShowMenu(!showMenu);
-  const handleBackClick = () => {
-    setIsPopupOpen(true);
-  };
+  // const handleBackClick = () => {
+  //   setIsPopupOpen(true);
+  // };
 
   const handleConfirmExit = () => {
     manager.leaveGame();
@@ -151,6 +150,23 @@ export default function Game({ manager }: { manager: UserActions }) {
           <Button onClick={handleConfirmExit}>Sí</Button>
           <Button onClick={() => setIsPopupOpen(false)} inversed>
             No
+          </Button>
+        </div>
+      </Popup>
+      <Popup
+        isOpen={manager.genericPopup ? manager.genericPopup.isOpen : undefined}
+        onClose={() => (manager.showPopup ? manager.showPopup("") : undefined)} // Cierra el popup
+        message={
+          manager.genericPopup ? manager.genericPopup.message : undefined
+        }
+      >
+        <div className="flex justify-center gap-4 mt-4">
+          <Button
+            onClick={() =>
+              manager.showPopup ? manager.showPopup("") : undefined
+            }
+          >
+            Cerrar
           </Button>
         </div>
       </Popup>

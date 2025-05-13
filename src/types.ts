@@ -97,6 +97,8 @@ export interface UserActions {
   isMyTurn: () => boolean;
   nextTurn: () => void;
   leaveGame: () => void;
+  genericPopup?: { isOpen: boolean; message: string };
+  showPopup?: (message: string) => void;
 }
 
 export interface TutorialActions {
