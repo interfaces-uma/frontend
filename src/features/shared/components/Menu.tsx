@@ -13,7 +13,11 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
   const manager = useLobbyManager();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isReinicio, setIsReinicio] = useState(false);
   const [isToLobby, setIsToLobby] = useState(false);
+  const response = isToLobby
+    ? "¿Seguro que quieres salir al inicio?"
+    : "¿Seguro que quieres salir de la partida?";
 
   const openSettings = () => {
     setShowSettings(!showSettings);
@@ -32,6 +36,16 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
   const salirDeLaPartida = () => {
     manager.leaveGame();
     navigate("/lobby");
+  };
+  const reiniciarPartida = () => {
+    if (state.user.role === "leader") {
+      socket.emit("resetGame", state.code, state.user);
+    } else {
+      alert("Solo los capitanes pueden reiniciar la partida.");
+    }
+  };
+  const handleReinicio = () => {
+    setIsReinicio(true);
   };
   // Maneja el clic fuera del popup
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -76,13 +90,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
                 Salir de la partida ❌
               </Button>
               <Button
-                onClick={() => {
-                  if (state.user.role === "leader") {
-                    socket.emit("resetGame", state.code, state.user);
-                  } else {
-                    alert("Solo los capitanes pueden reiniciar la partida.");
-                  }
-                }}
+                onClick={handleReinicio}
                 inversed
                 disabled={state.user.role !== "leader"}
                 style="w-full"
@@ -95,17 +103,25 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
         <Popup
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
-          message={
-            isToLobby
-              ? "¿Seguro que quieres salir al inicio?"
-              : "¿Seguro que quieres salir de la partida?"
-          }
+          message={response}
         >
           <div className="flex justify-center gap-4 mt-4">
             <Button onClick={isToLobby ? salirDelLobby : salirDeLaPartida}>
               Sí
             </Button>
             <Button onClick={() => setIsPopupOpen(false)} inversed>
+              No
+            </Button>
+          </div>
+        </Popup>
+        <Popup
+          isOpen={isReinicio}
+          onClose={() => setIsReinicio(false)}
+          message={"Seguro que quieres reiniciar la partida?"}
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button onClick={reiniciarPartida}>Sí</Button>
+            <Button onClick={() => setIsReinicio(false)} inversed>
               No
             </Button>
           </div>
