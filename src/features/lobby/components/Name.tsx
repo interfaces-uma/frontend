@@ -49,10 +49,15 @@ function Name({
       playHoverSound(code);
     }
   }, [code]);
+
   const showPopup = (message?: string) => {
-    if (!message) return;
-    setGenericPopup({ isOpen: true, message });
+    if (!message) {
+      setGenericPopup({ isOpen: false, message: "" });
+    } else {
+      setGenericPopup({ isOpen: true, message });
+    }
   };
+
   const handleClick = () => {
     if (cvolume > 0) {
       const audio = new Audio(clickSound);
@@ -77,7 +82,7 @@ function Name({
     if (!unirse) {
       socket.emit("createRoom", user, (response) => {
         if (!response.success) {
-          showPopup(response.message);
+          showPopup(response.message || "Error al crear la sala ❌");
         } else {
           navigate("/lobby", {
             state: {
@@ -90,7 +95,7 @@ function Name({
     } else {
       socket.emit("joinRoom", user, code, (response) => {
         if (!response.success) {
-          showPopup(response.message);
+          showPopup(response.message || "Error al unirse a la sala ❌");
         } else {
           navigate("/lobby", {
             state: {
