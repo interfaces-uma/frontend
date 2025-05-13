@@ -72,7 +72,12 @@ function Home() {
           onClose={openPopup}
           message="APRENDE A JUGAR"
         >
-          <Button onClick={() => navigate("/tutorial")}>JUGAR TUTORIAL</Button>
+          <Button
+            onClick={() => navigate("/tutorial")}
+            style="w-full bg-fondo h-10 text-white rounded-lg"
+          >
+            JUGAR TUTORIAL
+          </Button>
         </Popup>
       </div>
 
