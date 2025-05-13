@@ -81,17 +81,16 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
           <Button onClick={openReglas} inversed style="w-full">
             Reglas 📜
           </Button>
-          <Button
-            onClick={() => {
-              handleGoOut({ aLobby: true });
-            }}
-            inversed
-            style="w-full"
-          >
-            Salir al inicio 🏠
-          </Button>
           {isGame && (
             <>
+              <Button
+                onClick={handleReinicio}
+                inversed
+                disabled={state.user.role !== "leader"}
+                style="w-full"
+              >
+                Reiniciar Partida 🔄
+              </Button>
               <Button
                 onClick={() => {
                   handleGoOut({ aLobby: false });
@@ -101,16 +100,17 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
               >
                 Salir de la partida ❌
               </Button>
-              <Button
-                onClick={handleReinicio}
-                inversed
-                disabled={state.user.role !== "leader"}
-                style="w-full"
-              >
-                Reiniciar Partida 🔄
-              </Button>
             </>
           )}
+          <Button
+            onClick={() => {
+              handleGoOut({ aLobby: true });
+            }}
+            inversed
+            style="w-full"
+          >
+            Salir al inicio 🏠
+          </Button>
         </div>
         <Popup
           isOpen={isPopupOpen}
