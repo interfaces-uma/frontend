@@ -77,17 +77,6 @@ export default function Game({ manager }: { manager: UserActions }) {
             : "flex bg-fuerteAzul justify-center items-center h-[8%] px-2"
         }
       >
-        <div className="mr-auto">
-          {/*menu*/}
-          <Button onClick={openMenu} circular inversed>
-            <MenuIcon
-              fill="currentColor"
-              className="cartas"
-              width={20}
-              height={20}
-            />
-          </Button>
-        </div>
         <div className="flex h-full">
           <TeamInfo team="blue" />
           {isActualLeaderTurn() ? (
@@ -97,7 +86,15 @@ export default function Game({ manager }: { manager: UserActions }) {
           )}
           <TeamInfo team="red" />
         </div>
-        <div className="flex gap-2 ml-auto">
+        <div className="absolute right-4 flex gap-2 ml-auto">
+          <Button onClick={openMenu} circular inversed>
+            <MenuIcon
+              fill="currentColor"
+              className="cartas"
+              width={20}
+              height={20}
+            />
+          </Button>
           <Button
             onClick={() => {
               document.documentElement.requestFullscreen();
