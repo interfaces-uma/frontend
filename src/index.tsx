@@ -4,6 +4,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "@/style.css";
 import "./i18n";
 
+// Set font size from localStorage on initial load
+const savedFontIndex = localStorage.getItem("fontIndex");
+if (savedFontIndex) {
+  const fontSizes = [20, 22, 24, 26, 28];
+  document.documentElement.style.setProperty(
+    "--font-size",
+    `${fontSizes[Number(savedFontIndex)]}px`,
+  );
+}
+
 // Páginas
 import Home from "@/pages/Home";
 import Lobby from "@/pages/LobbyPage";
