@@ -24,25 +24,46 @@ function Settings({
   const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
   const [cprevVolume, csetPrevVolume] = useState<number | null>(null);
 
-  const [fontIndex, setFontSize] = useState(() =>
-    Number(localStorage.getItem("fontIndex") ?? "2"),
-  );
+  // Inicializar fontIndex desde localStorage o usar valor por defecto
+  const [fontIndex, setFontSize] = useState(() => {
+    const savedFontIndex = localStorage.getItem("fontIndex");
+    return savedFontIndex ? Number(savedFontIndex) : 2; // 2 corresponde a 24px
+  });
+
   const [language, setLanguage] = useState(
     () => localStorage.getItem("language") || "es",
   );
+
+  const { playHoverSound } = useHoverSound();
+
   const [copied, setCopied] = useState(false);
 
   const [narratorEnabled, setNarratorEnabled] = useState<boolean>(
     () => localStorage.getItem("helpSound") === "true",
   );
 
-  const { playHoverSound } = useHoverSound();
+  // Aplicar tamaño de fuente al montar el componente
+  useEffect(() => {
+    const savedFont = localStorage.getItem("fontIndex");
+    const savedLang = localStorage.getItem("language");
 
-  // Aplicar fuente y guardar
+    if (savedFont) {
+      const savedFontIndex = Number(savedFont);
+      document.documentElement.style.setProperty(
+        "--font-size",
+        `${fontSizes[savedFontIndex]}px`,
+      );
+    }
+    if (savedLang) setLanguage(savedLang);
+  }, []);
+
+  // Guardar y aplicar cambios de tamaño de fuente
   useEffect(() => {
     localStorage.setItem("fontIndex", fontIndex.toString());
-    document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
-    //document.documentElement.style.setProperty('--font-size', `${fontSizes[fontIndex]}px`);
+    document.documentElement.style.setProperty(
+      "--font-size",
+      `${fontSizes[fontIndex]}px`,
+    );
   }, [fontIndex]);
 
   // Guardar idioma y cambiar en i18next
