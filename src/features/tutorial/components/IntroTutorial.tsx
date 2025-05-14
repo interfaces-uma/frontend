@@ -19,14 +19,14 @@ function IntroTutorial({ onFinish }: IntroTutorialProps) {
 
   return (
     <div className="fixed inset-0 z-100 bg-black/50 flex items-center justify-center">
-      <div className="w-[50%] h-[50%] flex flex-col items-center justify-center bg-cartas p-6 rounded-2xl shadow-xl max-w-xl mx-auto">
-        <p className="text-lg text-center mb-4">{steps[step]}</p>
+      <div className="w-[20%] h-[20%]  flex flex-col items-center justify-center bg-cartas p-6 rounded-2xl shadow-xl max-w-xl mx-auto">
+        <p className="text-center mb-4">{steps[step]}</p>
         <div className="flex gap-4 mt-4">
           {step > 0 && (
             <button
               type="button"
               onClick={() => setStep((s) => s - 1)}
-              className="px-4 py-2 bg-gray-200 rounded-xl"
+              className="px-4 py-2 bg-gray-300 border-fondo border-2 rounded-xl"
             >
               Anterior
             </button>
