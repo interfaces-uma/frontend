@@ -8,12 +8,14 @@ import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import { huseVolume } from "@/context/hoverVolume/hoverVolumeContext";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { useHoverSound } from "@/components/HoverSound";
-import { text } from "stream/consumers";
+import i18n from "@/i18n";
+import { useTranslation } from "react-i18next";
 
 function Settings({
 	onClose,
 	roomCode,
 }: { onClose: () => void; roomCode?: string }) {
+	const { t } = useTranslation();
 	const fontSizes = [16, 18, 20, 22, 24];
 	const { volume, setVolume } = useVolume();
 	const { hvolume, hsetVolume } = huseVolume();
@@ -23,7 +25,9 @@ function Settings({
 	const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
 	const [cprevVolume, csetPrevVolume] = useState<number | null>(null);
 	const [fontIndex, setFontSize] = useState(2);
-	const [language, setLanguage] = useState("es");
+	const [language, setLanguage] = useState(
+		() => localStorage.getItem("language") || "es",
+	);
 
 	const { playHoverSound } = useHoverSound();
 
@@ -35,16 +39,25 @@ function Settings({
 		const savedLang = localStorage.getItem("language");
 
 		if (savedFont) setFontSize(Number(savedFont));
-		if (savedLang) setLanguage(savedLang);
+		if (savedLang) {
+			setLanguage(savedLang);
+			i18n.changeLanguage(savedLang); // Cambiar idioma en i18n
+		}
 	}, []);
 
-	// Guardar en localStorage
+	// Guardar en localStorage y aplicar idioma
+	useEffect(() => {
+		if (language) {
+			localStorage.setItem("language", language);
+			i18n.changeLanguage(language); // Cambiar idioma en i18n
+		}
+	}, [language]);
+
+	// Guardar tamaño de texto en localStorage
 	useEffect(() => {
 		localStorage.setItem("fontIndex", fontIndex.toString());
 		document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
 	}, [fontIndex]);
-
-	useEffect(() => localStorage.setItem("language", language), [language]);
 
 	const toggleMute = () => {
 		if (volume === 0 && prevVolume !== null) {
@@ -117,7 +130,6 @@ function Settings({
 			playHoverSound();
 		}
 	};
-
 	return (
 		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div
@@ -127,7 +139,7 @@ function Settings({
 			<div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
 				{/* Encabezado */}
 				<div className="flex justify-between items-center">
-					<h2 className="text-xl font-bold text-fondo">Ajustes</h2>
+					<h2 className="text-xl font-bold text-fondo">{t("settings")}</h2>
 					<Button narrator="cerrar" onClick={onClose} inversed circular>
 						<BackIcon />
 					</Button>
@@ -147,12 +159,12 @@ function Settings({
 							className="text-fondo"
 							fill="currentColor"
 						/>
-						Volumen de música
+						{t("music_volume")}
 					</label>
 					<input
 						onMouseEnter={() =>
 							handleMouseEnter(
-								`volumen de la musica al ${Math.round(volume * 100)} por ciento`,
+								`volumen de la musica al ${Math.round(volume * 100)}`,
 							)
 						}
 						type="range"
@@ -179,7 +191,7 @@ function Settings({
 							className="text-fondo"
 							fill="currentColor"
 						/>
-						Volumen al click
+						{t("click_volume")}
 					</label>
 					<input
 						type="range"
@@ -211,7 +223,7 @@ function Settings({
 							className="text-fondo"
 							fill="currentColor"
 						/>
-						Volumen al pasar el ratón
+						{t("hover_volume")}
 					</label>
 					<input
 						onMouseEnter={() =>
@@ -240,7 +252,7 @@ function Settings({
 							className="text-fondo"
 							fill="currentColor"
 						/>
-						Tamaño del texto
+						{t("text_size")}
 					</label>
 					<input
 						onMouseEnter={() =>
@@ -269,7 +281,7 @@ function Settings({
 							className="text-fondo"
 							fill="currentColor"
 						/>
-						Idioma
+						{t("language")}
 					</label>
 					<select
 						onMouseEnter={() => handleMouseEnter(language)}
@@ -277,10 +289,10 @@ function Settings({
 						onChange={(e) => setLanguage(e.target.value)}
 						className="w-full bg-cartas text-fondo font-semibold px-4 py-2 rounded-lg"
 					>
-						<option value="español">🇪🇸 Español</option>
-						<option value="english">🇬🇧 English</option>
-						<option value="français">🇫🇷 Français</option>
-						<option value="Deutsch">🇩🇪 Deutsch</option>
+						<option value="es">🇪🇸 Español</option>
+						<option value="en">🇬🇧 English</option>
+						<option value="fr">🇫🇷 Français</option>
+						<option value="de">🇩🇪 Deutsch</option>
 						<option value="wuanbatan">普通话</option>
 					</select>
 				</div>
@@ -294,7 +306,7 @@ function Settings({
 							onClick={handleCopy}
 							className="text-lg font-bold underline hover:text-yellow-300"
 						>
-							Código de sala: {roomCode}
+							{t("room_code")}: {roomCode}
 						</button>
 						{copied && <p className="text-sm opacity-60">¡Código copiado!</p>}
 					</div>
@@ -302,7 +314,7 @@ function Settings({
 
 				{/* Ayuda de sonido*/}
 				<div className="flex items-center justify-between text-fondo font-medium pt-2 border-t border-fondo/20">
-					<span>Ayuda de sonido</span>
+					<span>{t("sound_help")}</span>
 					<input
 						onMouseEnter={() => handleMouseEnter("ayuda de sonido")}
 						type="checkbox"
