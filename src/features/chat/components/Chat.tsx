@@ -1,7 +1,8 @@
-import type { Message } from "@/types";
-import { useState } from "react";
-import { useChat } from "@/features/chat/hooks/useChat";
 import { useGameState } from "@/context/game/GameContext";
+import { useChat } from "@/features/chat/hooks/useChat";
+import { socket } from "@/features/online/service/socket";
+import type { Message } from "@/types";
+import { useEffect, useState } from "react";
 
 function showMessages(
   data: Message[],
@@ -11,7 +12,8 @@ function showMessages(
   return (
     <ul
       ref={messagesEndRef}
-      className="max-h-80 min-h-80 w-full overflow-y-auto overflow-x-hidden"
+      // con el max-h-115 se ve bien en mi pantalla, seguramente en otra se vea mal. Pero sin max-h la lista de mensajes se va para abajo el chat entero
+      className="overflow-y-scroll overflow-x-hidden min-h-0"
     >
       {data.map((data, index) => (
         <li
@@ -27,9 +29,9 @@ function showMessages(
               <strong
                 className={
                   data.team === "red"
-                    ? "text-fuerteRojo ml-2"
+                    ? "text-[#b60808] ml-2"
                     : data.team === "blue"
-                      ? "text-fuerteAzul ml-2"
+                      ? "text-[#16a9c7] ml-2"
                       : "text-fondo ml-2"
                 }
               >
@@ -46,7 +48,7 @@ function showMessages(
 
 function Chat() {
   const { state } = useGameState();
-  const { handleSendMessage } = useChat();
+  const { handleSendMessage, handleRecieveMessage } = useChat();
 
   const [input, setInput] = useState<string>("");
 
@@ -56,8 +58,18 @@ function Chat() {
 
   const { messagesEndRef } = useChat();
 
+  useEffect(() => {
+    socket.on("updateMessages", (message: Message) => {
+      handleRecieveMessage(message);
+    });
+
+    return () => {
+      socket.off("updateMessages");
+    };
+  }, []);
+
   return (
-    <div className="bg-chat flex flex-col justify-center border-fondo border-4 rounded-lg w-full">
+    <div className="bg-chat flex flex-col border-fondo rounded-lg w-full flex-1 min-h-0">
       <div
         className={
           team === "red"
@@ -84,10 +96,10 @@ function Chat() {
       <div
         className={
           team === "red"
-            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white"
+            ? "bg-fuerteRojo flex rounded-bl rounded-br text-white mt-auto"
             : team === "blue"
-              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black"
-              : "bg-fondo flex rounded-bl rounded-br text-cartas"
+              ? "bg-fuerteAzul flex rounded-bl rounded-br text-black mt-auto"
+              : "bg-fondo flex rounded-bl rounded-br text-cartas mt-auto"
         }
       >
         <input
@@ -112,9 +124,9 @@ function Chat() {
           }}
           className={
             team === "red"
-              ? " bg-fuerteRojo p-2 rounded-br hover:brightness-90"
+              ? " bg-[#7c0d0d] p-2 rounded-br hover:brightness-90"
               : team === "blue"
-                ? " bg-fuerteAzul p-2 rounded-br hover:brightness-90"
+                ? " bg-[#178095] p-2 rounded-br hover:brightness-90"
                 : " bg-fondo p-2 rounded-br hover:brightness-90"
           }
         >

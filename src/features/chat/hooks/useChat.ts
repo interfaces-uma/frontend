@@ -1,7 +1,7 @@
+import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types";
 import { useEffect, useRef } from "react";
-import { useGameState } from "@/context/game/GameContext";
 
 export function useChat() {
   const { state, dispatch } = useGameState();
@@ -26,6 +26,10 @@ export function useChat() {
     }
   };
 
+  const handleRecieveMessage = (message: Message) => {
+    dispatch({ type: "SEND_MESSAGE", message });
+  };
+
   const messagesEndRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
@@ -36,6 +40,7 @@ export function useChat() {
 
   return {
     handleSendMessage,
+    handleRecieveMessage,
     messagesEndRef,
   };
 }

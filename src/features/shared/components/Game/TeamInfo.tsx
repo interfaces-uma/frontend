@@ -1,5 +1,5 @@
 import { useGameState } from "@/context/game/GameContext";
-import type { TeamColor, User } from "@/types";
+import type { TeamColor } from "@/types";
 
 export default function TeamInfo({ team }: { team: TeamColor }) {
   const { state } = useGameState();
@@ -12,8 +12,8 @@ export default function TeamInfo({ team }: { team: TeamColor }) {
     <div
       className={
         team === "red"
-          ? "bg-fuerteRojo text-white text-center rounded-br-2xl px-10 flex items-center justify-center"
-          : "bg-[#0D7E94] text-white text-center rounded-bl-2xl px-10 flex items-center justify-center"
+          ? "bg-[#7c0d0d] text-white text-center rounded-br-2xl px-10 flex items-center justify-center"
+          : "bg-[#178095] text-white text-center rounded-bl-2xl px-10 flex items-center justify-center"
       }
     >
       <div className="text-4xl font-bold">{cardsReamining} </div>

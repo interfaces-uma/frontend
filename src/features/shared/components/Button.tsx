@@ -1,9 +1,10 @@
-import type React from "react";
 import clickSound from "@/assets/newClick.mp3";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
-import { useHoverSound } from "@/components/HoverSound";
+import { useHoverSound } from "@/features/shared/components/HoverSound";
+import type React from "react";
 
 function Button({
+<<<<<<< HEAD:src/components/Button.tsx
 	children,
 	onClick,
 	circular,
@@ -19,6 +20,25 @@ function Button({
 	disabled?: boolean;
 	style?: string;
 	narrator?: string;
+=======
+  children,
+  onClick,
+  circular,
+  inversed,
+  disabled,
+  style,
+  narrator,
+  id,
+}: {
+  children?: React.ReactNode;
+  onClick: () => void;
+  circular?: boolean;
+  inversed?: boolean;
+  disabled?: boolean;
+  style?: string;
+  narrator?: string;
+  id?: string;
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Button.tsx
 }) {
 	let buttonStyle = "";
 	let buttonCircle = "";
@@ -26,6 +46,7 @@ function Button({
 
 	const { playHoverSound } = useHoverSound();
 
+<<<<<<< HEAD:src/components/Button.tsx
 	if (
 		children === "CREAR MESA" ||
 		children === "CREATE GAME" ||
@@ -51,6 +72,18 @@ function Button({
 	} else {
 		buttonStyle = "bg-cartas hover:bg-yellow-100";
 	}
+=======
+  if (children === "CREAR MESA") {
+    buttonStyle = "w-75 h-25 bg-fondoAzul hover:brightness-85 text-fondo";
+  } else if (children === "UNIRSE A MESA") {
+    buttonStyle = "w-75 h-25 bg-fondoRojo hover:brightness-85 text-fondo";
+  } else if (children === "CREAR") {
+    buttonStyle =
+      "w-50 h-15 bg-chat hover:brightness-85 text-fondo justify-center";
+  } else {
+    buttonStyle = "bg-cartas hover:brightness-50";
+  }
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Button.tsx
 
 	if (inversed) {
 		buttonStyle = "bg-fondo hover:brightness-85 text-cartas";
@@ -66,9 +99,15 @@ function Button({
 		buttonStyle = "bg-white text-gray-400 cursor-not-allowed";
 	}
 
+<<<<<<< HEAD:src/components/Button.tsx
 	if (children === "¡Entendido!") {
 		buttonStyle = "bg-fondo hover:brightness-85 text-cartas";
 	}
+=======
+  if (children === "¡Entendido!") {
+    buttonStyle = "bg-fondo hover:brightness-85 text-cartas hover:bg-fondo";
+  }
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Button.tsx
 
 	const handleClick = () => {
 		// Reproducir sonido de clic
@@ -89,6 +128,7 @@ function Button({
 		playHoverSound(narrationText);
 	};
 
+<<<<<<< HEAD:src/components/Button.tsx
 	return (
 		<button
 			type="button"
@@ -100,6 +140,20 @@ function Button({
 			{children}
 		</button>
 	);
+=======
+  return (
+    <button
+      id={id}
+      type="button"
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      disabled={disabled}
+      className={`${buttonCircle} ${buttonStyle} ${style} transition duration-300 ease-in-out cursor-pointer`}
+    >
+      {children}
+    </button>
+  );
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Button.tsx
 }
 
 export default Button;

@@ -1,11 +1,11 @@
 import type {
-  Message,
+  Card,
+  Clue,
   GameState,
+  Message,
   Role,
   TeamColor,
   User,
-  Clue,
-  Card,
 } from "@/types";
 import { type Socket, io } from "socket.io-client";
 
@@ -23,6 +23,7 @@ interface ClientToServerEvents {
   joinTeam: (
     data: { user: User; color: TeamColor; role: Role },
     code: string,
+    callback: (response: { success: boolean; message?: string }) => void,
   ) => void;
   sendMessage: (message: Message, roomCode: string) => void;
   startGame: (
@@ -33,11 +34,15 @@ interface ClientToServerEvents {
   guessCard: (card: Card) => void;
   leaveTeam: (code: string, user: User) => void;
   nextTurn: () => void;
+  resetGame: (roomCode: string, user: User) => void;
 }
 
 interface ServerToClientEvents {
   updateState: (state: GameState) => void;
   redirectGame: () => void;
+  endGame: (state: GameState, winner: TeamColor) => void;
+  redirectLobby: () => void;
+  updateMessages: (message: Message) => void;
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(

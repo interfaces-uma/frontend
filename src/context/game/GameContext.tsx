@@ -1,15 +1,15 @@
+import { socket } from "@/features/online/service/socket";
 import type { DispatchActions, GameState } from "@/types";
 import type React from "react";
 import {
-  createContext,
   type ReactNode,
+  createContext,
   useContext,
   useEffect,
   useReducer,
 } from "react";
 import { gameReducer } from "./gameReducer";
 import { initialGameState } from "./initialState";
-import { socket } from "@/features/online/service/socket";
 
 type GameContextType = {
   state: GameState;
@@ -23,14 +23,11 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     socket.on("updateState", (newState) => {
-      console.log(newState);
       dispatch({ type: "SET_STATE", state: newState });
     });
 
     return () => {
-      socket.off("updateState", (newState) => {
-        dispatch({ type: "SET_STATE", state: newState });
-      });
+      socket.off("updateState");
     };
   }, []);
 

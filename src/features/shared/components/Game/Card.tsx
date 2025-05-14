@@ -1,32 +1,35 @@
-import { useGameState } from "@/context/game/GameContext";
-import type { Card as CardType } from "@/types";
 import backSprite from "@/assets/backs.png";
-import redAgents from "@/assets/redAgents.png";
+import blackCard from "@/assets/black-back.png";
 import blueAgents from "@/assets/blueAgents.png";
 import greyAgents from "@/assets/greyAgents.png";
-import blackCard from "@/assets/black-back.png";
+import redAgents from "@/assets/redAgents.png";
+import { useGameState } from "@/context/game/GameContext";
+import type { Card as CardType } from "@/types";
 
 export default function Card({
   card,
   iconIndex,
   handleCardClick,
+  cardAnimationString,
 }: {
   card: CardType;
   iconIndex: number;
   handleCardClick: (word: string) => void;
+  cardAnimationString: string;
 }) {
   const { state } = useGameState();
   const colors: Record<string, string> = {
-    red: "bg-red-500",
-    blue: "bg-blue-500",
-    black: "bg-black",
-    empty: "bg-yellow-500",
+    red: "bg-fondoRojo",
+    blue: "bg-fondoAzul",
+    black: "bg-fondoNegro",
+    empty: "bg-card",
   };
+
   let className =
-    "card bg-[#F0D9B9] aspect-[3/2] rounded-lg flex items-center justify-center drop-shadow-md cursor-pointer";
+    "card bg-[#F0D9B9] rounded-lg flex items-center justify-center drop-shadow-md";
 
   if (card.isSelected) {
-    className += " outline outline-4 outline-blue-300";
+    className += " outline outline-4 outline-yellow-300";
   }
 
   if (state.user.role === "leader") {
@@ -63,6 +66,13 @@ export default function Card({
     backgroundPosition: `0 ${(spriteOffset % 6) * 20}%`,
   };
 
+  const getFontSize = (word: string) => {
+    if (word.length <= 6) return "clamp(0.75rem,2.5vw,1.5rem)";
+    if (word.length <= 10) return "clamp(0.7rem,2vw,1.2rem)";
+    if (word.length <= 15) return "clamp(0.6rem,1.5vw,1rem)";
+    return "clamp(0.5rem,1vw,0.8rem)";
+  };
+
   const coloredCardHtml = (
     <div>
       <div className="absolute z-10 left-1/2 transform -translate-x-[50%] bottom-0 w-full h-full">
@@ -81,7 +91,7 @@ export default function Card({
         />
       </div>
       <div
-        className={className}
+        className={`${className} w-full h-full absolute z-9`}
         style={{
           backgroundImage: `url(${backSprite})`,
           backgroundRepeat: "no-repeat",
@@ -94,7 +104,7 @@ export default function Card({
 
   const assassinCardHtml = (
     <div
-      className={className}
+      className={`${className} w-full h-full`}
       style={{
         backgroundImage: `url(${blackCard})`,
         backgroundRepeat: "no-repeat",
@@ -109,12 +119,15 @@ export default function Card({
     </div>
   ) : (
     <div
-      className={className}
+      id={`card-${card.word}`}
+      className={`${className} ${cardAnimationString}`}
       onClick={() => handleCardClick(card.word)}
-      onKeyDown={() => handleCardClick(card.word)}
     >
-      <div className="card-inner aspect-[3/2] border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
-        <span className="uppercase text-[clamp(0.75rem,2.5vw,1.5rem)]">
+      <div className="card-inner border-2 w-[85%] h-[75%] border-black rounded-lg flex items-center justify-center inset-shadow-sm text-center">
+        <span
+          className="uppercase text-nowrap select-none"
+          style={{ fontSize: getFontSize(card.word) }}
+        >
           {card.word}
         </span>
       </div>

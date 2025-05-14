@@ -1,3 +1,5 @@
+import { useGameState } from "@/context/game/GameContext";
+
 function PlayerCell({
   children,
   onClick,
@@ -12,11 +14,14 @@ function PlayerCell({
     buttonStyle = "bg-cartas hover:brightness-85 text-fondo";
   }
 
+  const { state } = useGameState();
+
   return (
     <button
       type="button"
+      disabled={state.isGameStarted}
       onClick={onClick}
-      className={`${buttonStyle} cursor-pointer rounded-md w-[100%] aspect-7/1 max-h-10`}
+      className={`${buttonStyle} cursor-pointer rounded-md w-[100%] aspect-7/1 max-h-10 disabled:cursor-not-allowed`}
     >
       {children}
     </button>

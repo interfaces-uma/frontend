@@ -3,11 +3,12 @@
 @theme {
   --color-fondo: #3b1d2a;
   --color-cartas: #f9f5d4;
-  --color-fondoRojo: #d8404a;
-  --color-fondoAzul: #5eafbf;
-  --color-chat: #d9d9d9;
-  --color-fuerteRojo: #b3261e;
+  --color-fondoRojo: #db3a34;
+  --color-fondoAzul: #40e3ed;
+  --color-fondoNegro: #13171b;
+  --color-fuerteRojo: #ce3a3a;
   --color-fuerteAzul: #5eafbf;
+  --color-chat: #d9d9d9;
 }
 
 body {

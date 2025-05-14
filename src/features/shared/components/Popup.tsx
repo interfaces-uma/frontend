@@ -1,7 +1,14 @@
+<<<<<<< HEAD:src/components/Popup.tsx
 import Button from "@/components/Button";
 import BackIcon from "@/components/Icons/IconBack";
 import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+=======
+import Button from "@/features/shared/components/Button";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import { useNavigate } from "react-router-dom";
+import { type ReactNode, useEffect, useState } from "react";
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Popup.tsx
 
 type PopupProps = {
 	isOpen?: boolean;
@@ -43,6 +50,7 @@ function Popup({
 		}
 	};
 
+<<<<<<< HEAD:src/components/Popup.tsx
 	// Lógica para renderizar uno de los tres posibles popups
 	const renderPopup = () => {
 		if (showWelcome) {
@@ -61,6 +69,28 @@ function Popup({
 				</BasePopup>
 			);
 		}
+=======
+  const navigate = useNavigate();
+
+  // Lógica para renderizar uno de los tres posibles popups
+  const renderPopup = () => {
+    if (showWelcome) {
+      return (
+        <BasePopup
+          onClose={() => setShowWelcome(false)}
+          message="¡Bienvenido al juego!"
+          description="¿Ya conoces cómo se juega?"
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button onClick={handleKnowsGame}>Sí</Button>
+            <Button onClick={handleDoesNotKnowGame} inversed>
+              No
+            </Button>
+          </div>
+        </BasePopup>
+      );
+    }
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Popup.tsx
 
 		if (showExplanation) {
 			return (
@@ -70,6 +100,7 @@ function Popup({
 					description="Código Secreto es un juego por equipos donde
            un líder da pistas para que sus compañeros adivinen palabras ocultas. 
            El reto es evitar las palabras del rival… ¡y sobre todo la palabra de color negro! 💣"
+<<<<<<< HEAD:src/components/Popup.tsx
 				>
 					<div className="flex justify-center mt-4">
 						<Button onClick={() => setShowExplanation(false)}>
@@ -79,6 +110,26 @@ function Popup({
 				</BasePopup>
 			);
 		}
+=======
+        >
+          <div className="flex justify-center gap-4 mt-4">
+            <Button
+              style="border-3 border-fondo"
+              onClick={() => {
+                navigate("/tutorial");
+                setShowExplanation(false);
+              }}
+            >
+              Jugar Tutorial
+            </Button>
+            <Button onClick={() => setShowExplanation(false)}>
+              ¡Entendido!
+            </Button>
+          </div>
+        </BasePopup>
+      );
+    }
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Popup.tsx
 
 		if (isOpen) {
 			return (
@@ -117,6 +168,7 @@ function BasePopup({
 		}
 	};
 
+<<<<<<< HEAD:src/components/Popup.tsx
 	return (
 		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<div
@@ -141,6 +193,31 @@ function BasePopup({
 			</div>
 		</div>
 	);
+=======
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      onClick={handleOverlayClick} // Agrega el evento de clic
+    >
+      <div className="bg-cartas p-6 rounded shadow-lg max-w-sm w-full relative">
+        {onClose && (
+          <div className="absolute top-2 left-2">
+            <Button onClick={onClose} inversed circular>
+              <BackIcon />
+            </Button>
+          </div>
+        )}
+        {message && <p className="mb-4 mt-8 text-center text-2xl">{message}</p>}
+        {description && (
+          <p className="text-center text-sm text-black-300 mb-4">
+            {description}
+          </p>
+        )}
+        {children}
+      </div>
+    </div>
+  );
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da:src/features/shared/components/Popup.tsx
 }
 
 export default Popup;

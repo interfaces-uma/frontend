@@ -58,6 +58,7 @@ export type User = {
  * Define el estado de una partida
  */
 export type GameState = {
+  isGameStarted: boolean;
   mode: GameMode;
   code: string;
   user: User;
@@ -79,7 +80,7 @@ export type DispatchActions =
   | { type: "SET_USER"; user: User }
   | { type: "SET_TEAM"; user: User; team: TeamColor; role: Role }
   | { type: "SET_STATE"; state: GameState }
-  | { type: "SET_CLUE"; word: string; count: number }
+  | { type: "SET_CLUE"; word: string; cards: Card[] }
   | { type: "REVEAL_CARD"; cardText: Card["word"] }
   | { type: "SELECT_CARD"; cardText: Card["word"] }
   | { type: "NEXT_TURN" }
@@ -91,9 +92,32 @@ export type DispatchActions =
  */
 export interface UserActions {
   setClue: (clue: Clue) => void;
-  selectCard?: (cardText: Card["word"]) => void;
+  selectCard: (cardText: Card["word"]) => void;
   revealCard: (cardText: Card["word"]) => void;
   isMyTurn: () => boolean;
   nextTurn: () => void;
   leaveGame: () => void;
+  genericPopup?: { isOpen: boolean; message: string };
+  showPopup?: (message: string) => void;
 }
+
+export interface TutorialActions {
+  setInitialState: () => void;
+  goNextStep: () => void;
+  goPreviousStep: () => void;
+  isLastStep: () => boolean;
+  currentStep: TutorialStep;
+}
+
+export type ExpectedTutorialAction =
+  | { type: "giveClue"; payload: { word: string[] } }
+  | { type: "selectCard"; payload: { words: string[] } }
+  | { type: "flipCard"; payload: { words: string[] } }
+  | { type: "nextTurn" };
+
+export type TutorialStep = {
+  title: string;
+  description: string;
+  highlightSelector?: string[];
+  expectedAction?: ExpectedTutorialAction;
+} | null;

@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import Button from "@/components/Button";
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import Button from "@/features/shared/components/Button";
+import { useEffect, useRef, useState } from "react";
 
-import music1 from "@/assets/homemusic.mp3";
-import music2 from "@/assets/lobbymusic.mp3";
 import music3 from "@/assets/2TheSky.mp3";
 import music4 from "@/assets/RapdeFernanfloo.mp3";
+import music1 from "@/assets/homemusic.mp3";
+import music2 from "@/assets/lobbymusic.mp3";
 
 const musicList = [
   { name: "Música Menú", src: music1 },

@@ -1,20 +1,26 @@
-import { useEffect, useRef, useState } from "react";
-import Button from "@/components/Button";
-import BackIcon from "@/components/Icons/IconBack";
-import MenuIcon from "@/components/Icons/IconMenu";
-import PlayerCell from "@/components/PlayerCell";
-import { useNavigate } from "react-router";
-import { useLobbyManager } from "./hooks/useLobbyManager";
 import { useGameState } from "@/context/game/GameContext";
 import { socket } from "@/features/online/service/socket";
-import Popup from "@/components/Popup";
+import Button from "@/features/shared/components/Button";
+import PlayerCell from "@/features/shared/components/Game/PlayerCell";
+import BackIcon from "@/features/shared/components/Icons/IconBack";
+import MenuIcon from "@/features/shared/components/Icons/IconMenu";
+import Popup from "@/features/shared/components/Popup";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { useLobbyManager } from "./hooks/useLobbyManager";
 
-import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import backgroundMusic from "@/assets/lobbymusic.mp3";
+import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
+import FullScreenIcon from "@/features/shared/components/Icons/IconFullScreen";
+import Menu from "@/features/shared/components/Menu";
+import TimedPopup from "@/features/shared/components/TimedPopup";
 import type { User } from "@/types";
+<<<<<<< HEAD
 import Menu from "@/components/Menu";
 import FullScreenIcon from "@/components/Icons/IconFullScreen";
 import { useTranslation } from "react-i18next";
+=======
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 function Lobby() {
 	const { t } = useTranslation();
@@ -52,7 +58,12 @@ function Lobby() {
 	}, [volume]);
 	//PARA LA MUSICA DE FONDO ↑
 
+<<<<<<< HEAD
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+=======
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [showStartPopup, setShowStartPopup] = useState(false);
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 	const handleConfirmExit = () => {
 		manager.leaveGame();
@@ -101,10 +112,17 @@ function Lobby() {
 		navigate("/");
 	};
 
+<<<<<<< HEAD
 	useEffect(() => {
 		socket.on("redirectGame", () => {
 			navigate("/game");
 		});
+=======
+  useEffect(() => {
+    socket.on("redirectGame", () => {
+      setShowStartPopup(true);
+    });
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 		return () => {
 			socket.off("redirectGame");
@@ -115,6 +133,7 @@ function Lobby() {
 		manager.leaveTeam();
 	};
 
+<<<<<<< HEAD
 	return (
 		<div className="flex h-screen">
 			{/* Botón salir */}
@@ -126,6 +145,19 @@ function Lobby() {
 					<BackIcon stroke="fondo" />
 				</Button>
 			</section>
+=======
+  return (
+    <div className="flex h-screen">
+      {/* Botón salir */}
+      {/* <section
+        id="botonSalir"
+        className="absolute top-2 left-2 xl:top-7 xl:left-7 z-10"
+      >
+        <Button onClick={handleBackClick} inversed circular>
+          <BackIcon stroke="fondo" />
+        </Button>
+      </section> */}
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 			{/* Room code */}
 			<section
@@ -140,6 +172,7 @@ function Lobby() {
 				</div>
 			</section>
 
+<<<<<<< HEAD
 			{/* Botón ajustes */}
 			<section className="absolute flex flex-col gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
 				<Button onClick={openMenu} circular inversed>
@@ -150,6 +183,18 @@ function Lobby() {
 						height={20}
 					/>
 				</Button>
+=======
+      {/* Botón menu */}
+      <section className="absolute flex gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
+        <Button onClick={openMenu} circular inversed>
+          <MenuIcon
+            fill="currentColor"
+            className="cartas"
+            width={20}
+            height={20}
+          />
+        </Button>
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 				<Button
 					onClick={() => {
@@ -168,6 +213,7 @@ function Lobby() {
 				</Button>
 			</section>
 
+<<<<<<< HEAD
 			{/* Boton jugar */}
 			<section
 				id="botonJugar"
@@ -183,6 +229,24 @@ function Lobby() {
 					{t("play")}
 				</button>
 			</section>
+=======
+      {/* Boton jugar */}
+      <section
+        id="botonJugar"
+        className="absolute left-1/2 bottom-7 transform -translate-x-1/2 z-10 w-[15%] h-[10%] rounded-xl text-cartas lg:text-3xl"
+      >
+        <button
+          type="button"
+          disabled={state.isGameStarted || state.user.role !== "leader"}
+          onClick={() => {
+            manager.startGame();
+          }}
+          className="w-full h-full cursor-pointer bg-fondo disabled:bg-gray-400 rounded-xl"
+        >
+          {state.isGameStarted ? "PARTIDA EN CURSO" : "JUGAR"}
+        </button>
+      </section>
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 
 			{/* No team players */}
 			<section
@@ -284,6 +348,7 @@ function Lobby() {
 				</div>
 			</section>
 
+<<<<<<< HEAD
 			{/* Ajustes */}
 			{/* {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />} */}
 			{/* Menu */}
@@ -303,6 +368,34 @@ function Lobby() {
 			</Popup>
 		</div>
 	);
+=======
+      {/* Ajustes */}
+      {/* {showSettings && <Settings onClose={openSettings} roomCode={roomCode} />} */}
+      {/* Menu */}
+      {showMenu && <Menu onClose={openMenu} isGame={false} />}
+
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        message="¿Seguro que quieres salir de la sala de espera?"
+      >
+        <div className="flex justify-center gap-4 mt-4">
+          <Button onClick={handleConfirmExit}>Sí</Button>
+          <Button onClick={() => setIsPopupOpen(false)} inversed>
+            No
+          </Button>
+        </div>
+      </Popup>
+
+      <TimedPopup
+        open={showStartPopup}
+        message="La partida va a comenzar..."
+        duration={3000}
+        onClose={() => navigate("/game")}
+      />
+    </div>
+  );
+>>>>>>> 27d27cdd65bed3353a05188c0d7c1d92a15297da
 }
 
 export default Lobby;
