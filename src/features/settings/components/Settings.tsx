@@ -15,8 +15,7 @@ function Settings({
   roomCode,
 }: { onClose: () => void; roomCode?: string }) {
   const { t, i18n } = useTranslation();
-  const fontSizes = [16, 18, 20, 22, 24];
-
+  const fontSizes = [20, 22, 24, 26, 28];
   const { volume, setVolume } = useVolume();
   const { hvolume, hsetVolume } = huseVolume();
   const { cvolume, csetVolume } = cuseVolume();
@@ -43,6 +42,7 @@ function Settings({
   useEffect(() => {
     localStorage.setItem("fontIndex", fontIndex.toString());
     document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
+    //document.documentElement.style.setProperty('--font-size', `${fontSizes[fontIndex]}px`);
   }, [fontIndex]);
 
   // Guardar idioma y cambiar en i18next

@@ -28,8 +28,8 @@ function Home() {
       {/* Vista movil */}
       <div className="w-full h-full bg-fondo overflow-hidden md:hidden">
         <div className="flex flex-col mx-[15%] justify-center items-center h-full">
-          <h1 className="text-center text-[clamp(3rem,5.5vw,100.5rem)]/12 w-full text-white mt-10">
-            CÓDIGO SECRETO
+          <h1 className="text-center font-fuente1 font-bold text-[clamp(3rem,5.5vw,100.5rem)]/12 text-white drop-shadow-[8px_8px_10px_rgba(0,0,0,1)]">
+            EL CÓDIGO CLANDESTINO
           </h1>
           <img
             src={homePhoto}
@@ -85,10 +85,10 @@ function Home() {
 
       {/* Vista pc */}
       <div className="bg-fondo h-screen w-screen flex-col items-center justify-center hidden md:flex">
-        <h1 className="text-center text-[clamp(3rem,5.5vw,100.5rem)]/12 w-full text-white">
-          CÓDIGO SECRETO
+        <h1 className="text-center font-fuente1 font-bold text-[clamp(3rem,5.5vw,100.5rem)]/12 text-white drop-shadow-[8px_8px_10px_rgba(0,0,0,1)]">
+          EL CÓDIGO CLANDESTINO
         </h1>
-        <img src={homePhoto} alt="not found" className="mt-10 w-[25%]" />
+        <img src={homePhoto} alt="not found" className="mt-20 w-[25%]" />
 
         <div className="flex items-center gap-6 mt-10">
           <Button onClick={openName}>{t("create_game")}</Button>

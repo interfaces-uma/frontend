@@ -10,11 +10,35 @@
   --color-fuerteAzul: #5eafbf;
   --color-chat: #d9d9d9;
 }
+@font-face {
+  font-family: 'Tagesschrift';
+  src: url("../fonts/Tagesschrift-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Underdog';
+  src: url("../fonts/Underdog-Regular.ttf");
+}
+
+:root {
+  --font-size: 24px;
+}
 
 body {
+  font-family: 'Underdog', sans-serif;
+  font-weight: normal;
   height: 100dvh;
   width: 100dvw;
+  font-size: var(--font-size);
 }
+
+/* body h1 {
+  font-family: 'Underdog', sans-serif;
+  font-weight: 900;
+  text-shadow: 8px 8px 10px rgba(0, 0, 0, 1);
+  letter-spacing: 1px;
+} */
 
 #root {
   height: 100%;

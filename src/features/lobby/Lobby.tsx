@@ -194,9 +194,7 @@ function Lobby() {
         id="jugadoresSinEquipo"
         className="absolute z-10 left-1/2 top-1/2 transform -translate-1/2 w-[20%] bg-cartas flex flex-col items-center gap-4 flex-1 text-center rounded-xl text-xs lg:text-lg h-[50%]"
       >
-        <h2 className="font-sans text-fondo mt-2">
-          {t("players_without_team")}
-        </h2>
+        <h2 className="text-fondo mt-2">{t("players_without_team")}</h2>
         <ul className="flex-1 overflow-y-auto w-full h-full">
           {noTeamPlayers.map((player) => (
             <li key={player}>{player}</li>
@@ -218,7 +216,7 @@ function Lobby() {
       {/* Blue team */}
       <section id="blueSection" className="bg-blue-500 w-full relative">
         <div className="bg-blue-400 px-10 rounded-xl absolute left-[10%]  top-1/2 transform -translate-y-1/2 text-center h-[80%] xl:h-[50%] w-[65%] justify-center content-center">
-          <h2 className="text-xl font-sans text-chat">{t("blue_team")}</h2>
+          <h2 className="text-xl text-chat">{t("blue_team")}</h2>
           {blueTeam.map((player, index) => {
             if (index === 0) {
               return (
@@ -255,7 +253,7 @@ function Lobby() {
       {/* Red team */}
       <section id="redSection" className="bg-red-500 w-full relative">
         <div className="bg-red-400 px-10 rounded-xl absolute right-[10%] top-1/2 transform  -translate-y-1/2 text-center h-[80%] xl:h-[50%] w-[65%] justify-center content-center">
-          <h2 className="text-xl font-sans text-chat">{t("red_team")}</h2>
+          <h2 className="text-xl text-chat">{t("red_team")}</h2>
           {redTeam.map((player, index) => {
             if (index === 0) {
               return (
