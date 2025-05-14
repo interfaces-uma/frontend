@@ -83,9 +83,7 @@ function Popup({
             >
               {t("play")} + {t("tutorial")}
             </Button>
-            <Button onClick={() => setShowExplanation(false)}>
-              ¡Entendido!
-            </Button>
+            <Button onClick={() => setShowExplanation(false)}>{t("ok")}</Button>
           </div>
         </BasePopup>
       );

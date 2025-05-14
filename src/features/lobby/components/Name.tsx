@@ -84,7 +84,7 @@ function Name({
     if (!unirse) {
       socket.emit("createRoom", user, (response) => {
         if (!response.success) {
-          showPopup(response.message || "Error al crear la sala ❌");
+          showPopup(response.message || "Error ❌");
         } else {
           navigate("/lobby", {
             state: {
@@ -97,7 +97,7 @@ function Name({
     } else {
       socket.emit("joinRoom", user, code, (response) => {
         if (!response.success) {
-          showPopup(response.message || "Error al unirse a la sala ❌");
+          showPopup(response.message || "Error ❌");
         } else {
           navigate("/lobby", {
             state: {

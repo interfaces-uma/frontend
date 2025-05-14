@@ -131,7 +131,7 @@ function Settings({
         {/* Encabezado */}
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold text-fondo">{t("settings")}</h2>
-          <Button narrator="cerrar" onClick={onClose} inversed circular>
+          <Button narrator={t("close")} onClick={onClose} inversed circular>
             <BackIcon />
           </Button>
         </div>

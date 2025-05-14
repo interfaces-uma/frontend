@@ -52,5 +52,7 @@
   "Welcome to the game!": "¡Bienvenido al juego!",
   "Do you already know how to play?": "¿Ya sabes cómo jugar?",
   "description": "Código Secreto es un juego por equipos donde un líder da pistas para que sus compañeros adivinen palabras ocultas.El reto es evitar las palabras del rival… ¡y sobre todo la palabra de color negro! 💣",
-  "ok" : "¡Entendido!"
+  "ok" : "¡Entendido!",
+  "learn_to_play" : "APRENDE A JUGAR"
+  
 }

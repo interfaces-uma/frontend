@@ -52,5 +52,6 @@
   "Welcome to the game!": "Welcome to the game!",
   "Do you already know how to play?": "Do you already know how to play?",
   "description": "Codenames is a team game where a leader gives clues for their teammates to guess hidden words. The challenge is to avoid the rival words... and especially the black word! 💣",
-  "ok" : "Got it!"
+  "ok" : "Got it!",
+  "learn_to_play" : "LEARN TO PLAY"
 }

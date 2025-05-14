@@ -52,5 +52,6 @@
   "Welcome to the game!": "Willkommen im Spiel!",
   "Do you already know how to play?": "Weißt du schon, wie?",
   "description": "Codenames ist ein Teamspiel, bei dem ein Anführer Hinweise gibt, damit seine Teamkollegen versteckte Wörter erraten. Die Herausforderung besteht darin, die gegnerischen Wörter zu vermeiden... und vor allem das schwarze Wort! 💣",
-  "ok" : "Verstanden!"
+  "ok" : "Verstanden!",
+  "learn_to_play" : "LERNEN ZU SPIELEN"
 }

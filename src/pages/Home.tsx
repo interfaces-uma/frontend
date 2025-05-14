@@ -69,11 +69,8 @@ function Home() {
         {showSettings && <Settings onClose={openSettings} />}
         {showName && !showNameCode && <Name onClose={openName} />}
         {showNameCode && <Name onClose={openNameCode} unirse />}
-        <Popup
-          isOpen={isPopupOpen}
-          onClose={openPopup}
-          message="APRENDE A JUGAR"
-        >
+
+        <Popup isOpen={isPopupOpen} onClose={openPopup}>
           <Button
             onClick={() => navigate("/tutorial")}
             style="w-full bg-fondo text-white rounded-lg"
@@ -113,11 +110,7 @@ function Home() {
         {showNameCode && <Name onClose={openNameCode} unirse />}
 
         {/* Tutorial popup manual */}
-        <Popup
-          isOpen={isPopupOpen}
-          onClose={openPopup}
-          message="APRENDE A JUGAR"
-        >
+        <Popup isOpen={isPopupOpen} onClose={openPopup}>
           <Button
             onClick={() => navigate("/tutorial")}
             style="w-full bg-fondo text-white rounded-lg"

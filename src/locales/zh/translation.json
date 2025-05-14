@@ -52,5 +52,6 @@
     "Welcome to the game!": "欢迎来到游戏！",
     "Do you already know how to play?": "你已经知道怎么玩了吗？",
     "description": "密码是一个团队游戏，其中一个领导者给出提示，以便他们的队友猜测隐藏的单词。挑战在于避免对手的单词...尤其是黑色单词！💣",
-    "ok" : "明白了!"
+    "ok" : "明白了!",
+    "learn_to_play" : "学习游戏"
 }
