@@ -15,11 +15,8 @@
     "**/*.{js,ts,jsx,tsx}": ["biome lint --fix", "biome format --write"]
   },
   "dependencies": {
-    "i18next": "^25.1.2",
-    "i18next-browser-languagedetector": "^8.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^15.5.1",
     "react-router": "^7.5.0",
     "react-router-dom": "^7.5.0",
     "socket.io-client": "4.8.1"
