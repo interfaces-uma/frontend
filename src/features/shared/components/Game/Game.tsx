@@ -15,8 +15,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import MenuIcon from "../Icons/IconMenu";
 import Menu from "../Menu";
+import { useTranslation } from "react-i18next";
 
 export default function Game({ manager }: { manager: UserActions }) {
+  const { t } = useTranslation();
   const { state } = useGameState();
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -45,7 +47,7 @@ export default function Game({ manager }: { manager: UserActions }) {
   useEffect(() => {
     if (!socket) return;
     socket.on("endGame", (_state: GameState, winner: string) => {
-      setEndMessage(`El equipo ${winner} ha ganado la partida`);
+      setEndMessage(`${t("the_team")} ${winner} ${t("has_won_the_game")}`);
       setShowEndPopup(true);
     });
     socket.on("redirectLobby", () => {
@@ -135,7 +137,7 @@ export default function Game({ manager }: { manager: UserActions }) {
                 }}
                 style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold transition-transform duration-200 hover:scale-102"
               >
-                PASAR TURNO
+                {t("pass_turn")}
               </Button>
             </div>
           )}
@@ -144,12 +146,12 @@ export default function Game({ manager }: { manager: UserActions }) {
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
-        message="¿Seguro que quieres salir de la partida?"
+        message={t("confirm_leave_game")}
       >
         <div className="flex justify-center gap-4 mt-4">
-          <Button onClick={handleConfirmExit}>Sí</Button>
+          <Button onClick={handleConfirmExit}>{t("yes")}</Button>
           <Button onClick={() => setIsPopupOpen(false)} inversed>
-            No
+            {t("no")}
           </Button>
         </div>
       </Popup>
@@ -166,7 +168,7 @@ export default function Game({ manager }: { manager: UserActions }) {
               manager.showPopup ? manager.showPopup("") : undefined
             }
           >
-            Cerrar
+            {t("close")}
           </Button>
         </div>
       </Popup>

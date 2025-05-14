@@ -9,6 +9,7 @@ import clickSound from "@/assets/newClick.mp3";
 import { cuseVolume } from "@/context/clickVolume/clickVolumeContext";
 import { useHoverSound } from "@/features/shared/components/HoverSound";
 import Popup from "@/features/shared/components/Popup";
+import { useTranslation } from "react-i18next";
 
 function Name({
   onClose,
@@ -18,6 +19,7 @@ function Name({
   unirse?: boolean;
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { dispatch } = useGameState();
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
@@ -136,7 +138,7 @@ function Name({
         </div>
 
         <label className="text-fondo text-2xl font-bold mb-4 mt-4">
-          Nombre
+          {t("name")}
           <input
             type="text"
             value={name}
@@ -144,13 +146,13 @@ function Name({
             onClick={handleClick}
             onKeyDown={(e) => handleKeyDown(e)}
             className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
-            placeholder="Escribe tu nombre"
+            placeholder={t("enter_name")}
           />
         </label>
 
         {unirse && (
           <label className="text-fondo text-2xl font-bold mb-4 mt-4">
-            Código de sala
+            {t("room_code")}
             <input
               type="text"
               inputMode="numeric"
@@ -163,7 +165,7 @@ function Name({
               }}
               onKeyDown={handleKeyDown}
               className="bg-transparent border-b-2 border-fondo text-fondo text-2xl font-bold mb-4 focus:outline-none w-full"
-              placeholder="Introduzca el código de la sala"
+              placeholder={t("enter_room_code")}
             />
           </label>
         )}
@@ -174,7 +176,7 @@ function Name({
             inversed
             disabled={unirse && code.length !== 4}
           >
-            {unirse ? "UNIRSE" : "CREAR"}
+            {unirse ? t("join") : t("create")}
           </Button>
         </div>
         <Popup
@@ -186,7 +188,7 @@ function Name({
             <Button
               onClick={() => setGenericPopup({ isOpen: false, message: "" })}
             >
-              Cerrar
+              {t("close")}
             </Button>
           </div>
         </Popup>

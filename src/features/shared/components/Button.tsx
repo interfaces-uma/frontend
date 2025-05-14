@@ -28,11 +28,29 @@ function Button({
 
   const { playHoverSound } = useHoverSound();
 
-  if (children === "CREAR MESA") {
+  if (
+    children === "CREAR MESA" ||
+    children === "CREATE GAME" ||
+    children === "SPIEL ERSTELLEN" ||
+    children === "CRÉER UNE TABLE" ||
+    children === "创建游戏"
+  ) {
     buttonStyle = "w-75 h-25 bg-fondoAzul hover:brightness-85 text-fondo";
-  } else if (children === "UNIRSE A MESA") {
+  } else if (
+    children === "UNIRSE A MESA" ||
+    children === "JOIN GAME" ||
+    children === "SPIEL BEITRETEN" ||
+    children === "REJOINDRE UNE TABLE" ||
+    children === "加入游戏"
+  ) {
     buttonStyle = "w-75 h-25 bg-fondoRojo hover:brightness-85 text-fondo";
-  } else if (children === "CREAR") {
+  } else if (
+    children === "CREAR" ||
+    children === "CREATE" ||
+    children === "SPIELEN" ||
+    children === "JOUER" ||
+    children === "创建"
+  ) {
     buttonStyle =
       "w-50 h-15 bg-chat hover:brightness-85 text-fondo justify-center";
   } else {

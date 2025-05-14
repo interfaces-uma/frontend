@@ -7,8 +7,10 @@ import SettingsIcon from "@/features/shared/components/Icons/IconSettings";
 import Popup from "@/features/shared/components/Popup";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 function Home() {
+  const { t } = useTranslation();
   const [showSettings, setShowSettings] = useState(false);
   const [showName, setShowName] = useState(false);
   const [showNameCode, setShowNameCode] = useState(false);
@@ -36,17 +38,17 @@ function Home() {
           />
           <div id="botones" className="h-[25%] w-full mt-5 flex flex-col">
             <Button onClick={openName} style="w-full h-[30%] m-auto">
-              CREAR MESA
+              {t("create_game")}
             </Button>
             <Button onClick={openNameCode} style="w-full h-[30%] m-auto">
-              UNIRSE A MESA
+              {t("join_game")}
             </Button>
             <Button
               onClick={openPopup}
               style="w-full h-[30%] m-auto"
               narrator="TUTORIAL"
             >
-              COMO JUGAR
+              {t("how_to_play")}
             </Button>
           </div>
           <div
@@ -54,7 +56,7 @@ function Home() {
             className="flex justify-center items-center gap-4 mt-5 mb-5 w-full"
           >
             <Button
-              narrator="Ajustes"
+              narrator={t("settings")}
               onClick={openSettings}
               circular
               style="w-13 h-13 flex items-center justify-center"
@@ -76,7 +78,7 @@ function Home() {
             onClick={() => navigate("/tutorial")}
             style="w-full bg-fondo text-white rounded-lg"
           >
-            JUGAR TUTORIAL
+            {t("tutorial")}
           </Button>
         </Popup>
       </div>
@@ -89,16 +91,16 @@ function Home() {
         <img src={homePhoto} alt="not found" className="mt-10 w-[25%]" />
 
         <div className="flex items-center gap-6 mt-10">
-          <Button onClick={openName}>CREAR MESA</Button>
+          <Button onClick={openName}>{t("create_game")}</Button>
           <Button narrator="Ajustes" onClick={openSettings} circular>
             <SettingsIcon stroke="fondo" />
           </Button>
-          <Button onClick={openNameCode}>UNIRSE A MESA</Button>
+          <Button onClick={openNameCode}>{t("join_game")}</Button>
         </div>
 
         <div className="absolute top-3 right-3">
-          <Button onClick={openPopup} narrator="COMO JUGAR">
-            COMO JUGAR
+          <Button onClick={openPopup} narrator={t("how_to_play")} circular>
+            {t("how_to_play")}
           </Button>
         </div>
 
@@ -120,7 +122,7 @@ function Home() {
             onClick={() => navigate("/tutorial")}
             style="w-full bg-fondo text-white rounded-lg"
           >
-            JUGAR TUTORIAL
+            {t("tutorial")}
           </Button>
         </Popup>
 

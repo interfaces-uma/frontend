@@ -8,12 +8,15 @@ import IconFontSize from "@/features/shared/components/Icons/IconFontSize";
 import IconLanguage from "@/features/shared/components/Icons/IconLanguage";
 import IconVolume from "@/features/shared/components/Icons/IconVolume";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function Settings({
   onClose,
   roomCode,
 }: { onClose: () => void; roomCode?: string }) {
+  const { t, i18n } = useTranslation();
   const fontSizes = [16, 18, 20, 22, 24];
+
   const { volume, setVolume } = useVolume();
   const { hvolume, hsetVolume } = huseVolume();
   const { cvolume, csetVolume } = cuseVolume();
@@ -21,29 +24,37 @@ function Settings({
   const [prevVolume, setPrevVolume] = useState<number | null>(null);
   const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
   const [cprevVolume, csetPrevVolume] = useState<number | null>(null);
-  const [fontIndex, setFontSize] = useState(2);
-  const [language, setLanguage] = useState("es");
+
+  const [fontIndex, setFontSize] = useState(() =>
+    Number(localStorage.getItem("fontIndex") ?? "2"),
+  );
+  const [language, setLanguage] = useState(
+    () => localStorage.getItem("language") || "es",
+  );
+  const [copied, setCopied] = useState(false);
+
+  const [narratorEnabled, setNarratorEnabled] = useState<boolean>(
+    () => localStorage.getItem("helpSound") === "true",
+  );
 
   const { playHoverSound } = useHoverSound();
 
-  const [copied, setCopied] = useState(false);
-
-  // Cargar desde localStorage
-  useEffect(() => {
-    const savedFont = localStorage.getItem("fontIndex");
-    const savedLang = localStorage.getItem("language");
-
-    if (savedFont) setFontSize(Number(savedFont));
-    if (savedLang) setLanguage(savedLang);
-  }, []);
-
-  // Guardar en localStorage
+  // Aplicar fuente y guardar
   useEffect(() => {
     localStorage.setItem("fontIndex", fontIndex.toString());
     document.body.style.fontSize = `${fontSizes[fontIndex]}px`;
   }, [fontIndex]);
 
-  useEffect(() => localStorage.setItem("language", language), [language]);
+  // Guardar idioma y cambiar en i18next
+  useEffect(() => {
+    localStorage.setItem("language", language);
+    i18n.changeLanguage(language);
+  }, [language]);
+
+  // Guardar narrador
+  useEffect(() => {
+    localStorage.setItem("helpSound", narratorEnabled.toString());
+  }, [narratorEnabled]);
 
   const toggleMute = () => {
     if (volume === 0 && prevVolume !== null) {
@@ -75,46 +86,19 @@ function Settings({
     }
   };
 
-  //narrador
-  const [narratorEnabled, setNarratorEnabled] = useState<boolean | undefined>(
-    undefined,
-  );
-
-  useEffect(() => {
-    const saved = localStorage.getItem("helpSound");
-    if (saved !== null) {
-      setNarratorEnabled(saved === "true");
-    } else {
-      setNarratorEnabled(false); // valor por defecto si no está en localStorage
-    }
-  }, []);
-
-  useEffect(() => {
-    if (narratorEnabled !== undefined) {
-      localStorage.setItem("helpSound", narratorEnabled.toString());
-    }
-  }, [narratorEnabled]);
-
-  //narrador
+  const handleMouseEnter = (text: string) => {
+    if (narratorEnabled) playHoverSound(text);
+    else playHoverSound();
+  };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText((roomCode ?? "").toString());
+    navigator.clipboard.writeText(roomCode ?? "");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  // Maneja el clic fuera del popup
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget && onClose) {
-      onClose();
-    }
-  };
 
-  const handleMouseEnter = (text: string) => {
-    if (narratorEnabled) {
-      playHoverSound(text);
-    } else {
-      playHoverSound();
-    }
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget && onClose) onClose();
   };
 
   return (
@@ -125,7 +109,7 @@ function Settings({
       <div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
         {/* Encabezado */}
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold text-fondo">Ajustes</h2>
+          <h2 className="text-xl font-bold text-fondo">{t("settings")}</h2>
           <Button narrator="cerrar" onClick={onClose} inversed circular>
             <BackIcon />
           </Button>
@@ -145,7 +129,7 @@ function Settings({
               className="text-fondo"
               fill="currentColor"
             />
-            Volumen de música
+            {t("music_volume")}
           </label>
           <input
             onMouseEnter={() =>
@@ -177,7 +161,7 @@ function Settings({
               className="text-fondo"
               fill="currentColor"
             />
-            Volumen al click
+            {t("click_volume")}
           </label>
           <input
             type="range"
@@ -209,7 +193,7 @@ function Settings({
               className="text-fondo"
               fill="currentColor"
             />
-            Volumen al pasar el ratón
+            {t("hover_volume")}
           </label>
           <input
             onMouseEnter={() =>
@@ -234,11 +218,11 @@ function Settings({
             className="flex items-center gap-2 text-fondo font-medium"
           >
             <IconFontSize
-              onMouseEnter={() => handleMouseEnter("tamaño del texto")}
+              onMouseEnter={() => handleMouseEnter(t("text_size"))}
               className="text-fondo"
               fill="currentColor"
             />
-            Tamaño del texto
+            {t("text_size")}
           </label>
           <input
             onMouseEnter={() =>
@@ -263,11 +247,11 @@ function Settings({
             className="flex items-center gap-2 text-fondo font-medium"
           >
             <IconLanguage
-              onMouseEnter={() => handleMouseEnter("idioma")}
+              onMouseEnter={() => handleMouseEnter(t("language"))}
               className="text-fondo"
               fill="currentColor"
             />
-            Idioma
+            {t("language")}
           </label>
           <select
             onMouseEnter={() => handleMouseEnter(language)}
@@ -275,11 +259,11 @@ function Settings({
             onChange={(e) => setLanguage(e.target.value)}
             className="w-full bg-cartas text-fondo font-semibold px-4 py-2 rounded-lg"
           >
-            <option value="español">🇪 Español</option>
-            <option value="english">🇬 English</option>
-            <option value="français">🇫 Français</option>
-            <option value="Deutsch">🇩 Deutsch</option>
-            <option value="wuanbatan">普通话</option>
+            <option value="es">🇪 Español</option>
+            <option value="en">🇬 English</option>
+            <option value="fr">🇫 Français</option>
+            <option value="de">🇩 Deutsch</option>
+            <option value="zh">普通话</option>
           </select>
         </div>
 
@@ -292,7 +276,7 @@ function Settings({
               onClick={handleCopy}
               className="text-lg font-bold underline hover:text-yellow-300"
             >
-              Código de sala: {roomCode}
+              {t("room_code")} {roomCode}
             </button>
             {copied && <p className="text-sm opacity-60">¡Código copiado!</p>}
           </div>
@@ -300,7 +284,7 @@ function Settings({
 
         {/* Ayuda de sonido*/}
         <div className="flex items-center justify-between text-fondo font-medium pt-2 border-t border-fondo/20">
-          <span>Ayuda de sonido</span>
+          <span>{t("sound_help")}</span>
           <input
             onMouseEnter={() => handleMouseEnter("ayuda de sonido")}
             type="checkbox"
