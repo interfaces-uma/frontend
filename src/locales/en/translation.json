@@ -47,5 +47,10 @@
   "tutorial_under_construction": "TUTORIAL UNDER CONSTRUCTION 🏗🚧🚧👷👷👷",
   "pass_turn": "PASS TURN",
   "the_team" : "The team",
-  "has_won_the_game": "has won the game"
+  "has_won_the_game": "has won the game",
+  "Only captains can restart the game": "Only captains can restart the game",
+  "Welcome to the game!": "Welcome to the game!",
+  "Do you already know how to play?": "Do you already know how to play?",
+  "description": "Codenames is a team game where a leader gives clues for their teammates to guess hidden words. The challenge is to avoid the rival words... and especially the black word! 💣",
+  "ok" : "Got it!"
 }

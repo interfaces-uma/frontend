@@ -47,5 +47,10 @@
   "tutorial_under_construction": "TUTORIAL EN CONSTRUCCIÓN 🏗🚧🚧👷👷👷",
   "pass_turn": "PASA TURNO",
   "the_team" : "El equipo",
-  "has_won_the_game": "ha ganado la partida"
+  "has_won_the_game": "ha ganado la partida",
+  "Only captains can restart the game": "Solo los capitanes pueden reiniciar la partida",
+  "Welcome to the game!": "¡Bienvenido al juego!",
+  "Do you already know how to play?": "¿Ya sabes cómo jugar?",
+  "description": "Código Secreto es un juego por equipos donde un líder da pistas para que sus compañeros adivinen palabras ocultas.El reto es evitar las palabras del rival… ¡y sobre todo la palabra de color negro! 💣",
+  "ok" : "¡Entendido!"
 }

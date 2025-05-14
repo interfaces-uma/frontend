@@ -71,7 +71,13 @@ function Button({
     buttonStyle = "bg-white text-gray-400 cursor-not-allowed";
   }
 
-  if (children === "¡Entendido!") {
+  if (
+    children === "¡Entendido!" ||
+    children === "Got it!!" ||
+    children === "Verstanden!" ||
+    children === "Compris!" ||
+    children === "明白了!"
+  ) {
     buttonStyle = "bg-fondo hover:brightness-85 text-cartas hover:bg-fondo";
   }
 

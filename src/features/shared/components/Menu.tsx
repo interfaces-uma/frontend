@@ -6,8 +6,10 @@ import { socket } from "@/features/online/service/socket";
 import { useNavigate } from "react-router";
 import { useLobbyManager } from "@/features/lobby/hooks/useLobbyManager";
 import Popup from "./Popup";
+import { useTranslation } from "react-i18next";
 
 function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
+  const { t } = useTranslation();
   const [showSettings, setShowSettings] = useState(false);
   const { state } = useGameState();
   const manager = useLobbyManager();
@@ -23,14 +25,14 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
     message: "",
   });
   const response = isToLobby
-    ? "¿Seguro que quieres salir al inicio?"
-    : "¿Seguro que quieres salir de la partida?";
+    ? t("confirm_exit_to_home")
+    : t("confirm_leave_game");
 
   const openSettings = () => {
     setShowSettings(!showSettings);
   };
   const openReglas = () => {
-    console.log("Abrir reglas");
+    console.log("Open Rules");
   };
   const handleGoOut = ({ aLobby }: { aLobby: boolean }) => {
     setIsToLobby(aLobby);
@@ -49,7 +51,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
     if (state.user.role === "leader") {
       socket.emit("resetGame", state.code, state.user);
     } else {
-      showPopup("Solo los capitanes pueden reiniciar la partida.");
+      showPopup(t("Only captains can restart the game"));
     }
   };
   const handleReinicio = () => {
@@ -73,13 +75,15 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
       onClick={handleOverlayClick} // Agrega el evento de clic
     >
       <div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
-        <h1 className="text-center text-4xl font-bold text-fondo">Menú</h1>
+        <h1 className="text-center text-4xl font-bold text-fondo">
+          {t("menu")}
+        </h1>
         <div className="flex flex-col items-center justify-center space-y-4">
           <Button onClick={openSettings} inversed style="w-full">
-            Ajustes ⚙️
+            {t("settings")} ⚙️
           </Button>
           <Button onClick={openReglas} inversed style="w-full">
-            Reglas 📜
+            {t("rules")} 📜
           </Button>
           {isGame && (
             <>
@@ -98,7 +102,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
                 inversed
                 style="w-full"
               >
-                Salir de la partida ❌
+                {t("leave_game")}❌
               </Button>
             </>
           )}
@@ -109,7 +113,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
             inversed
             style="w-full"
           >
-            Salir al inicio 🏠
+            {t("exit_to_home")} 🏠
           </Button>
         </div>
         <Popup
@@ -129,12 +133,12 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
         <Popup
           isOpen={isReinicio}
           onClose={() => setIsReinicio(false)}
-          message={"Seguro que quieres reiniciar la partida?"}
+          message={t("confirm_restart")}
         >
           <div className="flex justify-center gap-4 mt-4">
-            <Button onClick={reiniciarPartida}>Sí</Button>
+            <Button onClick={reiniciarPartida}>{t("yes")}</Button>
             <Button onClick={() => setIsReinicio(false)} inversed>
-              No
+              {t("no")}
             </Button>
           </div>
         </Popup>
@@ -147,7 +151,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
             <Button
               onClick={() => setGenericPopup({ isOpen: false, message: "" })}
             >
-              Cerrar
+              {t("close")}
             </Button>
           </div>
         </Popup>

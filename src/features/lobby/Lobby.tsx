@@ -79,8 +79,7 @@ function Lobby() {
       return t("join...");
     }
     if (player.name === me.name) {
-      // biome-ignore lint/style/useTemplate: <explanation>
-      return `${player.name} ( + t("me") +)`;
+      return `${player.name} (${t("me")})`;
     }
     return player.name;
   };

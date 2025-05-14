@@ -2,6 +2,7 @@ import Button from "@/features/shared/components/Button";
 import BackIcon from "@/features/shared/components/Icons/IconBack";
 import { useNavigate } from "react-router-dom";
 import { type ReactNode, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type PopupProps = {
   isOpen?: boolean;
@@ -20,6 +21,7 @@ function Popup({
   children,
   autoWelcome = false,
 }: PopupProps) {
+  const { t } = useTranslation();
   const [showWelcome, setShowWelcome] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
@@ -50,13 +52,13 @@ function Popup({
       return (
         <BasePopup
           onClose={() => setShowWelcome(false)}
-          message="¡Bienvenido al juego!"
-          description="¿Ya conoces cómo se juega?"
+          message={t("Welcome to the game!")}
+          description={t("Do you already know how to play?")}
         >
           <div className="flex justify-center gap-4 mt-4">
-            <Button onClick={handleKnowsGame}>Sí</Button>
+            <Button onClick={handleKnowsGame}>{t("yes")}</Button>
             <Button onClick={handleDoesNotKnowGame} inversed>
-              No
+              {t("no")}
             </Button>
           </div>
         </BasePopup>
@@ -67,10 +69,9 @@ function Popup({
       return (
         <BasePopup
           onClose={() => setShowExplanation(false)}
-          message="¿Cómo se juega?"
-          description="Código Secreto es un juego por equipos donde
-           un líder da pistas para que sus compañeros adivinen palabras ocultas. 
-           El reto es evitar las palabras del rival… ¡y sobre todo la palabra de color negro! 💣"
+          // biome-ignore lint/style/useTemplate: <explanation>
+          message={t("how_to_play") + "?"}
+          description={t("description")}
         >
           <div className="flex justify-center gap-4 mt-4">
             <Button
@@ -80,7 +81,7 @@ function Popup({
                 setShowExplanation(false);
               }}
             >
-              Jugar Tutorial
+              {t("play")} + {t("tutorial")}
             </Button>
             <Button onClick={() => setShowExplanation(false)}>
               ¡Entendido!
