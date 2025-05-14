@@ -51,7 +51,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
     if (state.user.role === "leader") {
       socket.emit("resetGame", state.code, state.user);
     } else {
-      showPopup(t("Only captains can restart the game"));
+      showPopup(t("only_captains_can_restart_the_game"));
     }
   };
   const handleReinicio = () => {

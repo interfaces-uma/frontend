@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 interface IntroTutorialProps {
   onFinish: () => void;
 }
 
 function IntroTutorial({ onFinish }: IntroTutorialProps) {
   const [step, setStep] = useState(0);
+  const { t } = useTranslation();
 
   const steps = [
     "¡Bienvenido! Este es el tutorial de El Código Secreto.",

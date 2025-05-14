@@ -46,7 +46,7 @@ function Home() {
             <Button
               onClick={openPopup}
               style="w-full h-[30%] m-auto"
-              narrator="TUTORIAL"
+              narrator={t("tutorial")}
             >
               {t("how_to_play")}
             </Button>
@@ -113,7 +113,7 @@ function Home() {
         <Popup isOpen={isPopupOpen} onClose={openPopup}>
           <Button
             onClick={() => navigate("/tutorial")}
-            style="w-full bg-fondo text-white rounded-lg"
+            style="w-[90%] mx-auto bg-fondo text-white rounded-lg ml-10"
           >
             {t("tutorial")}
           </Button>

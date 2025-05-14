@@ -52,8 +52,8 @@ function Popup({
       return (
         <BasePopup
           onClose={() => setShowWelcome(false)}
-          message={t("Welcome to the game!")}
-          description={t("Do you already know how to play?")}
+          message={t("Welcome_to_the_game!")}
+          description={t("do_you_already_know_how_to_play")}
         >
           <div className="flex justify-center gap-4 mt-4">
             <Button onClick={handleKnowsGame}>{t("yes")}</Button>
