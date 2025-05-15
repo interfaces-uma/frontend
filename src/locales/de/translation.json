@@ -63,5 +63,15 @@
   "t7": "Lass uns anfangen. Wir führen dich Schritt für Schritt durch ein Beispielspiel.",
   "previus": "Zurück",
   "next": "Weiter",
-  "start": "Start"
+  "start": "Start",
+  "seleccion": "Wähle die zusammenhängenden Karten",
+  "des_seleccion": "Du bist der Anführer des blauen Teams. Wähle Karten, die miteinander verbunden sind.",
+  "give_clue": "Gib ein Schlüsselwort",
+  "give_clue_description": "Gib einen Hinweis, der die ausgewählten Karten miteinander verbindet, damit dein Team sie erraten kann. Zum Beispiel: 'Tiere oder Haustiere'. Achte darauf, dass der Hinweis nicht mit anderen Karten auf dem Spielfeld zusammenhängt.",
+  "elecction": "Kartenauswahl als Agent",
+  "elecction_description": "Du agierst jetzt als Agent deines Teams. So würden deine Teamkollegen das Spielfeld sehen. Wähle die Wörter aus, die mit dem Hinweis in Verbindung stehen könnten.",
+  "next_turn": "Zug beenden",
+  "next_turn_description": "Sobald du die Karten ausgewählt hast, kannst du den Zug beenden, damit das gegnerische Team weiterspielen kann. Du kannst immer eine zusätzliche Karte wählen, zusätzlich zu denen, die dein Anführer genannt hat.",
+  "ready": "Bereit zum Spielen!",
+  "ready_description": "Jetzt kannst du mit deinen Freunden spielen. Viel Glück!"
 }

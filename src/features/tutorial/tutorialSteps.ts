@@ -1,11 +1,12 @@
 import type { TutorialStep } from "@/types";
+import i18next from "i18next";
+const t = i18next.t;
 
 const steps: TutorialStep[] = [
   null,
   {
-    title: "Selecciona las cartas relacionadas",
-    description:
-      "Eres el lider del equipo azul. Elige cartas relacionadas entre sí.",
+    title: t("seleccion"),
+    description: t("des_seleccion"),
     highlightSelector: ["#card-gato", "#card-hamster", "#card-perro"],
     expectedAction: {
       type: "selectCard",
@@ -15,9 +16,8 @@ const steps: TutorialStep[] = [
     },
   },
   {
-    title: "Da una palabra clave",
-    description:
-      "Da una pista que relacione las cartas seleccionadas para que tu equipo las adivine. Por ejemplo: 'animales o mascotas'. Asegúrate de que la pista no se relacione con ninguna carta más del tablero.",
+    title: t("give_clue"),
+    description: t("give_clue_description"),
     highlightSelector: ["#input-clue"],
     expectedAction: {
       type: "giveClue",
@@ -27,9 +27,8 @@ const steps: TutorialStep[] = [
     },
   },
   {
-    title: "Elección de cartas como agente",
-    description:
-      "Ahora estás actuando como un agente de tu equipo. Así verían el tablero tus compañeros. Elige las palabras que puedan estar relacionadas con la pista.",
+    title: t("elecction"),
+    description: t("elecction_description"),
     highlightSelector: ["#card-gato", "#card-hamster", "#card-perro"],
     expectedAction: {
       type: "flipCard",
@@ -39,17 +38,16 @@ const steps: TutorialStep[] = [
     },
   },
   {
-    title: "Pasa de turno",
-    description:
-      "Una vez elegidas las cartas, puedes pasar de turno para que juegue el equipo rival. Siempre tienes la posibilidad de elegir una carta más del tablero a parte de las definidas por tu lider",
+    title: t("next_turn"),
+    description: t("next_turn_description"),
     highlightSelector: ["#next-turn-button"],
     expectedAction: {
       type: "nextTurn",
     },
   },
   {
-    title: "¡Listo para jugar!",
-    description: "Ahora puedes jugar con tus amigos. ¡Buena suerte!",
+    title: t("ready"),
+    description: t("ready_description"),
   },
 ];
 

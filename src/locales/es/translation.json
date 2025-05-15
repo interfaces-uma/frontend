@@ -63,6 +63,16 @@
   "t7": "Vamos a empezar. Te guiaremos paso a paso en una partida ficticia.",
   "previus": "Anterior",
   "next": "Siguiente",
-  "start": "Empezar"
+  "start": "Empezar",
+  "seleccion": "Selecciona las cartas relacionadas",
+  "des_seleccion": "Eres el lider del equipo azul. Elige cartas relacionadas entre sí.",
+  "give_clue": "Da una palabra clave",
+  "give_clue_description": "Da una pista que relacione las cartas seleccionadas para que tu equipo las adivine. Por ejemplo: 'animales o mascotas'. Asegúrate de que la pista no se relacione con ninguna carta más del tablero.",
+  "elecction": "Elección de cartas como agente",
+  "elecction_description": "Ahora estás actuando como un agente de tu equipo. Así verían el tablero tus compañeros. Elige las palabras que puedan estar relacionadas con la pista.",
+  "next_turn": "Pasa de turno",
+  "next_turn_description": "Una vez elegidas las cartas, puedes pasar de turno para que juegue el equipo rival. Siempre tienes la posibilidad de elegir una carta más del tablero a parte de las definidas por tu lider",
+  "ready": "¡Listo para jugar!",
+  "ready_description": "Ahora puedes jugar con tus amigos. ¡Buena suerte!"
   
 }

@@ -63,5 +63,15 @@
   "t7": "Commençons. Nous allons te guider pas à pas dans une partie fictive.",
   "previus": "Précédent",
   "next": "Suivant",
-  "start": "Commencer"
+  "start": "Commencer",
+  "seleccion": "Sélectionne les cartes associées",
+  "des_seleccion": "Tu es le chef de l’équipe bleue. Choisis des cartes qui sont liées entre elles.",
+  "give_clue": "Donne un mot-clé",
+  "give_clue_description": "Donne un indice qui relie les cartes sélectionnées pour que ton équipe puisse les deviner. Par exemple : 'animaux ou animaux de compagnie'. Assure-toi que l’indice ne correspond à aucune autre carte du plateau.",
+  "elecction": "Sélection de cartes en tant qu'agent",
+  "elecction_description": "Tu agis maintenant comme agent de ton équipe. Voici comment tes coéquipiers verraient le plateau. Choisis les mots pouvant être liés à l’indice.",
+  "next_turn": "Passer le tour",
+  "next_turn_description": "Une fois les cartes choisies, tu peux passer le tour pour laisser jouer l’équipe adverse. Tu as toujours la possibilité de choisir une carte supplémentaire en plus de celles indiquées par ton chef.",
+  "ready": "Prêt à jouer !",
+  "ready_description": "Tu peux maintenant jouer avec tes amis. Bonne chance !"
 }

@@ -63,5 +63,17 @@
   "t7": "Let's begin. We'll guide you step by step through a sample game.",
   "previus": "Previous",
   "next": "Next",
-  "start": "Start"
+  "start": "Start",
+  "seleccion": "Select the related cards",
+  "des_seleccion": "You are the leader of the blue team. Choose cards that are related to each other.",
+  "give_clue": "Give a keyword",
+  "give_clue_description": "Give a clue that links the selected cards so your team can guess them. For example: 'animals or pets'. Make sure the clue is not related to any other card on the board.",
+  "elecction": "Card selection as an agent",
+  "elecction_description": "You are now acting as an agent for your team. This is how your teammates would see the board. Choose the words that may be related to the clue.",
+  "next_turn": "End turn",
+  "next_turn_description": "Once you've chosen the cards, you can end the turn so the opposing team can play. You always have the option to choose one extra card beyond those indicated by your leader.",
+  "ready": "Ready to play!",
+  "ready_description": "Now you can play with your friends. Good luck!"
 }
+
+
