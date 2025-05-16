@@ -3,6 +3,7 @@ import { useChat } from "@/features/chat/hooks/useChat";
 import { socket } from "@/features/online/service/socket";
 import type { Message } from "@/types";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function showMessages(
   data: Message[],
@@ -47,6 +48,7 @@ function showMessages(
 }
 
 function Chat() {
+  const { t } = useTranslation();
   const { state } = useGameState();
   const { handleSendMessage, handleRecieveMessage } = useChat();
 
@@ -103,7 +105,7 @@ function Chat() {
         }
       >
         <input
-          placeholder="Escribe un mensaje..."
+          placeholder={t("write_clue")}
           onChange={(event) => setInput(event.target.value)}
           value={input}
           onKeyDown={(event) => {
@@ -130,7 +132,7 @@ function Chat() {
                 : " bg-fondo p-2 rounded-br hover:brightness-90"
           }
         >
-          <strong>Enviar</strong>
+          <strong>{t("send")}</strong>
         </button>
       </div>
     </div>

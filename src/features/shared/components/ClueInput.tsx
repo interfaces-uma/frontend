@@ -1,6 +1,7 @@
 import { useGameState } from "@/context/game/GameContext";
 import type React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ClueInputProps {
   onSend: (clueWord: string) => void;
@@ -15,7 +16,7 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
   const [input, setInput] = useState("");
   const { state } = useGameState();
   const selectedCards = state.cards.filter((card) => card.isSelected);
-
+  const { t } = useTranslation();
   const handleSend = () => {
     if (input.trim() === "" || selectedCards.length === 0) return;
     onSend(input.trim());
@@ -36,7 +37,7 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
         className="flex-1 text-center text-xl bg-cartas outline-none border-none placeholder:text-fondo focus:ring-0 uppercase"
         value={input.toUpperCase()}
         type="text"
-        placeholder="Escribe tu pista..."
+        placeholder={t("write_clue")}
         onChange={(e) => setInput(e.target.value.toUpperCase())}
         onKeyDown={handleKeyDown}
         disabled={disabled}
@@ -48,7 +49,7 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
         onClick={handleSend}
         disabled={disabled || input.trim() === "" || selectedCards.length === 0}
       >
-        Enviar
+        {t("send")}
       </button>
     </div>
   );

@@ -98,5 +98,22 @@
   "pluma": "plume",
   "misil": "missile",
   "montaña": "montagne",
-  "tenedor": "fourchette"
+  "tenedor": "fourchette",
+  "accept": "ACCEPTER",
+  "cancel": "ANNULER",
+  
+  "animals": "animaux",
+  "pets": "animaux de compagnie",
+  "pet": "animal de compagnie",
+  "animal": "animal",
+   "rL1": "C'est ton tour, sélectionne des cartes et associe-les à un mot-clé...",
+  "rA1": "C'est ton tour, sélectionne les cartes que tu crois correctes...",
+  "rL2": "C'est au tour de ton chef, attends qu'il donne un indice...",
+  "rA2": "C'est au tour de tes agents, attends qu'ils devinent les cartes...",
+  "rL3": "Le chef ennemi donne un indice à ses agents...",
+  "rA3": "C'est au tour des agents ennemis, attends qu'ils devinent les cartes...",
+   "write_clue": "Écris ton indice...",
+  "write_msg": "Écris un message..."
+
+
 }

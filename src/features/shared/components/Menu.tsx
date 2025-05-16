@@ -93,7 +93,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
                 disabled={state.user.role !== "leader"}
                 style="w-full"
               >
-                Reiniciar Partida 🔄
+                {t("restart_game")} 🔄
               </Button>
               <Button
                 onClick={() => {
@@ -102,7 +102,7 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
                 inversed
                 style="w-full"
               >
-                {t("leave_game")}❌
+                {t("leave_game")} ❌
               </Button>
             </>
           )}
@@ -123,10 +123,10 @@ function Menu({ onClose, isGame }: { onClose: () => void; isGame: boolean }) {
         >
           <div className="flex justify-center gap-4 mt-4">
             <Button onClick={isToLobby ? salirDelLobby : salirDeLaPartida}>
-              Sí
+              {t("yes")}
             </Button>
             <Button onClick={() => setIsPopupOpen(false)} inversed>
-              No
+              {t("no")}
             </Button>
           </div>
         </Popup>

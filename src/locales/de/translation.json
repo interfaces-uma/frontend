@@ -98,5 +98,19 @@
   "pluma": "Feder",
   "misil": "Rakete",
   "montaña": "Berg",
-  "tenedor": "Gabel"
+  "tenedor": "Gabel",
+  "accept": "AKZEPTIEREN",
+  "cancel": "ABBRECHEN",
+   "animals": "Tiere",
+  "pets": "Haustiere",
+  "pet": "Haustier",
+  "animal": "Tier",
+  "rL1": "Du bist dran, wähle Karten aus und verknüpfe sie mit einem Schlüsselwort...",
+  "rA1": "Du bist dran, wähle die Karten aus, die du für richtig hältst...",
+  "rL2": "Dein Anführer ist am Zug, warte auf seinen Hinweis...",
+  "rA2": "Deine Agenten sind am Zug, warte, bis sie die Karten erraten...",
+  "rL3": "Der feindliche Anführer gibt seinen Agenten einen Hinweis...",
+  "rA3": "Die feindlichen Agenten sind am Zug, warte, bis sie die Karten erraten...",
+  "write_clue": "Schreibe deinen Hinweis...",
+  "write_msg": "Schreibe eine Nachricht..."
 }

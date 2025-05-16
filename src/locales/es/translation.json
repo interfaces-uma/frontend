@@ -102,7 +102,19 @@
   "pluma": "pluma",
   "misil": "misil",
   "montaña": "montaña",
-  "tenedor": "tenedor"
+  "tenedor": "tenedor",
+  "accept": "ACEPTAR",
+  "cancel": "CANCELAR",
+  "rL1": "Es tu turno, selecciona cartas y asocialas a una palabra clave...",
+  "rA1": "Es tu turno, selecciona las cartas que creas correctas...",
+  "rL2": "Es el turno de tu líder, espera a que te de una pista...",
+  "rA2": "Es el turno de tus agentes, espera a que adivinen las cartas...",
+  "rL3": "El lider enemigo está dando una pista a sus agentes...",
+  "rA3": "Es el turno de los agentes enemigos, espera a que adivinen las cartas...",
+  "write_clue": "Escribe tu pista...",
+  "write_msg": "Escribe un mensaje..."
+
+
 
 
 

@@ -98,7 +98,25 @@
   "pluma": "feather",
   "misil": "missile",
   "montaña": "mountain",
-  "tenedor": "fork"
+  "tenedor": "fork",
+  "accept": "ACCEPT",
+  "cancel": "CANCEL",
+  "animals": "animals",
+  "pets": "pets",
+  "pet": "pet",
+  "animal": "animal", 
+  "rL1": "It's your turn, select cards and link them to a keyword...",
+  "rA1": "It's your turn, select the cards you think are correct...",
+  "rL2": "It's your leader's turn, wait for the clue...",
+  "rA2": "It's your agents' turn, wait for them to guess the cards...",
+  "rL3": "The enemy leader is giving a clue to their agents...",
+  "rA3": "It's the enemy agents' turn, wait for them to guess the cards...",
+  "write_clue": "Write your clue...",
+  "write_msg": "Write a message..."
+
+
+
+
 
 
 }

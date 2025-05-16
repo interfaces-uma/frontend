@@ -1,4 +1,5 @@
 import Button from "@/features/shared/components/Button";
+import i18next from "i18next";
 
 interface TutorialPopupProps {
   title: string;
@@ -8,10 +9,12 @@ interface TutorialPopupProps {
   acceptText?: string;
 }
 
+const t = i18next.t;
+
 const TutorialPopup = ({
   title,
   message,
-  acceptText = "Aceptar",
+  acceptText = t("accept"),
   onAccept,
   isOpen,
 }: TutorialPopupProps) => {

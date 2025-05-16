@@ -1,5 +1,8 @@
 import { useGameState } from "@/context/game/GameContext";
 import { useEffect, useState } from "react";
+import i18next from "i18next";
+
+const t = i18next.t;
 
 /** Componente que informa del estado de la partida
  * Muestra en un label de quien es el turno y que debes hacer
@@ -20,31 +23,28 @@ const GameStatus = () => {
 
     if (state.user.role === roleTurn && state.user.color === teamTurn) {
       if (roleTurn === "leader") {
-        info =
-          "Es tu turno, selecciona cartas y asocialas a una palabra clave...";
+        info = t("rL1");
       }
       if (roleTurn === "agent") {
-        info = "Es tu turno, selecciona las cartas que creas correctas...";
+        info = t("rA1");
       }
     }
 
     if (state.user.role !== roleTurn && state.user.color === teamTurn) {
       if (roleTurn === "leader") {
-        info = "Es el turno de tu líder, espera a que te de una pista...";
+        info = t("rL2");
       }
       if (roleTurn === "agent") {
-        info =
-          "Es el turno de tus agentes, espera a que adivinen las cartas...";
+        info = t("rA2");
       }
     }
 
     if (state.user.color !== teamTurn) {
       if (roleTurn === "leader") {
-        info = "El lider enemigo está dando una pista a sus agentes...";
+        info = t("rL3");
       }
       if (roleTurn === "agent") {
-        info =
-          "Es el turno de los agentes enemigos, espera a que adivinen las cartas...";
+        info = t("rA3");
       }
     }
 

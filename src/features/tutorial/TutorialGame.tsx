@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import IntroTutorial from "./components/IntroTutorial";
 import TutorialPopup from "./components/TutorialPopup";
 import { useNavigate } from "react-router";
+import i18next from "i18next";
+
+const t = i18next.t;
 
 const TutorialGame = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -58,7 +61,7 @@ const TutorialGame = () => {
           title={manager.currentStep?.title ?? ""}
           message={manager.currentStep?.description ?? ""}
           isOpen={showTutorial}
-          acceptText={manager.isLastStep() ? "Volver al menu" : "Aceptar"}
+          acceptText={manager.isLastStep() ? t("exit_to_home") : t("accept")}
           onAccept={() => {
             if (manager.isLastStep()) {
               navigate("/");
