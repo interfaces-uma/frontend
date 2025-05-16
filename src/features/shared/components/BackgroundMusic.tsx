@@ -1,15 +1,17 @@
 import { useVolume } from "@/context/backgroundVolume/backgroundVolumeContext";
 import Button from "@/features/shared/components/Button";
 import { useEffect, useRef, useState } from "react";
+import i18next from "i18next";
 
 import music3 from "@/assets/2TheSky.mp3";
 import music4 from "@/assets/RapdeFernanfloo.mp3";
 import music1 from "@/assets/homemusic.mp3";
 import music2 from "@/assets/lobbymusic.mp3";
 
+const t = i18next.t;
 const musicList = [
-  { name: "Música Menú", src: music1 },
-  { name: "Música de acción", src: music2 },
+  { name: t("m_menu"), src: music1 },
+  { name: t("m_action"), src: music2 },
   { name: "2 The Sky", src: music3 },
   { name: "Rap de Fernanfloo", src: music4 },
 ];
@@ -52,7 +54,7 @@ const BackgroundMusic = ({ showText = false }) => {
         audioRef.current = audio;
       })
       .catch((err) => {
-        console.error("Error al reproducir música:", err);
+        console.error("Error music", err);
       });
 
     return () => {

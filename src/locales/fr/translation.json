@@ -113,7 +113,9 @@
   "rL3": "Le chef ennemi donne un indice à ses agents...",
   "rA3": "C'est au tour des agents ennemis, attends qu'ils devinent les cartes...",
    "write_clue": "Écris ton indice...",
-  "write_msg": "Écris un message..."
+  "write_msg": "Écris un message...",
+  "m_menu": "Musique du menu",
+  "m_action": "Musique d'action"
 
 
 }

@@ -112,5 +112,7 @@
   "rL3": "Der feindliche Anführer gibt seinen Agenten einen Hinweis...",
   "rA3": "Die feindlichen Agenten sind am Zug, warte, bis sie die Karten erraten...",
   "write_clue": "Schreibe deinen Hinweis...",
-  "write_msg": "Schreibe eine Nachricht..."
+  "write_msg": "Schreibe eine Nachricht...",
+  "m_menu": "Menü Musik",
+  "m_action": "Aktionsmusik"
 }

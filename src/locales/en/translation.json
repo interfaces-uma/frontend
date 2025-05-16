@@ -112,7 +112,9 @@
   "rL3": "The enemy leader is giving a clue to their agents...",
   "rA3": "It's the enemy agents' turn, wait for them to guess the cards...",
   "write_clue": "Write your clue...",
-  "write_msg": "Write a message..."
+  "write_msg": "Write a message...",
+  "m_menu": "Menu Music",
+  "m_action": "Action Music"
 
 
 

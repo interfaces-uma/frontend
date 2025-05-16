@@ -112,7 +112,9 @@
   "rL3": "El lider enemigo está dando una pista a sus agentes...",
   "rA3": "Es el turno de los agentes enemigos, espera a que adivinen las cartas...",
   "write_clue": "Escribe tu pista...",
-  "write_msg": "Escribe un mensaje..."
+  "write_msg": "Escribe un mensaje...",
+  "m_menu": "Música Menú",
+  "m_action": "Música Acción"
 
 
 
