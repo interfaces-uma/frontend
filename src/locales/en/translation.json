@@ -73,7 +73,34 @@
   "next_turn": "End turn",
   "next_turn_description": "Once you've chosen the cards, you can end the turn so the opposing team can play. You always have the option to choose one extra card beyond those indicated by your leader.",
   "ready": "Ready to play!",
-  "ready_description": "Now you can play with your friends. Good luck!"
+  "ready_description": "Now you can play with your friends. Good luck!",
+  "júpiter": "Jupiter",
+  "sopa": "soup",
+  "marte": "Mars",
+  "fantasma": "ghost",
+  "violín": "violin",
+  "arma": "weapon",
+  "macarrones": "macaroni",
+  "reloj": "watch",
+  "hamster": "hamster",
+  "piano": "piano",
+  "trompeta": "trumpet",
+  "bomba": "bomb",
+  "perro": "dog",
+  "telescopio": "telescope",
+  "pizza": "pizza",
+  "libro": "book",
+  "venus": "Venus",
+  "gato": "cat",
+  "helicóptero": "helicopter",
+  "moto": "motorbike",
+  "ladrillo": "brick",
+  "pluma": "feather",
+  "misil": "missile",
+  "montaña": "mountain",
+  "tenedor": "fork"
+
+
 }
 
 

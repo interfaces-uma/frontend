@@ -7,11 +7,16 @@ const steps: TutorialStep[] = [
   {
     title: t("seleccion"),
     description: t("des_seleccion"),
-    highlightSelector: ["#card-gato", "#card-hamster", "#card-perro"],
+    highlightSelector: [
+      `#card-${t("gato")}`,
+      `#card-${t("hamster")}`,
+      `#card-${t("perro")}`,
+    ],
+
     expectedAction: {
       type: "selectCard",
       payload: {
-        words: ["gato", "hamster", "perro"],
+        words: [t("gato"), t("hamster"), t("perro")],
       },
     },
   },
@@ -22,18 +27,23 @@ const steps: TutorialStep[] = [
     expectedAction: {
       type: "giveClue",
       payload: {
-        word: ["animales", "animal", "mascota", "mascotas"],
+        word: [t("animales"), t("animal"), t("mascota"), t("mascotas")],
       },
     },
   },
   {
     title: t("elecction"),
     description: t("elecction_description"),
-    highlightSelector: ["#card-gato", "#card-hamster", "#card-perro"],
+    highlightSelector: [
+      `#card-${t("gato")}`,
+      `#card-${t("hamster")}`,
+      `#card-${t("perro")}`,
+    ],
+
     expectedAction: {
       type: "flipCard",
       payload: {
-        words: ["gato", "hamster", "perro"],
+        words: [t("gato"), t("hamster"), t("perro")],
       },
     },
   },

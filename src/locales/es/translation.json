@@ -73,6 +73,38 @@
   "next_turn": "Pasa de turno",
   "next_turn_description": "Una vez elegidas las cartas, puedes pasar de turno para que juegue el equipo rival. Siempre tienes la posibilidad de elegir una carta más del tablero a parte de las definidas por tu lider",
   "ready": "¡Listo para jugar!",
-  "ready_description": "Ahora puedes jugar con tus amigos. ¡Buena suerte!"
+  "ready_description": "Ahora puedes jugar con tus amigos. ¡Buena suerte!",
+  "animals": "animales",
+  "pets": "mascotas",
+  "pet" : "mascota",
+  "animal" : "animal",
+  "júpiter": "júpiter",
+  "sopa": "sopa",
+  "marte": "marte",
+  "fantasma": "fantasma",
+  "violín": "violín",
+  "arma": "arma",
+  "macarrones": "macarrones",
+  "reloj": "reloj",
+  "hamster": "hamster",
+  "piano": "piano",
+  "trompeta": "trompeta",
+  "bomba": "bomba",
+  "perro": "perro",
+  "telescopio": "telescopio",
+  "pizza": "pizza",
+  "libro": "libro",
+  "venus": "venus",
+  "gato": "gato",
+  "helicóptero": "helicóptero",
+  "moto": "moto",
+  "ladrillo": "ladrillo",
+  "pluma": "pluma",
+  "misil": "misil",
+  "montaña": "montaña",
+  "tenedor": "tenedor"
+
+
+
   
 }
