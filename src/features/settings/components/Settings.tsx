@@ -130,7 +130,7 @@ function Settings({
       <div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
         {/* Encabezado */}
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold text-fondo">{t("settings")}</h2>
+          <h1 className="text-xl font-bold text-fondo">{t("settings")}</h1>
           <Button narrator={t("close")} onClick={onClose} inversed circular>
             <BackIcon />
           </Button>
