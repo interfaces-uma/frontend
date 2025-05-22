@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [pluginReact()],
   html: {
     title: "CODIGO SECRETO",
+    template: "./public/index.html",
   },
   source: {
     define: {
