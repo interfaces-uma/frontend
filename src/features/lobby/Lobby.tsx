@@ -120,35 +120,35 @@ function Lobby() {
 
   return (
     <>
-      <header>{}</header>
+      <header>
+        <nav>
+          <div className="absolute flex gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
+            <Button onClick={openMenu} circular inversed>
+              <MenuIcon
+                fill="currentColor"
+                className="cartas"
+                width={20}
+                height={20}
+              />
+            </Button>
 
-      <nav>
-        <div className="absolute flex gap-2 top-2 right-2 xl:top-7 xl:right-7 z-10">
-          <Button onClick={openMenu} circular inversed>
-            <MenuIcon
-              fill="currentColor"
-              className="cartas"
-              width={20}
-              height={20}
-            />
-          </Button>
-
-          <Button
-            onClick={() => {
-              document.documentElement.requestFullscreen();
-            }}
-            circular
-            inversed
-          >
-            <FullScreenIcon
-              className="cartas"
-              width={20}
-              height={20}
-              strokeWidth={3}
-            />
-          </Button>
-        </div>
-      </nav>
+            <Button
+              onClick={() => {
+                document.documentElement.requestFullscreen();
+              }}
+              circular
+              inversed
+            >
+              <FullScreenIcon
+                className="cartas"
+                width={20}
+                height={20}
+                strokeWidth={3}
+              />
+            </Button>
+          </div>
+        </nav>
+      </header>
 
       <main className="flex h-screen">
         <section
