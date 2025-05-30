@@ -26,9 +26,6 @@ export default function Game({ manager }: { manager: UserActions }) {
   const [endMessage, setEndMessage] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const openMenu = () => setShowMenu(!showMenu);
-  // const handleBackClick = () => {
-  //   setIsPopupOpen(true);
-  // };
 
   const handleConfirmExit = () => {
     manager.leaveGame();
@@ -70,79 +67,84 @@ export default function Game({ manager }: { manager: UserActions }) {
   };
 
   return (
-    <div className="bg-fondo w-full h-screen flex flex-col">
-      <div
-        className={
-          state.user.color === "red"
-            ? "flex bg-[#ce3a3a] justify-center items-center h-[8%] px-2"
-            : "flex bg-fuerteAzul justify-center items-center h-[8%] px-2"
-        }
-      >
-        <div className="flex h-full">
-          <TeamInfo team="blue" />
-          {isActualLeaderTurn() ? (
-            <ClueInput onSend={handleClueSend} />
-          ) : (
-            <ClueList />
-          )}
-          <TeamInfo team="red" />
-        </div>
-        <div className="absolute right-4 flex gap-2 ml-auto">
-          <Button onClick={openMenu} circular inversed>
-            <MenuIcon
-              fill="currentColor"
-              className="cartas"
-              width={20}
-              height={20}
+    <>
+      <main className="bg-fondo w-full h-screen flex flex-col">
+        <header
+          className={
+            state.user.color === "red"
+              ? "flex bg-[#ce3a3a] justify-center items-center h-[8%] px-2"
+              : "flex bg-fuerteAzul justify-center items-center h-[8%] px-2"
+          }
+        >
+          <h1 className="flex h-full">
+            <TeamInfo team="blue" />
+            {isActualLeaderTurn() ? (
+              <ClueInput onSend={handleClueSend} />
+            ) : (
+              <ClueList />
+            )}
+            <TeamInfo team="red" />
+          </h1>
+          <div className="absolute right-4 flex gap-2 ml-auto">
+            <Button onClick={openMenu} circular inversed>
+              <MenuIcon
+                fill="currentColor"
+                className="cartas"
+                width={20}
+                height={20}
+              />
+            </Button>
+            <Button
+              onClick={() => {
+                document.documentElement.requestFullscreen();
+              }}
+              circular
+              inversed
+            >
+              <FullScreenIcon
+                className="cartas"
+                width={20}
+                height={20}
+                strokeWidth={3}
+              />
+            </Button>
+          </div>
+        </header>
+
+        <section className="mt-2 mb-2 flex justify-center">
+          <GameStatus />
+        </section>
+
+        <section className="flex w-full flex-1 min-h-0">
+          <div className="w-[70%] flex ml-4 mr-4 mb-4">
+            <Board
+              board={cards}
+              handleCardClick={
+                state.user.role === "leader"
+                  ? manager.selectCard || (() => {})
+                  : manager.revealCard || (() => {})
+              }
             />
-          </Button>
-          <Button
-            onClick={() => {
-              document.documentElement.requestFullscreen();
-            }}
-            circular
-            inversed
-          >
-            <FullScreenIcon
-              className="cartas"
-              width={20}
-              height={20}
-              strokeWidth={3}
-            />
-          </Button>
-        </div>
-      </div>
-      <div className="mt-2 mb-2 flex justify-center">
-        <GameStatus />
-      </div>
-      <div className="flex w-full flex-1 min-h-0">
-        <div className="w-[70%] flex ml-4 mr-4 mb-4">
-          <Board
-            board={cards}
-            handleCardClick={
-              state.user.role === "leader"
-                ? manager.selectCard || (() => {})
-                : manager.revealCard || (() => {})
-            }
-          />
-        </div>
-        <div className="flex-1 flex flex-col min-h-0 mr-4 mb-4">
-          <Chat />
-          {state.user.role !== "leader" && (
-            <div className="mt-4 h-[15%] mt-0">
-              <Button
-                id="next-turn-button"
-                onClick={() => {
-                  manager.nextTurn();
-                }}
-                style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold transition-transform duration-200 hover:scale-102"
-              >
-                {t("pass_turn")}
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
+          </div>
+          <aside className="flex-1 flex flex-col min-h-0 mr-4 mb-4">
+            <Chat />
+            {state.user.role !== "leader" && (
+              <div className="mt-4 h-[15%] mt-0">
+                <Button
+                  id="next-turn-button"
+                  onClick={() => {
+                    manager.nextTurn();
+                  }}
+                  style="w-full h-full text-[clamp(0.5rem,2vw,2rem)] font-bold transition-transform duration-200 hover:scale-102"
+                >
+                  {t("pass_turn")}
+                </Button>
+              </div>
+            )}
+          </aside>
+        </section>
+      </main>
+
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
@@ -155,9 +157,10 @@ export default function Game({ manager }: { manager: UserActions }) {
           </Button>
         </div>
       </Popup>
+
       <Popup
         isOpen={manager.genericPopup ? manager.genericPopup.isOpen : undefined}
-        onClose={() => (manager.showPopup ? manager.showPopup("") : undefined)} // Cierra el popup
+        onClose={() => (manager.showPopup ? manager.showPopup("") : undefined)}
         message={
           manager.genericPopup ? manager.genericPopup.message : undefined
         }
@@ -172,14 +175,15 @@ export default function Game({ manager }: { manager: UserActions }) {
           </Button>
         </div>
       </Popup>
-      {/* Menu */}
+
       {showMenu && <Menu onClose={openMenu} isGame={true} />}
+
       <TimedPopup
         open={showEndPopup}
         message={endMessage}
         duration={3000}
         onClose={() => navigate("/lobby")}
       />
-    </div>
+    </>
   );
 }

@@ -105,6 +105,7 @@ function Chat() {
         }
       >
         <input
+          aria-label={t("write_clue")}
           placeholder={t("write_clue")}
           onChange={(event) => setInput(event.target.value)}
           value={input}

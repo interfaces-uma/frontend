@@ -12,7 +12,7 @@ export default function ClueList() {
   return (
     <div className="bg-cartas text-center px-20 flex items-center justify-center">
       {state.clue === null ? (
-        <p>-</p>
+        <h2>-</h2>
       ) : (
         <p className="text-3xl font-bold">
           {state.clue.word.toUpperCase()}

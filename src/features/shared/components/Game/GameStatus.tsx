@@ -72,7 +72,7 @@ const GameStatus = () => {
 
   return (
     <div className="bg-amber-50 rounded-2xl text-center p-1">
-      <p>{typedText}</p>
+      <h2>{typedText}</h2>
     </div>
   );
 };
