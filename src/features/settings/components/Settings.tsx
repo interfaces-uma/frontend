@@ -24,10 +24,9 @@ function Settings({
   const [hprevVolume, hsetPrevVolume] = useState<number | null>(null);
   const [cprevVolume, csetPrevVolume] = useState<number | null>(null);
 
-  // Inicializar fontIndex desde localStorage o usar valor por defecto
   const [fontIndex, setFontSize] = useState(() => {
     const savedFontIndex = localStorage.getItem("fontIndex");
-    return savedFontIndex ? Number(savedFontIndex) : 2; // 2 corresponde a 24px
+    return savedFontIndex ? Number(savedFontIndex) : 2;
   });
 
   const [language, setLanguage] = useState(
@@ -35,14 +34,12 @@ function Settings({
   );
 
   const { playHoverSound } = useHoverSound();
-
   const [copied, setCopied] = useState(false);
 
   const [narratorEnabled, setNarratorEnabled] = useState<boolean>(
     () => localStorage.getItem("helpSound") === "true",
   );
 
-  // Aplicar tamaño de fuente al montar el componente
   useEffect(() => {
     const savedFont = localStorage.getItem("fontIndex");
     const savedLang = localStorage.getItem("language");
@@ -57,7 +54,6 @@ function Settings({
     if (savedLang) setLanguage(savedLang);
   }, []);
 
-  // Guardar y aplicar cambios de tamaño de fuente
   useEffect(() => {
     localStorage.setItem("fontIndex", fontIndex.toString());
     document.documentElement.style.setProperty(
@@ -66,13 +62,11 @@ function Settings({
     );
   }, [fontIndex]);
 
-  // Guardar idioma y cambiar en i18next
   useEffect(() => {
     localStorage.setItem("language", language);
     i18n.changeLanguage(language);
   }, [language]);
 
-  // Guardar narrador
   useEffect(() => {
     localStorage.setItem("helpSound", narratorEnabled.toString());
   }, [narratorEnabled]);
@@ -125,9 +119,9 @@ function Settings({
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      onClick={handleOverlayClick} // Agrega el evento de clic
+      onClick={handleOverlayClick}
     >
-      <div className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
+      <main className="bg-cartas w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6 shadow-lg">
         {/* Encabezado */}
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold text-fondo">{t("settings")}</h1>
@@ -138,154 +132,148 @@ function Settings({
 
         {/* Volumen de música */}
         <div className="space-y-2">
-          <label
-            htmlFor="music-volume"
-            id="music-volume"
-            className="flex items-center gap-2 text-fondo font-medium cursor-pointer"
-          >
-            <IconVolume
-              onMouseEnter={() => handleMouseEnter("Mutear música")}
-              volume={volume}
-              onClick={toggleMute}
-              className="text-fondo"
-              fill="currentColor"
+          <label className="flex flex-col gap-2 text-fondo font-medium cursor-pointer">
+            <span className="flex items-center gap-2">
+              <IconVolume
+                onMouseEnter={() => handleMouseEnter("Mutear música")}
+                volume={volume}
+                onClick={toggleMute}
+                className="text-fondo"
+                fill="currentColor"
+              />
+              {t("music_volume")}
+            </span>
+            <input
+              onMouseEnter={() =>
+                handleMouseEnter(
+                  `volumen de la musica al ${Math.round(volume * 100)} por ciento`,
+                )
+              }
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={volume}
+              onChange={(e) => setVolume(Number(e.target.value))}
+              className="w-full accent-fondo"
             />
-            {t("music_volume")}
           </label>
-          <input
-            onMouseEnter={() =>
-              handleMouseEnter(
-                `volumen de la musica al ${Math.round(volume * 100)} por ciento`,
-              )
-            }
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={volume}
-            onChange={(e) => setVolume(Number(e.target.value))}
-            className="w-full accent-fondo"
-          />
         </div>
 
         {/* Sonido de clic */}
         <div className="space-y-2">
-          <label
-            htmlFor="cmusic-volume"
-            id="music-volume"
-            className="flex items-center gap-2 text-fondo font-medium cursor-pointer"
-          >
-            <IconVolume
-              onMouseEnter={() => handleMouseEnter("mutear el click")}
-              volume={cvolume}
-              onClick={toggleClickMute}
-              className="text-fondo"
-              fill="currentColor"
+          <label className="flex flex-col gap-2 text-fondo font-medium cursor-pointer">
+            <span className="flex items-center gap-2">
+              <IconVolume
+                onMouseEnter={() => handleMouseEnter("mutear el click")}
+                volume={cvolume}
+                onClick={toggleClickMute}
+                className="text-fondo"
+                fill="currentColor"
+              />
+              {t("click_volume")}
+            </span>
+            <input
+              onMouseEnter={() =>
+                handleMouseEnter(
+                  `volumen del click al ${Math.round(cvolume * 100)} por ciento`,
+                )
+              }
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={cvolume}
+              onChange={(e) => csetVolume(Number(e.target.value))}
+              className="w-full accent-fondo"
             />
-            {t("click_volume")}
           </label>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={cvolume}
-            onChange={(e) => csetVolume(Number(e.target.value))}
-            onMouseEnter={() =>
-              handleMouseEnter(
-                `volumen del click al ${Math.round(cvolume * 100)} por ciento`,
-              )
-            }
-            className="w-full accent-fondo"
-          />
         </div>
 
         {/* Sonido al pasar el ratón */}
         <div className="space-y-2">
-          <label
-            htmlFor="hmusic-volume"
-            id="music-volume"
-            className="flex items-center gap-2 text-fondo font-medium cursor-pointer"
-          >
-            <IconVolume
-              onMouseEnter={() => handleMouseEnter("mutear al pasar el ratón")}
-              volume={hvolume}
-              onClick={toggleHoverMute}
-              className="text-fondo"
-              fill="currentColor"
+          <label className="flex flex-col gap-2 text-fondo font-medium cursor-pointer">
+            <span className="flex items-center gap-2">
+              <IconVolume
+                onMouseEnter={() =>
+                  handleMouseEnter("mutear al pasar el ratón")
+                }
+                volume={hvolume}
+                onClick={toggleHoverMute}
+                className="text-fondo"
+                fill="currentColor"
+              />
+              {t("hover_volume")}
+            </span>
+            <input
+              onMouseEnter={() =>
+                handleMouseEnter(
+                  `volumen al pasar el raton al ${Math.round(hvolume * 100)} por ciento`,
+                )
+              }
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={hvolume}
+              onChange={(e) => hsetVolume(Number(e.target.value))}
+              className="w-full accent-fondo"
             />
-            {t("hover_volume")}
           </label>
-          <input
-            onMouseEnter={() =>
-              handleMouseEnter(
-                `volumen al pasar el raton al ${Math.round(hvolume * 100)} por ciento`,
-              )
-            }
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={hvolume}
-            onChange={(e) => hsetVolume(Number(e.target.value))}
-            className="w-full accent-fondo"
-          />
         </div>
 
         {/* Tamaño de texto */}
         <div className="space-y-2">
-          <label
-            htmlFor="font-size"
-            className="flex items-center gap-2 text-fondo font-medium"
-          >
-            <IconFontSize
-              onMouseEnter={() => handleMouseEnter(t("text_size"))}
-              className="text-fondo"
-              fill="currentColor"
+          <label className="flex flex-col gap-2 text-fondo font-medium cursor-pointer">
+            <span className="flex items-center gap-2">
+              <IconFontSize
+                onMouseEnter={() => handleMouseEnter(t("text_size"))}
+                className="text-fondo"
+                fill="currentColor"
+              />
+              {t("text_size")}
+            </span>
+            <input
+              onMouseEnter={() =>
+                handleMouseEnter(
+                  `tamaño del texto al ${Math.round(fontIndex * 100) - 100} por ciento`,
+                )
+              }
+              type="range"
+              min={0}
+              max={4}
+              step={1}
+              value={fontIndex}
+              onChange={(e) => setFontSize(Number(e.target.value))}
+              className="w-full accent-fondo"
             />
-            {t("text_size")}
           </label>
-          <input
-            onMouseEnter={() =>
-              handleMouseEnter(
-                `tamaño del texto al ${Math.round(fontIndex * 100) - 100} por ciento`,
-              )
-            }
-            type="range"
-            min={0}
-            max={4}
-            step={1}
-            value={fontIndex}
-            onChange={(e) => setFontSize(Number(e.target.value))}
-            className="w-full accent-fondo"
-          />
         </div>
 
         {/* Idioma */}
         <div className="space-y-2">
-          <label
-            htmlFor="languaje"
-            className="flex items-center gap-2 text-fondo font-medium"
-          >
-            <IconLanguage
-              onMouseEnter={() => handleMouseEnter(t("language"))}
-              className="text-fondo"
-              fill="currentColor"
-            />
-            {t("language")}
+          <label className="flex flex-col gap-2 text-fondo font-medium cursor-pointer">
+            <div className="flex items-center gap-2">
+              <IconLanguage
+                onMouseEnter={() => handleMouseEnter(t("language"))}
+                className="text-fondo"
+                fill="currentColor"
+              />
+              {t("language")}
+            </div>
+            <select
+              onMouseEnter={() => handleMouseEnter(language)}
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="w-full bg-cartas text-fondo font-semibold px-4 py-2 rounded-lg"
+            >
+              <option value="es">🇪 Español</option>
+              <option value="en">🇬 English</option>
+              <option value="fr">🇫 Français</option>
+              <option value="de">🇩 Deutsch</option>
+              <option value="zh">普通话</option>
+            </select>
           </label>
-          <select
-            onMouseEnter={() => handleMouseEnter(language)}
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            className="w-full bg-cartas text-fondo font-semibold px-4 py-2 rounded-lg"
-          >
-            <option value="es">🇪 Español</option>
-            <option value="en">🇬 English</option>
-            <option value="fr">🇫 Français</option>
-            <option value="de">🇩 Deutsch</option>
-            <option value="zh">普通话</option>
-          </select>
         </div>
 
         {/* Código de sala */}
@@ -303,10 +291,11 @@ function Settings({
           </div>
         )}
 
-        {/* Ayuda de sonido*/}
+        {/* Ayuda de sonido */}
         <div className="flex items-center justify-between text-fondo font-medium pt-2 border-t border-fondo/20">
           <span>{t("sound_help")}</span>
           <input
+            aria-label={t("sound_help")}
             onMouseEnter={() => handleMouseEnter("ayuda de sonido")}
             type="checkbox"
             checked={narratorEnabled}
@@ -314,7 +303,7 @@ function Settings({
             className="w-6 h-6 accent-fondo"
           />
         </div>
-      </div>
+      </main>
     </div>
   );
 }
