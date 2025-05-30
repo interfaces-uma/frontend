@@ -14,11 +14,11 @@ export default function ClueList() {
       {state.clue === null ? (
         <h2>-</h2>
       ) : (
-        <p className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold">
           {state.clue.word.toUpperCase()}
           {"     "}
           {state.clue.cards.filter((c) => !c.isFlipped).length}
-        </p>
+        </h1>
       )}
     </div>
   );
