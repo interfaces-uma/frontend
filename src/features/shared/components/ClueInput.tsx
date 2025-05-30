@@ -34,6 +34,7 @@ const ClueInput: React.FC<ClueInputProps> = ({ onSend, disabled }) => {
       className="flex gap-2 items-center w-full p-2 rounded bg-cartas"
     >
       <input
+        aria-label={t("write_clue")}
         className="flex-1 text-center text-xl bg-cartas outline-none border-none placeholder:text-fondo focus:ring-0 uppercase"
         value={input.toUpperCase()}
         type="text"
