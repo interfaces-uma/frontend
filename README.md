@@ -22,9 +22,9 @@ This is an online/local multiplayer game that recreates the "Codenames" board ga
 ## Team
 
 ### Equipo L
-- **Salma Boulagna Moreno** - CEO - salmabm0416@gmail.com
+- **Salma Boulagna Moreno** - CTO y CIO - salmabm0416@gmail.com
 - **Carlos Rodríguez Martín** - COO - carlosrodriguezmartin2004@gmail.com
-- **Miguel Ángel Dorado Maldonado** - CTO y CIO - miguelangeldorado10@gmail.com
+- **Miguel Ángel Dorado Maldonado** - CEO - miguelangeldorado10@gmail.com
 - **José Ruiz Pareja** - CXO - joseruizparejaa@gmail.com
 
 ## Features
